@@ -36,9 +36,18 @@ Estudar mais **Recursão**
 
 **Operação OBR 1:** Carregamento do arquivo de Espelho do Registro Geral das Unidades da Federação (ERGUF).
 
-**Operação OBR 2:** Persistência dos dados/Recuperação de dados. **Operação OBR 3:** Busca por número de registro geral/RG. **Operação OBR 4:** Relatórios.
+**Operação OBR 2:** Persistência dos dados/Recuperação de dados. 
+
+
+**Operação OBR 3:** Busca por número de registro geral/RG. 
+
+
+**Operação OBR 4:** Relatórios.
+
 
 **Operação OBR 5:** Medição de tempo das operações.
+
+
 
 **Operação OBR 6:** Interface com o usuário.
 
