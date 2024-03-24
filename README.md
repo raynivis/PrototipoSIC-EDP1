@@ -44,78 +44,78 @@ Estudar mais **Recursão**
 
 1. **Informações dos cidadãos**
 
-Desenvolvimento, cada **Cidadão** deve apresentar no mínimo esses **dados**: 
-
-
-
-**Nome completo (máximo de 70 caracteres) : String**
-
-Exemplo: “Ray Santiago Diva Negro”
-
-Data de nascimento (máximo de 10 caracteres) : **String** Exemplo: “31/07/2006”
-
-
-
-**Naturalidade (máximo de 30 caracteres) : Strings**
-
-Exemplo: São 2 Campos, Cidade e Estado “Castilho”
-
-“SP”
-
-***Observações:***
-
-*Ray: Seria Legal na hora de Relatório o campo ficar: “Castilho-SP”*
-
-*Cortez: -> verdade*
-
-*May: Deveríamos colocar correção para o preenchimento das informações? Por exemplo, tem o modelo da data de nascimento para o preenchimento: 00/00/0000, mas caso a pessoa insira 23/02/12, o programa corrigirá automaticamente ou o usuário deve inserir novamente?*
-
-
-
-**Números do registro geral do cidadão**
-
-**CPF (Máximo e mínimo de 11 + 3 (símbolos) = 14 caracteres/inteiro)**
-
-**RG do Estado (0 caracteres/inteiro no mínimo e 14 + 8 (símbolos) = 22 caracteres/inteiro no máximo)**
-
-**: Strings/Inteiros**
-
-Exemplo: São 2 Campos, Rg e CPF
-
-“12345678911”
-
-“123456789”
-
-***Observações:***
-
-*Ray: O mínimo de caracteres de RG é zero porque é possível uma pessoas não ter o RG em nenhum estado*
-
-*Sobre os 13 a 14 digitos do RG: [https://pt.stackoverflow.com/questions/121593/quantidade-de-caracteres-do-cpf-cnpj-e-rg*](https://pt.stackoverflow.com/questions/121593/quantidade-de-caracteres-do-cpf-cnpj-e-rg)*
-
-*Podíamos fazer uma verificação se o cpf do mesmo indivíduo em estados diferentes são iguais e colocar uma mensagem de tentativa de falsificação ou erro no cadastro.*
-
-*May: Acho interessante, mas teria que ver qual tipo de busca é o mais adequado pra não pesar muito*
-
-*O formato do rg vai depender do estado.*
-
-*Seria legal no relatório estar no formato de “xxx.xxx.xxx-xx” e no rg vai depender do estado e do período feito (o que é mais complicado 🙁)*
-
-*May: Acho interessante, é melhor pra organizar também*
-
-
-
-
-**Registros gerais emitidos (de 0 a 27): Inteiro**
-
-Exemplo:
-
-2
-
-Nesse exemplo é contado a partir do arquivo que o indivíduo possui dois registros de RG, por exemplo em São Paulo e na Bahia
-
-*Ray: Como no exemplo abaixo do arquivo, não possui um campo para a quantidade de RGs feitos, então imagino que seja um contador interno, talvez uma função para modificar o valor de RGs Encontrados vai ser implementado*
-
-Pode ser feito mais dados para um determinado indivíduo, e isso vai partir de ideias que podem facilitar o desenvolvimento da solução.
+   Desenvolvimento, cada **Cidadão** deve apresentar no mínimo esses **dados**: 
+   
+   
+   
+   **Nome completo (máximo de 70 caracteres) : String**
+   
+   Exemplo: “Ray Santiago Diva Negro”
+   
+   Data de nascimento (máximo de 10 caracteres) : **String** Exemplo: “31/07/2006”
+   
+   
+   
+   **Naturalidade (máximo de 30 caracteres) : Strings**
+   
+   Exemplo: São 2 Campos, Cidade e Estado “Castilho”
+   
+   “SP”
+   
+   ***Observações:***
+   
+   *Ray: Seria Legal na hora de Relatório o campo ficar: “Castilho-SP”*
+   
+   *Cortez: -> verdade*
+   
+   *May: Deveríamos colocar correção para o preenchimento das informações? Por exemplo, tem o modelo da data de nascimento para o preenchimento: 00/00/0000, mas caso a pessoa insira 23/02/12, o programa corrigirá automaticamente ou o usuário deve inserir novamente?*
+   
+   
+   
+   **Números do registro geral do cidadão**
+   
+   **CPF (Máximo e mínimo de 11 + 3 (símbolos) = 14 caracteres/inteiro)**
+   
+   **RG do Estado (0 caracteres/inteiro no mínimo e 14 + 8 (símbolos) = 22 caracteres/inteiro no máximo)**
+   
+   **: Strings/Inteiros**
+   
+   Exemplo: São 2 Campos, Rg e CPF
+   
+   “12345678911”
+   
+   “123456789”
+   
+   ***Observações:***
+   
+   *Ray: O mínimo de caracteres de RG é zero porque é possível uma pessoas não ter o RG em nenhum estado*
+   
+   *Sobre os 13 a 14 digitos do RG: [https://pt.stackoverflow.com/questions/121593/quantidade-de-caracteres-do-cpf-cnpj-e-rg*](https://pt.stackoverflow.com/questions/121593/quantidade-de-caracteres-do-cpf-cnpj-e-rg)*
+   
+   *Podíamos fazer uma verificação se o cpf do mesmo indivíduo em estados diferentes são iguais e colocar uma mensagem de tentativa de falsificação ou erro no cadastro.*
+   
+   *May: Acho interessante, mas teria que ver qual tipo de busca é o mais adequado pra não pesar muito*
+   
+   *O formato do rg vai depender do estado.*
+   
+   *Seria legal no relatório estar no formato de “xxx.xxx.xxx-xx” e no rg vai depender do estado e do período feito (o que é mais complicado 🙁)*
+   
+   *May: Acho interessante, é melhor pra organizar também*
+   
+   
+   
+   
+   **Registros gerais emitidos (de 0 a 27): Inteiro**
+   
+   Exemplo:
+   
+   2
+   
+   Nesse exemplo é contado a partir do arquivo que o indivíduo possui dois registros de RG, por exemplo em São Paulo e na Bahia
+   
+   *Ray: Como no exemplo abaixo do arquivo, não possui um campo para a quantidade de RGs feitos, então imagino que seja um contador interno, talvez uma função para modificar o valor de RGs Encontrados vai ser implementado*
+   
+   Pode ser feito mais dados para um determinado indivíduo, e isso vai partir de ideias que podem facilitar o desenvolvimento da solução.
 
 2. **Operações desejadas**
 
@@ -139,104 +139,104 @@ Operações **obrigatórias**:
 
 2. **Persistência dos dados:**
 
-Ao **iniciar ou encerrar** o programa, os **dados devem estar de acordo com as execuções feitas no programa**, até a última **execução**;
-
-**Importações novas e alteração de dados de algum cidadão** deve estar **atualizada** ao **fim** do programa;
-
-As **alterações** devem ser **permanentes**, mesmo que o programa se encerre **(ignorando os casos de erro)**.
-
-Uma das soluções, é usar **arquivos de dados**, esse arquivo pode ser em **binário ou texto** (vamos ver qual é mais funcional), **priorizando o tempo de otimização**.
-
-***Observações:***
-
-*Ray: Não sei se entendi bem, mas nesse método de arquivo de dados, o manter dados no início deverá ser mantido no buffer pela última execução (ou seja vai ter q escrever sempre que vai importar os últimos dados) ou deverá ser feito de forma automática??*
-
-*Edu: Acho que a maneira mais simples de fazer em java seria com persistência via arquivo de texto, que é “tipo” um BD mesmo que o java aceita, é bem mais fácil de fazer do que implementar um BD, tipo MUITO mais fácil. Uma outra opção seria “escrever” um novo JSON quando encerrar o programa e ele abrir esse JSON completo sempre que iniciasse o programa (já de forma automática) porém acredito que isso daria mais trabalho do que fazer por meio de arquivo.*
+   Ao **iniciar ou encerrar** o programa, os **dados devem estar de acordo com as execuções feitas no programa**, até a última **execução**;
+   
+   **Importações novas e alteração de dados de algum cidadão** deve estar **atualizada** ao **fim** do programa;
+   
+   As **alterações** devem ser **permanentes**, mesmo que o programa se encerre **(ignorando os casos de erro)**.
+   
+   Uma das soluções, é usar **arquivos de dados**, esse arquivo pode ser em **binário ou texto** (vamos ver qual é mais funcional), **priorizando o tempo de otimização**.
+   
+   ***Observações:***
+   
+   *Ray: Não sei se entendi bem, mas nesse método de arquivo de dados, o manter dados no início deverá ser mantido no buffer pela última execução (ou seja vai ter q escrever sempre que vai importar os últimos dados) ou deverá ser feito de forma automática??*
+   
+   *Edu: Acho que a maneira mais simples de fazer em java seria com persistência via arquivo de texto, que é “tipo” um BD mesmo que o java aceita, é bem mais fácil de fazer do que implementar um BD, tipo MUITO mais fácil. Uma outra opção seria “escrever” um novo JSON quando encerrar o programa e ele abrir esse JSON completo sempre que iniciasse o programa (já de forma automática) porém acredito que isso daria mais trabalho do que fazer por meio de arquivo.*
 
 3. **Busca por número de registro geral/RG:**
 
-Uma busca realizada para encontrar **determinado cidadão** em base a seu **RG**;
-
-“uma operação muito realizada diariamente.”, ou seja tem que ser muito **eficiente**;
-
-Devemos fazer **vários testes**;
-
-Mostrar **todas as informações cadastradas de um cidadão**, incluindo **todos os RGs** junto com a **unidade da federação que foi feito cada cadastro**.
-
-***Observações:***
-
-*Ray: Mais tarde volto aqui com os resultados de buscas, para ver o pior caso de alguns jeitos, mas queria transformar os rg em inteiros e fazer busca binária;*
+   Uma busca realizada para encontrar **determinado cidadão** em base a seu **RG**;
+   
+   “uma operação muito realizada diariamente.”, ou seja tem que ser muito **eficiente**;
+   
+   Devemos fazer **vários testes**;
+   
+   Mostrar **todas as informações cadastradas de um cidadão**, incluindo **todos os RGs** junto com a **unidade da federação que foi feito cada cadastro**.
+   
+   ***Observações:***
+   
+   *Ray: Mais tarde volto aqui com os resultados de buscas, para ver o pior caso de alguns jeitos, mas queria transformar os rg em inteiros e fazer busca binária;*
 
 4. **Relatórios**
 
-**Grupo de operações** para gerar um relatório
-
-O **relatório** será gerado após o usuário informar a faixa etária desejada; talvez um readline “idade a idade” ou dois separados: idade, idade
-
-O cálculo da idade será **arredondado**, ou seja **2024** - O ano de nascimento;
-
-exemplo nasci em 2004 em julho, tenho 19 ainda, mas no sistema vai contar como eu tendo 20
-
-Os nomes **deverão ser listados pelo estado que nasceram**
-
-O relatório deve conter os seguintes dados:
-
-- número do registro geral,
-- nome completo
-- data de nascimento
-- naturalidade
-
-Nessa **ordem**;
-
-O relatório deve ser ordenado pelo nome dos cidadãos (talvez usar uma lista auxiliar?);
-
-*May: Encadeamento externo seria eficiente aqui? **Observações:***
-
-*Ray: Meu Deus.*
-
-*Cortez: muito é massa doido.*
+   **Grupo de operações** para gerar um relatório
+   
+   O **relatório** será gerado após o usuário informar a faixa etária desejada; talvez um readline “idade a idade” ou dois separados: idade, idade
+   
+   O cálculo da idade será **arredondado**, ou seja **2024** - O ano de nascimento;
+   
+   exemplo nasci em 2004 em julho, tenho 19 ainda, mas no sistema vai contar como eu tendo 20
+   
+   Os nomes **deverão ser listados pelo estado que nasceram**
+   
+   O relatório deve conter os seguintes dados:
+   
+   - número do registro geral,
+   - nome completo
+   - data de nascimento
+   - naturalidade
+   
+   Nessa **ordem**;
+   
+   O relatório deve ser ordenado pelo nome dos cidadãos (talvez usar uma lista auxiliar?);
+   
+   *May: Encadeamento externo seria eficiente aqui? **Observações:***
+   
+   *Ray: Meu Deus.*
+   
+   *Cortez: muito é massa doido.*
 
 5. **Medição de tempo das operações**
 
-Os **alunos da disciplina** que vão indicar qual a melhor **estrutura de dados para a solução do problema;**
-
-A informação do **tempo gasto** em cada **operação** seja **explícita**;
-
-“Para os que **não entendem de programaçã**o consigam **diferenciar** (as **estruturas**) e **comparar** facilmente o **desempenho dos protótipos.**”;
-
-**Final** de cada **operação** realizada (itens anteriores) o **protótipo** deve mostrar o **tempo gasto**, em **segundos**;
-
-***Observações:***
-
-*Ray: Acho que o cortez disse que tem uma função do java que já faz isso.*
-
-*May: Encontrei um vídeo e um site que falam sobre essa função:*
-
-[*Java - Pegar o tempo de execução de uma função ](https://www.youtube.com/watch?v=nhGG6DWfRLw)*/ https://pt.stackoverflow.com/questions/431058/o-que-o-número-retornado-por-system-currenttimemillis-re![](Aspose.Words.84381239-6c9b-410e-9213-6a7f99a8eec7.002.png)*
-
-*presenta*
+   Os **alunos da disciplina** que vão indicar qual a melhor **estrutura de dados para a solução do problema;**
+   
+   A informação do **tempo gasto** em cada **operação** seja **explícita**;
+   
+   “Para os que **não entendem de programaçã**o consigam **diferenciar** (as **estruturas**) e **comparar** facilmente o **desempenho dos protótipos.**”;
+   
+   **Final** de cada **operação** realizada (itens anteriores) o **protótipo** deve mostrar o **tempo gasto**, em **segundos**;
+   
+   ***Observações:***
+   
+   *Ray: Acho que o cortez disse que tem uma função do java que já faz isso.*
+   
+   *May: Encontrei um vídeo e um site que falam sobre essa função:*
+   
+   [*Java - Pegar o tempo de execução de uma função ](https://www.youtube.com/watch?v=nhGG6DWfRLw)*/ https://pt.stackoverflow.com/questions/431058/o-que-o-número-retornado-por-system-currenttimemillis-re![](Aspose.Words.84381239-6c9b-410e-9213-6a7f99a8eec7.002.png)*
+   
+   *presenta*
 
 6. **Interface com o usuário:**
 
-Importante que o sistema seja **fácil de ser usado por usuários sem tanto conhecimento de programação**;
-
-É necessário **apresentar**, pelo menos, **esboços da Interfaces** nos **Checkpoints.**
-
-Apresentar uma i**nterface agradável** ao usuário que o **permita realizar as operações listadas** acima **sem muito esforço**;
-
-**Possibilidades**:
-
-- Criar um programa que interaja com o usuário via **terminal**, através de **menus** ou como um interpretador de **comandos;**
-- Programa com **interface** gráfica, com o uso de **janelas e botões**;
-- Versão **híbrida**, que permita as **duas formas** de operação, conforme o desejado;
-
-A **escolha** da interface gráfica deve levar em conta o **contexto da aplicação** e a **necessidade** de **avaliar** as estruturas de dados.
-
-***Observações:***
-
-Operações **Adicionais**:
-
-???
+   Importante que o sistema seja **fácil de ser usado por usuários sem tanto conhecimento de programação**;
+   
+   É necessário **apresentar**, pelo menos, **esboços da Interfaces** nos **Checkpoints.**
+   
+   Apresentar uma i**nterface agradável** ao usuário que o **permita realizar as operações listadas** acima **sem muito esforço**;
+   
+   **Possibilidades**:
+   
+   - Criar um programa que interaja com o usuário via **terminal**, através de **menus** ou como um interpretador de **comandos;**
+   - Programa com **interface** gráfica, com o uso de **janelas e botões**;
+   - Versão **híbrida**, que permita as **duas formas** de operação, conforme o desejado;
+   
+   A **escolha** da interface gráfica deve levar em conta o **contexto da aplicação** e a **necessidade** de **avaliar** as estruturas de dados.
+   
+   ***Observações:***
+   
+   Operações **Adicionais**:
+   
+   ???
 
 **3. Requisitos da disciplina**
 
@@ -322,8 +322,8 @@ Apresentação final
 A apresentação final deve ser **mais completa e contemplar**, além **dos detalhes de implementação**, uma **avaliação das estruturas quanto seu desempenho na solução do problema**
 
 - O que foi **desenvolvido**, e por **quem**;
-- **Dificuldades encontradas** no desenvolvimento do trabalho;
-- **Decisões** tomadas para a i**mplementação das estruturas** (tipo de lista encadeada; detalhes da tabela de dispersão; linguagem de programação; modelagem do tipo de
+- **Dificuldades encontradas** no desenvolvimento do trabalho;
+- **Decisões** tomadas para a *implementação das estruturas** (tipo de lista encadeada; detalhes da tabela de dispersão; linguagem de programação; modelagem do tipo de
 
   dado; estruturas auxiliares; arquivo de dados; etc.); 
 
