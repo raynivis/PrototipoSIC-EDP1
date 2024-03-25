@@ -6,8 +6,11 @@
 
 Estudar mais **Recursão**
 
-**Para desenhos do slide:** draw.io / app.driagrams.net / **Miro** app **Divisões e Cronograma:**
+**Para desenhos do slide:** draw.io / app.driagrams.net / **Miro** app 
 
+
+
+**Divisões e Cronograma:**
 
 
 |**Atividade**|**Dificuldade**|**Integrantes**|**Data de Entrega Prevista**|**Data de Entrega**|
@@ -199,13 +202,16 @@ Operações **obrigatórias**:
    
    O relatório deve ser ordenado pelo nome dos cidadãos (talvez usar uma lista auxiliar?);
    
-   *May: Encadeamento externo seria eficiente aqui? **Observações:***
+   *May: Encadeamento externo seria eficiente aqui?
+
+
+   **Observações:***
    
    *Ray: Meu Deus.*
    
    *Cortez: muito é massa doido.*
 
-5. **Medição de tempo das operações**
+6. **Medição de tempo das operações**
 
    Os **alunos da disciplina** que vão indicar qual a melhor **estrutura de dados para a solução do problema;**
    
@@ -225,7 +231,7 @@ Operações **obrigatórias**:
    
    *presenta*
 
-6. **Interface com o usuário:**
+7. **Interface com o usuário:**
 
    Importante que o sistema seja **fácil de ser usado por usuários sem tanto conhecimento de programação**;
    
