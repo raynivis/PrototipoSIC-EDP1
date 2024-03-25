@@ -343,7 +343,8 @@ A apresentação final deve ser **mais completa e contemplar**, além **dos deta
   dado; estruturas auxiliares; arquivo de dados; etc.); 
 
 - Como foram **tratadas as operações em relação a organização das estruturas**; 
-- Funções que **não conseguiram implementar** e/ou **funções extras implementadas**;  Implementação da **sexta estrutura (*bônus*)**; 
+- Funções que **não conseguiram implementar** e/ou **funções extras implementadas**; 
+- Implementação da **sexta estrutura (*bônus*)**; 
 - Como foram pensados e **realizados os testes de avaliação**; 
 - **Resultado dos testes** e a **indicação da melhor estrutura implementada pelo grupo**;
 
