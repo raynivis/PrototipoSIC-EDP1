@@ -29,14 +29,6 @@ Estudar mais **Recursão**
 |Arquivos para testes|Médio|Mayara e Ray|||
 
 
-**Diagram de Classe**:
-
-
-
-![image_2024-03-28_223240726](https://github.com/gustavo-cortez/trabalhoED/assets/154099929/e5a18cdf-1439-444f-afdd-a0022503af55)
-
-
-
 **Legenda:**
 
 **CP:** CheckPoint.
@@ -61,6 +53,13 @@ Estudar mais **Recursão**
 
 
 **Operação OBR 6:** Interface com o usuário.
+
+
+**Diagram de Classe**:
+
+
+
+![image_2024-03-28_223240726](https://github.com/gustavo-cortez/trabalhoED/assets/154099929/e5a18cdf-1439-444f-afdd-a0022503af55)
 
 1. **Informações dos cidadãos**
 
