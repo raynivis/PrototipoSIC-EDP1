@@ -64,11 +64,11 @@ Estudar mais **Recursão**
    
    Exemplo: “Ray Santiago Diva Negro”
    
-   Data de nascimento (máximo de 10 caracteres) : **String** Exemplo: “31/07/2006”
+   Data de nascimento (máximo de 10 caracteres) : **Date** Exemplo: “31/07/2006”
    
    
    
-   **Naturalidade (máximo de 30 caracteres) : Strings**
+   **Naturalidade (máximo de 30 caracteres) : Classe**
    
    Exemplo: São 2 Campos, Cidade e Estado “Castilho”
    
@@ -90,7 +90,7 @@ Estudar mais **Recursão**
    
    **RG do Estado (0 caracteres/inteiro no mínimo e 14 + 8 (símbolos) = 22 caracteres/inteiro no máximo)**
    
-   **: Strings/Inteiros**
+   **: Classe**
    
    Exemplo: São 2 Campos, Rg e CPF
    
