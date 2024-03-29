@@ -59,7 +59,8 @@ Estudar mais **Recursão**
 
 
 
-![image_2024-03-28_223240726](https://github.com/gustavo-cortez/trabalhoED/assets/154099929/e5a18cdf-1439-444f-afdd-a0022503af55)
+![DiagramaED](https://github.com/gustavo-cortez/trabalhoED/assets/154099929/262fe4a4-8ad3-474b-9c64-0cf35b8b4d4f)
+
 
 1. **Informações dos cidadãos**
 
