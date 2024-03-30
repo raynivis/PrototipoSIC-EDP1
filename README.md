@@ -4,6 +4,8 @@
 
 **Importante:**
 
+Adicionar o plugin de json nas maquinas
+
 Estudar mais **Recursão**
 
 **Para desenhos do slide:** draw.io / app.driagrams.net / **Miro** app 
