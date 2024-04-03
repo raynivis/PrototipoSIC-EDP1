@@ -1,6 +1,6 @@
 # Trabalho EDP I
 
-**Grupo:** Eduardo Alves Freitas, Gustavo Cortez de Paula, Mayara Marques De Oliveira Gonçalves e Ray Santiago Del Negro
+**Grupo:** Eduardo Alves De Oliveira Freitas, Gustavo Cortez de Paula, Mayara Marques De Oliveira Gonçalves e Ray Santiago Del Negro
 
 **Importante:**
 
