@@ -18,10 +18,10 @@ Estudar mais **Recursão**
 |**Atividade**|**Dificuldade**|**Integrantes**|**Data de Entrega Prevista**|**Data de Entrega**|
 | - | - | - | :-: | - |
 |Estruturas de Dados|Trabalhoso|Todos|01/07||
-|Slides do CP 1|Trabalhoso|Todos|04/04||
+|Slides do CP 1|Trabalhoso|Todos|04/04|05/04||
 |Slides do CP 2|Trabalhoso|Todos|05/06||
 |Slides do TF|Trabalhoso|Todos|03/07||
-|Classes|Médio|Ray, Cortez e Mayara|02/04|28/03|
+|Classes|Médio|Ray, Cortez e Mayara|02/04|28/03||
 |Operação OBR 1|Médio|Eduardo e Mayara|||
 |Operação OBR 2|Médio|Eduardo e Ray|||
 |Operação OBR 3|Trabalhoso|Todos|||
