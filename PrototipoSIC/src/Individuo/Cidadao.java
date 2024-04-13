@@ -4,6 +4,8 @@
  */
 package Individuo;
 
+import java.util.List;
+
 /**
  *
  * @author ra
@@ -12,18 +14,18 @@ public class Cidadao {
     private String nome;
     private String datanasc;
     private String cpf;
-    private Rg[] rsgerais;
-    private int qntrg;
+    private List<Rg> rgGerais; /*mudei aqui*/
     private Naturalidade origem;
 
-    public Cidadao(String nome, String datanasc, String cpf, Rg[] rsgerais, int qntrg, Naturalidade origem) {
+    public Cidadao(String nome, String datanasc, String cpf, List<Rg> rgGerais, Naturalidade origem) {
         this.nome = nome;
         this.datanasc = datanasc;
         this.cpf = cpf;
-        this.rsgerais = rsgerais;
-        this.qntrg = qntrg;
+        this.rgGerais = rgGerais;
         this.origem = origem;
     }
+
+    
     
     public String getNome() {
         return nome;
@@ -49,20 +51,12 @@ public class Cidadao {
         this.cpf = cpf;
     }
 
-    public Rg[] getRsgerais() {
-        return rsgerais;
+    public List<Rg> getRgGerais() {
+        return rgGerais;
     }
 
-    public void setRsgerais(Rg[] rsgerais) {
-        this.rsgerais = rsgerais;
-    }
-
-    public int getQntrg() {
-        return qntrg;
-    }
-
-    public void setQntrg(int qntrg) {
-        this.qntrg = qntrg;
+    public void setRgGerais(List<Rg> rgGerais) {
+        this.rgGerais = rgGerais;
     }
 
     public Naturalidade getOrigem() {
@@ -72,6 +66,7 @@ public class Cidadao {
     public void setOrigem(Naturalidade origem) {
         this.origem = origem;
     }
+    
     
     
 }
