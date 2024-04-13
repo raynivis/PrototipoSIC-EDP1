@@ -35,9 +35,14 @@ public class JsonImporter {
                     (String) naturalidadeJson.get("cidade"),
                     (String) naturalidadeJson.get("estado"));
                 
-                Rg[] rgs = new Rg[] { new Rg((String) cidadaoJson.get("rg"), "Desconhecido") };
+                /*mudei aqui*/
+                List<Rg> rgs =  new ArrayList<>();
+                Rg rg = new Rg("rg", "a");
+                rgs.add(rg) ;
+                /*mudei ate aqui, tava dando erro pq era so uma array, ai tive q fazer esse tampa buraco
+                para conseguir compilar e testar*/
 
-                Cidadao cidadao = new Cidadao(nome, datanasc, cpf, rgs, 1, naturalidade);
+                Cidadao cidadao = new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
                 cidadaos.add(cidadao);
             }
 
