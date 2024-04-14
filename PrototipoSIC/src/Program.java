@@ -5,6 +5,7 @@ import Individuo.Naturalidade;
 import Individuo.Rg;
 import Persistencia.GerenciadorDeDados;
 import Telas.TelaInicial;
+import Timer.TempoDeExecucao;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +22,9 @@ public class Program {
     
     public static void main(String[] args) {
        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();
+       TempoDeExecucao tempo = new TempoDeExecucao();
+       tempo.iniciar();
         ListaEncadeada lista = new ListaEncadeada(); /*declarando a lista*/
-        
         /*cirando a lista de rgs*/
         List<Rg> lista1 = new ArrayList<>();
         Rg rg1 = new Rg("12", "sp");
@@ -52,6 +54,10 @@ public class Program {
         lista.adicionarLista(c2);
         lista.adicionarLista(c3);
         lista.adicionarLista(c4);
+        tempo.finalizar();
+        
+        long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
+        System.out.println("Tempo de execução: " + tempoDeExecucao + " Milissegundos");
         
         /*testando a insercao*/
         lista.imprimirLista();
