@@ -3,6 +3,7 @@ import Estrutura.ListaEncadeada;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
 import Individuo.Rg;
+import Persistencia.GerenciadorDeDados;
 import Telas.TelaInicial;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 public class Program {
     
     public static void main(String[] args) {
-        
+       GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();
         ListaEncadeada lista = new ListaEncadeada(); /*declarando a lista*/
         
         /*cirando a lista de rgs*/
@@ -41,6 +42,7 @@ public class Program {
         
         /*criando os Cidadaos*/
         Cidadao c1 = new Cidadao("Ray", "31/07/2004", "1", lista1, origem);
+        
         Cidadao c2 = new Cidadao("Mayra Marques", "31/07/1998", "2", lista2, origem);
         Cidadao c3 = new Cidadao("Ligeiro", "31/07/1945", "3", lista3, origem);
         Cidadao c4 = new Cidadao("Cotrez", "31/07/2003", "4", lista4, origem);
@@ -66,9 +68,11 @@ public class Program {
 
         /*testando para ver se inseriu no cpf "1"*/
         lista.imprimirLista();
-               
         
-         /*new TelaInicial().setVisible(true);*/
+        
+        gerenciadorDeDados.salvarCidadaos(lista.getCidadaos());
+        
+         //new TelaInicial().setVisible(true);
     }
     
 }

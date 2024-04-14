@@ -18,4 +18,7 @@ public class No { /*Essa classe eh a chave da estrutura*/
         this.prox = null;
     }
        
+        public Cidadao getCidadao() {
+        return chave;
+    }
 }

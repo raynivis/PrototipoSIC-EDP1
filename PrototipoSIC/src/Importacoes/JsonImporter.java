@@ -4,6 +4,7 @@
  */
 package Importacoes;
 
+import Estrutura.ListaEncadeada;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
 import Individuo.Rg;
@@ -16,10 +17,9 @@ import java.util.List;
 
 public class JsonImporter {
 
-    public static List<Cidadao> importarCidadaosDeJson(String arquivoJson) {
-        List<Cidadao> cidadaos = new ArrayList<>();
+    public void importarCidadaosDeJson(String arquivoJson) {
         JSONParser parser = new JSONParser();
-
+        ListaEncadeada listaCidadaos = new ListaEncadeada();
         try {
             Object obj = parser.parse(new FileReader(arquivoJson));
             JSONObject jsonObject = (JSONObject) obj;
@@ -34,22 +34,21 @@ public class JsonImporter {
                 Naturalidade naturalidade = new Naturalidade(
                     (String) naturalidadeJson.get("cidade"),
                     (String) naturalidadeJson.get("estado"));
-                
-                /*mudei aqui*/
-                List<Rg> rgs =  new ArrayList<>();
-                Rg rg = new Rg("rg", "a");
-                rgs.add(rg) ;
-                /*mudei ate aqui, tava dando erro pq era so uma array, ai tive q fazer esse tampa buraco
-                para conseguir compilar e testar*/
 
-                Cidadao cidadao = new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
-                cidadaos.add(cidadao);
+                JSONObject rgJson = (JSONObject) cidadaoJson.get("rg");
+                String numero = (String) rgJson.get("numero");
+                String orgaoEmissor = (String) rgJson.get("orgao_emissor");
+                Rg rg = new Rg(numero, orgaoEmissor);
+
+                List<Rg> rgs = new ArrayList<>();
+                rgs.add(rg);
+                Cidadao novoCidadao = new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
+
+                listaCidadaos.adicionarLista(novoCidadao);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return cidadaos;
     }
 }

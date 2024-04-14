@@ -6,6 +6,7 @@ package Telas;
 
 import Importacoes.JsonImporter;
 import Individuo.Cidadao;
+import Persistencia.GerenciadorDeDados;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -64,8 +65,8 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImportarJsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarJsonActionPerformed
-        // TODO add your handling code here:
-            JFileChooser fileChooser = new JFileChooser();
+   GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();
+    JFileChooser fileChooser = new JFileChooser();
     FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos JSON", "json");
     fileChooser.setFileFilter(filter);
     
@@ -74,11 +75,15 @@ public class TelaInicial extends javax.swing.JFrame {
         String caminhoDoArquivo = fileChooser.getSelectedFile().getAbsolutePath();
         
         // Chamada da função para importar cidadãos do arquivo JSON
-        List<Cidadao> cidadaosImportados = JsonImporter.importarCidadaosDeJson(caminhoDoArquivo);
-        
-        // Aqui você pode usar a lista de cidadãos conforme necessário
-        System.out.println("Número de cidadãos importados: " + cidadaosImportados.size());
-        // Exemplo: imprimir os nomes dos cidadãos importados
+        List<Cidadao> listaCidadaos = gerenciadorDeDados.getCidadaos(); // Usando o método getCidadaos()
+        JsonImporter jsonImporter = new JsonImporter(); // Criando uma instância de JsonImporter
+        jsonImporter.importarCidadaosDeJson(caminhoDoArquivo);
+
+        // Atualiza a interface de usuário se necessário e informa quantos cidadãos foram importados
+        System.out.println("Número de cidadãos na lista após a importação: " + listaCidadaos.size());
+
+        // Salva os dados após a importação
+        //gerenciadorDeDados.salvarCidadaos();
     }
     }//GEN-LAST:event_btnImportarJsonActionPerformed
 

@@ -6,6 +6,8 @@ package Estrutura;
 
 import Individuo.Cidadao;
 import Individuo.Rg;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -77,4 +79,14 @@ public class ListaEncadeada {
         System.out.println();
     }
     
+    public List<Cidadao> getCidadaos() {
+        List<Cidadao> cidadaos = new ArrayList<>();
+        No atual = cabeca;
+        while (atual != null) {
+            cidadaos.add(atual.getCidadao());
+            atual = atual.prox;
+        }
+        return cidadaos;
+    }
+     
 }
