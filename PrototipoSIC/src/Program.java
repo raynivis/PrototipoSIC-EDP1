@@ -22,11 +22,10 @@ public class Program {
     
     public static void main(String[] args) {
        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();
-       TempoDeExecucao tempo = new TempoDeExecucao();
-       tempo.iniciar();
-        ListaEncadeada lista = new ListaEncadeada(); /*declarando a lista*/
+       
+       ListaEncadeada lista = new ListaEncadeada(); /*declarando a lista*/
         /*cirando a lista de rgs*/
-        List<Rg> lista1 = new ArrayList<>();
+       /* List<Rg> lista1 = new ArrayList<>();
         Rg rg1 = new Rg("12", "sp");
         lista1.add(rg1);
         List<Rg> lista2 = new ArrayList<>();
@@ -37,48 +36,48 @@ public class Program {
         lista3.add(rg3);
         List<Rg> lista4 = new ArrayList<>();
         Rg rg4 = new Rg("89", "sp");
-        lista4.add(rg4);
+        lista4.add(rg4); */
         
         /*cirando uma naturalidade so*/
-        Naturalidade origem = new Naturalidade("Casticty", "SP");
+       // Naturalidade origem = new Naturalidade("Casticty", "SP");
         
         /*criando os Cidadaos*/
-        Cidadao c1 = new Cidadao("Ray", "31/07/2004", "1", lista1, origem);
+       /* Cidadao c1 = new Cidadao("Ray", "31/07/2004", "1", lista1, origem);
         
         Cidadao c2 = new Cidadao("Mayra Marques", "31/07/1998", "2", lista2, origem);
         Cidadao c3 = new Cidadao("Ligeiro", "31/07/1945", "3", lista3, origem);
-        Cidadao c4 = new Cidadao("Cotrez", "31/07/2003", "4", lista4, origem);
+        Cidadao c4 = new Cidadao("Cotrez", "31/07/2003", "4", lista4, origem); */
         
         /*adicionando os cidadaos na lista e criando os nohs em ordem de chegada*/
-        lista.adicionarLista(c1);
+        /*lista.adicionarLista(c1);
         lista.adicionarLista(c2);
         lista.adicionarLista(c3);
         lista.adicionarLista(c4);
         tempo.finalizar();
         
         long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
-        System.out.println("Tempo de execução: " + tempoDeExecucao + " Milissegundos");
+        System.out.println("Tempo de execucao: " + tempoDeExecucao + " Milissegundos");
         
         /*testando a insercao*/
-        lista.imprimirLista();
+       // lista.imprimirLista();
         
         
         /*testando colocar o msm cpf*/
-        List<Rg> lista5 = new ArrayList<>();
+       /* List<Rg> lista5 = new ArrayList<>();
         Rg rg5 = new Rg("36", "ms");
         lista5.add(rg5);
         Cidadao c5 = new Cidadao("Ray", "31/07/2004", "1", lista5, origem);
         
         /*adicionando na lista*/
-        lista.adicionarLista(c5);
+        //lista.adicionarLista(c5); 
 
         /*testando para ver se inseriu no cpf "1"*/
-        lista.imprimirLista();
+        //lista.imprimirLista();
         
         
         gerenciadorDeDados.salvarCidadaos(lista.getCidadaos());
         
-         //new TelaInicial().setVisible(true);
+         new TelaInicial().setVisible(true);
     }
     
 }

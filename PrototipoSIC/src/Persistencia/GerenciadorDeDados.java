@@ -30,7 +30,7 @@ public class GerenciadorDeDados {
     @SuppressWarnings("unchecked")
     
 
-    private void carregarCidadaos() {
+    public void carregarCidadaos() {
     JSONParser parser = new JSONParser();
     try (FileReader reader = new FileReader(CAMINHO_DO_ARQUIVO)) {
         Object obj = parser.parse(reader);

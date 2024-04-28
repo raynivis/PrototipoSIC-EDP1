@@ -17,38 +17,40 @@ import java.util.List;
 
 public class JsonImporter {
 
-    public void importarCidadaosDeJson(String arquivoJson) {
-        JSONParser parser = new JSONParser();
-        ListaEncadeada listaCidadaos = new ListaEncadeada();
-        try {
-            Object obj = parser.parse(new FileReader(arquivoJson));
-            JSONObject jsonObject = (JSONObject) obj;
-            JSONArray cidadaosJson = (JSONArray) jsonObject.get("cidadãos");
+public List<Cidadao> importarCidadaosDeJson(String arquivoJson) {
+    JSONParser parser = new JSONParser();
+    List<Cidadao> listaCidadaos = new ArrayList<>();
+    try {
+        Object obj = parser.parse(new FileReader(arquivoJson));
+        JSONObject jsonObject = (JSONObject) obj;
+        
+        String estadoRG = (String) jsonObject.get("uf");  // Extrai o "UF" do JSON
+        JSONArray cidadaosJson = (JSONArray) jsonObject.get("cidadãos");
 
-            for (Object c : cidadaosJson) {
-                JSONObject cidadaoJson = (JSONObject) c;
-                String nome = (String) cidadaoJson.get("nome");
-                String cpf = (String) cidadaoJson.get("cpf");
-                String datanasc = (String) cidadaoJson.get("data_nasc");
-                JSONObject naturalidadeJson = (JSONObject) cidadaoJson.get("naturalidade");
-                Naturalidade naturalidade = new Naturalidade(
-                    (String) naturalidadeJson.get("cidade"),
-                    (String) naturalidadeJson.get("estado"));
+        for (Object c : cidadaosJson) {
+            JSONObject cidadaoJson = (JSONObject) c;
+            String nome = (String) cidadaoJson.get("nome");
+            String cpf = (String) cidadaoJson.get("cpf");
+            String datanasc = (String) cidadaoJson.get("data_nasc");
+            String numeroRg = (String) cidadaoJson.get("rg");  // Extrai o número do RG
 
-                JSONObject rgJson = (JSONObject) cidadaoJson.get("rg");
-                String numero = (String) rgJson.get("numero");
-                String orgaoEmissor = (String) rgJson.get("orgao_emissor");
-                Rg rg = new Rg(numero, orgaoEmissor);
+            JSONObject naturalidadeJson = (JSONObject) cidadaoJson.get("naturalidade");
+            Naturalidade naturalidade = new Naturalidade(
+                (String) naturalidadeJson.get("cidade"),
+                (String) naturalidadeJson.get("estado"));
 
-                List<Rg> rgs = new ArrayList<>();
-                rgs.add(rg);
-                Cidadao novoCidadao = new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
+            Rg rg = new Rg(numeroRg, estadoRG);  // Usa o "UF" como estado do RG
 
-                listaCidadaos.adicionarLista(novoCidadao);
-            }
+            List<Rg> rgs = new ArrayList<>();
+            rgs.add(rg);
+            Cidadao novoCidadao = new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            listaCidadaos.add(novoCidadao);
         }
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return listaCidadaos;
+}
 }

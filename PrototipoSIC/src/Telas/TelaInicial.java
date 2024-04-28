@@ -4,11 +4,14 @@
  */
 package Telas;
 
+import Estrutura.ListaEncadeada;
 import Importacoes.JsonImporter;
 import Individuo.Cidadao;
 import Persistencia.GerenciadorDeDados;
+import Timer.TempoDeExecucao;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -65,7 +68,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnImportarJsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarJsonActionPerformed
-   GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();
+   GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();  
+   
+    ListaEncadeada lista = new ListaEncadeada();
     JFileChooser fileChooser = new JFileChooser();
     FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos JSON", "json");
     fileChooser.setFileFilter(filter);
@@ -73,17 +78,29 @@ public class TelaInicial extends javax.swing.JFrame {
     int result = fileChooser.showOpenDialog(this);
     if (result == JFileChooser.APPROVE_OPTION) {
         String caminhoDoArquivo = fileChooser.getSelectedFile().getAbsolutePath();
+        TempoDeExecucao tempo = new TempoDeExecucao();
+        
+        //comeca calcular o tempo
+        tempo.iniciar();
         
         // Chamada da função para importar cidadãos do arquivo JSON
-        List<Cidadao> listaCidadaos = gerenciadorDeDados.getCidadaos(); // Usando o método getCidadaos()
         JsonImporter jsonImporter = new JsonImporter(); // Criando uma instância de JsonImporter
-        jsonImporter.importarCidadaosDeJson(caminhoDoArquivo);
+            
+        List<Cidadao> listaCidadaos = jsonImporter.importarCidadaosDeJson(caminhoDoArquivo); // Usando o método getCidadaos()
 
         // Atualiza a interface de usuário se necessário e informa quantos cidadãos foram importados
         System.out.println("Número de cidadãos na lista após a importação: " + listaCidadaos.size());
 
+        
+        //termina de calcular o tempo
+        tempo.finalizar();
+        long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
+        //System.out.println("Tempo de execucao: " + tempoDeExecucao + " Milissegundos");
+        
         // Salva os dados após a importação
-        //gerenciadorDeDados.salvarCidadaos();
+        
+        gerenciadorDeDados.salvarCidadaos(listaCidadaos);
+        JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Informação", JOptionPane.INFORMATION_MESSAGE);
     }
     }//GEN-LAST:event_btnImportarJsonActionPerformed
 
