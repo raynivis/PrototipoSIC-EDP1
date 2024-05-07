@@ -39,7 +39,7 @@ public class JsonImporter {
                     List<Rg> rgs = new ArrayList<>();
                     rgs.add(rg);
                     Cidadao novoCidadao = new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
-                    listaCidadaos.adicionarLista(novoCidadao);
+                    listaCidadaos.adicionarLista(listaCidadaos, novoCidadao);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
