@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Estrutura;
 
 import Individuo.Cidadao;
@@ -11,7 +7,7 @@ import java.util.List;
 
 /**
  *
- * @author ra
+ * @author ray, Gustavo
  */
 public class ListaEncadeada {
     private No cabeca; /*O no de cabeça aqui, ele vai apontar pro resto da estrutura*/
@@ -20,10 +16,10 @@ public class ListaEncadeada {
         this.cabeca = null; /*iniciando a lista vazia*/
     }
     
-    public void adicionarLista(Cidadao novoCidadao) {
+    public void adicionarLista(ListaEncadeada lista, Cidadao novoCidadao) {
         
         /*Verificando se o cpf esta cadastrado*/
-        Cidadao cidadaoExistente = buscarCidadao(novoCidadao.getCpf()); 
+        Cidadao cidadaoExistente = buscarCidadao(lista, novoCidadao.getCpf()); 
         /*talvez essa verificacao fique por arquivo, ja que vai demorar muito para 
         ele buscar e esse caso so acontece em ufs diferentes*/
         
@@ -48,12 +44,12 @@ public class ListaEncadeada {
         
     }
     
-    public Cidadao buscarCidadao(String cpf) { /*Da para usar a busca aqui de cpf, so chamar na interface*/
-        if(cabeca == null){
+    public Cidadao buscarCidadao(ListaEncadeada lista, String cpf) { /*Da para usar a busca aqui de cpf, so chamar na interface*/
+        if(lista.cabeca == null){
             return null;
-        }
+        }   
         
-        No i = cabeca;
+        No i = lista.cabeca;
         while (i.prox != null) {
             if(i.getCidadao().getCpf().equals(cpf)) {
                 return i.getCidadao();
