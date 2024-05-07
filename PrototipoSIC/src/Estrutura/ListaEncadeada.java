@@ -53,8 +53,8 @@ public class ListaEncadeada {
         
         No i = cabeca;
         while (i.prox != null) {
-            if(i.chave.getCpf().equals(cpf)) {
-                return i.chave;
+            if(i.getCidadao().getCpf().equals(cpf)) {
+                return i.getCidadao();
             }
             i = i.prox;
         }
@@ -64,15 +64,15 @@ public class ListaEncadeada {
      public void imprimirLista() { /*Para testes*/
         No i = cabeca;
         while (i != null) {
-            System.out.println(i.chave.getNome() );
-            System.out.println(i.chave.getCpf() );
-            System.out.println(i.chave.getDatanasc());
-            for(Rg r : i.chave.getRgGerais()){
+            System.out.println(i.getCidadao().getNome() );
+            System.out.println(i.getCidadao().getCpf() );
+            System.out.println(i.getCidadao().getDatanasc());
+            for(Rg r : i.getCidadao().getRgGerais()){
                 System.out.print(r.getRg() + " ");
                 System.out.println(r.getEstadoRG());
             }
-            System.out.print(i.chave.getOrigem().getCidade() + " ");
-            System.out.println(i.chave.getOrigem().getEstado());
+            System.out.print(i.getCidadao().getOrigem().getCidade() + " ");
+            System.out.println(i.getCidadao().getOrigem().getEstado());
             i = i.prox;
             System.out.println();
         }
@@ -88,5 +88,10 @@ public class ListaEncadeada {
         }
         return cidadaos;
     }
+
+    public No getCabeca() {
+        return cabeca;
+    }
+    
      
 }

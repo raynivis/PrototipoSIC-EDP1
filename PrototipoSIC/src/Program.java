@@ -4,6 +4,7 @@ import Individuo.Cidadao;
 import Individuo.Naturalidade;
 import Individuo.Rg;
 import Persistencia.GerenciadorDeDados;
+import Relatorio.Relatorio;
 import Telas.TelaInicial;
 import Timer.TempoDeExecucao;
 import java.util.ArrayList;
@@ -77,7 +78,8 @@ public class Program {
         
         gerenciadorDeDados.salvarCidadaos(lista.getCidadaos());
         
-         new TelaInicial().setVisible(true);
+        new TelaInicial().setVisible(true);
+         
     }
     
 }

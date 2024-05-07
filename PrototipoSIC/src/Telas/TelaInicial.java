@@ -8,6 +8,7 @@ import Estrutura.ListaEncadeada;
 import Importacoes.JsonImporter;
 import Individuo.Cidadao;
 import Persistencia.GerenciadorDeDados;
+import Relatorio.Relatorio;
 import Timer.TempoDeExecucao;
 import java.util.List;
 import javax.swing.JFileChooser;
@@ -91,6 +92,9 @@ public class TelaInicial extends javax.swing.JFrame {
         // Atualiza a interface de usuário se necessário e informa quantos cidadãos foram importados
         System.out.println("Número de cidadãos na lista após a importação: " + listaCidadaos.size());
 
+        Relatorio relatorio = new Relatorio(lista, 1, 80);
+        relatorio.imprimirRelatorio();
+        
         
         //termina de calcular o tempo
         tempo.finalizar();
