@@ -48,7 +48,7 @@ public class GerenciadorDeDados {
         e.printStackTrace();
     }
 }
-
+    
     
     private Cidadao parsearObjetoCidadao(JSONObject cidadaoJson) {
         String nome = (String) cidadaoJson.get("nome");
