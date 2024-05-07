@@ -2,18 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Estrutura;
+package Relatorio;
+
 import Individuo.Cidadao;
 
 /**
  *
- * @author ra
+ * @author nivis
  */
-public class No { /*Essa classe eh a chave da estrutura*/
+public class NoRlt {  
     private Cidadao chave;
-    public No prox;
+    public NoRlt prox;
 
-    public No(Cidadao chave) {
+    public NoRlt(Cidadao chave) {
         this.chave = chave;
         this.prox = null;
     }
@@ -21,8 +22,9 @@ public class No { /*Essa classe eh a chave da estrutura*/
     public void setChave(Cidadao chave) {
         this.chave = chave;
     }
-    
+     
     public Cidadao getCidadao() {
         return chave;
     }
+
 }
