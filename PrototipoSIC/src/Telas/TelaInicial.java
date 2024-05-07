@@ -94,7 +94,7 @@ public class TelaInicial extends javax.swing.JFrame {
             // Atualiza a interface de usuário se necessário e informa quantos cidadãos foram importados
             // System.out.println("Número de cidadãos na lista após a importação: " + lista.getQuantidadeCidadao());
         
-            Relatorio relatorio = new Relatorio(lista, 34, 34);
+            Relatorio relatorio = new Relatorio(lista, 10, 30);
             relatorio.imprimirRelatorio();
         
             // Termina de calcular o tempo

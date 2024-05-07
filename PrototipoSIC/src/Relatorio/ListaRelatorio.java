@@ -45,9 +45,8 @@ public class ListaRelatorio {
             System.out.print(i.getCidadao().getOrigem().getCidade() + " ");
             System.out.println(i.getCidadao().getOrigem().getEstado());
             i = i.prox;
-            System.out.println();
+            System.out.println("");
         }
-        System.out.println();
     }
     
 }

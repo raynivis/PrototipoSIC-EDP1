@@ -52,7 +52,6 @@ public class Relatorio {
             String data = i.getCidadao().getDatanasc();
             String anoTexto = data.substring(data.length()-4, data.length());
             int ano = Integer.parseInt(anoTexto);
-            System.out.println(2024-ano);
             if((2024-ano) >= faixaetaria1 && (2024-ano) <= faixaetaria2) {           
                 String naturalidadeEstado = i.getCidadao().getOrigem().getEstado();
                 switch(naturalidadeEstado) {
@@ -145,34 +144,60 @@ public class Relatorio {
         }      
     }
     
-    public void imprimirRelatorio(){
-        
+    public void imprimirRelatorio(){ 
+        System.out.println("\nAcre: ");
         ac.imprimirLista();
+        System.out.println("\nAlagoa: ");
         al.imprimirLista();
+        System.out.println("\nAmapa: ");
         ap.imprimirLista();
+        System.out.println("\nAmazona: ");
         am.imprimirLista();
+        System.out.println("\nBahia: ");
         ba.imprimirLista();
+        System.out.println("\nCeara: ");
         ce.imprimirLista();
+        System.out.println("\nDistrito Federal: ");
         df.imprimirLista();
+        System.out.println("\nEspirto Santo: ");
         es.imprimirLista();
+        System.out.println("\nGoias: ");
         go.imprimirLista();
+        System.out.println("\nMaranhao: ");
         ma.imprimirLista();
+        System.out.println("\nMato Grosso: ");
         mt.imprimirLista();
+        System.out.println("\nMato Grosso do Sul: ");
         ms.imprimirLista();
+        System.out.println("\nMinas Gerais: ");
         mg.imprimirLista();
+        System.out.println("\nPara: ");
         pa.imprimirLista();
+        System.out.println("\nParaiba: ");
         pb.imprimirLista();
+        System.out.println("\nParana: ");
         pr.imprimirLista();
+        System.out.println("\nPernambuco: ");
         pe.imprimirLista();
+        System.out.println("\nPiaui: ");
         pi.imprimirLista();
+        System.out.println("\nRio de Janeiro: ");
         rj.imprimirLista();
+        System.out.println("\nRio Grande de Norte: ");
         rn.imprimirLista();
+        System.out.println("\nRio Grande do Sul: ");
         rs.imprimirLista();
+        System.out.println("\nRondonia: ");
         ro.imprimirLista();
+        System.out.println("\nRoraima: ");
         rr.imprimirLista();
+        System.out.println("\nSanta Catarina: ");
         sc.imprimirLista();
+        System.out.println("\nSao Paulo");
         sp.imprimirLista();
+        System.out.println("\nSergipe");
         se.imprimirLista();
+        System.out.println("\nTocantins: ");
         to.imprimirLista();
     }
     
