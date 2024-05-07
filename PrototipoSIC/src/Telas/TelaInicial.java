@@ -67,45 +67,45 @@ public class TelaInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private ListaEncadeada lista = null;  // Inicialmente, a lista é nula
     private void btnImportarJsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarJsonActionPerformed
-   GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();  
-   
-    ListaEncadeada lista = new ListaEncadeada();
-    JFileChooser fileChooser = new JFileChooser();
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos JSON", "json");
-    fileChooser.setFileFilter(filter);
+        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();  
+
+        if (lista == null) {
+            lista = new ListaEncadeada();  // Cria uma nova lista se não existir
+        }
+
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos JSON", "json");
+        fileChooser.setFileFilter(filter);
     
-    int result = fileChooser.showOpenDialog(this);
-    if (result == JFileChooser.APPROVE_OPTION) {
-        String caminhoDoArquivo = fileChooser.getSelectedFile().getAbsolutePath();
-        TempoDeExecucao tempo = new TempoDeExecucao();
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            String caminhoDoArquivo = fileChooser.getSelectedFile().getAbsolutePath();
+            TempoDeExecucao tempo = new TempoDeExecucao();
         
-        //comeca calcular o tempo
-        tempo.iniciar();
+            // Começa a calcular o tempo
+            tempo.iniciar();
         
-        // Chamada da função para importar cidadãos do arquivo JSON
-        JsonImporter jsonImporter = new JsonImporter(); // Criando uma instância de JsonImporter
-            
-        List<Cidadao> listaCidadaos = jsonImporter.importarCidadaosDeJson(caminhoDoArquivo); // Usando o método getCidadaos()
+            // Chamada da função para importar cidadãos do arquivo JSON
+            JsonImporter jsonImporter = new JsonImporter(); // Criando uma instância de JsonImporter
+            lista = jsonImporter.importarCidadaosDeJson(caminhoDoArquivo, lista);
 
-        // Atualiza a interface de usuário se necessário e informa quantos cidadãos foram importados
-        System.out.println("Número de cidadãos na lista após a importação: " + listaCidadaos.size());
-
-        Relatorio relatorio = new Relatorio(lista, 1, 80);
-        relatorio.imprimirRelatorio();
+            // Atualiza a interface de usuário se necessário e informa quantos cidadãos foram importados
+            // System.out.println("Número de cidadãos na lista após a importação: " + lista.getQuantidadeCidadao());
         
+            Relatorio relatorio = new Relatorio(lista, 34, 34);
+            relatorio.imprimirRelatorio();
         
-        //termina de calcular o tempo
-        tempo.finalizar();
-        long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
-        //System.out.println("Tempo de execucao: " + tempoDeExecucao + " Milissegundos");
+            // Termina de calcular o tempo
+            tempo.finalizar();
+            long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
+            // System.out.println("Tempo de execução: " + tempoDeExecucao + " Milissegundos");
         
-        // Salva os dados após a importação
-        
-        gerenciadorDeDados.salvarCidadaos(listaCidadaos);
-        JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Informação", JOptionPane.INFORMATION_MESSAGE);
-    }
+            // Salva os dados após a importação
+            gerenciadorDeDados.salvarCidadaos(lista);
+            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Informação", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnImportarJsonActionPerformed
 
     /**

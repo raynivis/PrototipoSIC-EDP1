@@ -4,6 +4,8 @@
  */
 package Persistencia;
 
+import Estrutura.ListaEncadeada;
+import Estrutura.No;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
 import Individuo.Rg;
@@ -72,34 +74,35 @@ public class GerenciadorDeDados {
         return new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
 }
 
-    public void salvarCidadaos(List<Cidadao> cidadaos) {
+    public void salvarCidadaos(ListaEncadeada lista) {
         JSONArray listaCidadaos = new JSONArray();
-        for (Cidadao cidadao : cidadaos) {
-            JSONObject detalhesCidadao = new JSONObject();
-            detalhesCidadao.put("nome", cidadao.getNome());
-            detalhesCidadao.put("cpf", cidadao.getCpf());
-            detalhesCidadao.put("data_nasc", cidadao.getDatanasc());
-            JSONArray arrayRgs = new JSONArray();
-            for (Rg rg : cidadao.getRgGerais()) {
-                JSONObject detalhesRg = new JSONObject();
-                detalhesRg.put("numero", rg.getRg());
-                detalhesRg.put("Estado", rg.getEstadoRG());
-                arrayRgs.add(detalhesRg);
-            }
-            detalhesCidadao.put("rgs", arrayRgs);
-            JSONObject detalhesNaturalidade = new JSONObject();
-            detalhesNaturalidade.put("cidade", cidadao.getOrigem().getCidade());
-            detalhesNaturalidade.put("estado", cidadao.getOrigem().getEstado());
-            detalhesCidadao.put("naturalidade", detalhesNaturalidade);
-            listaCidadaos.add(detalhesCidadao);
+        
+    for (Cidadao cidadao : lista.getCidadaos()) {
+        JSONObject detalhesCidadao = new JSONObject();
+        detalhesCidadao.put("nome", cidadao.getNome());
+        detalhesCidadao.put("cpf", cidadao.getCpf());
+        detalhesCidadao.put("data_nasc", cidadao.getDatanasc());
+        JSONArray arrayRgs = new JSONArray();
+        for (Rg rg : cidadao.getRgGerais()) {
+            JSONObject detalhesRg = new JSONObject();
+            detalhesRg.put("numero", rg.getRg());
+            detalhesRg.put("Estado", rg.getEstadoRG());
+            arrayRgs.add(detalhesRg);
         }
+        detalhesCidadao.put("rgs", arrayRgs);
+        JSONObject detalhesNaturalidade = new JSONObject();
+        detalhesNaturalidade.put("cidade", cidadao.getOrigem().getCidade());
+        detalhesNaturalidade.put("estado", cidadao.getOrigem().getEstado());
+        detalhesCidadao.put("naturalidade", detalhesNaturalidade);
+        listaCidadaos.add(detalhesCidadao);
+    }
 
-        try (FileWriter file = new FileWriter(CAMINHO_DO_ARQUIVO)) {
-            file.write(listaCidadaos.toJSONString());
-            file.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    try (FileWriter file = new FileWriter("cidadaos.json")) {
+        file.write(listaCidadaos.toJSONString());
+        file.flush();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
     }
 
     public List<Cidadao> getCidadaos() {

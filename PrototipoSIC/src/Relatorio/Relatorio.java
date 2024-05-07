@@ -52,6 +52,7 @@ public class Relatorio {
             String data = i.getCidadao().getDatanasc();
             String anoTexto = data.substring(data.length()-4, data.length());
             int ano = Integer.parseInt(anoTexto);
+            System.out.println(2024-ano);
             if((2024-ano) >= faixaetaria1 && (2024-ano) <= faixaetaria2) {           
                 String naturalidadeEstado = i.getCidadao().getOrigem().getEstado();
                 switch(naturalidadeEstado) {
@@ -140,6 +141,7 @@ public class Relatorio {
                     break;
                 }
             }
+            i=i.prox;
         }      
     }
     

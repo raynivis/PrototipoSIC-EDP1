@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ListaEncadeada {
     private No cabeca; /*O no de cabeça aqui, ele vai apontar pro resto da estrutura*/
-
+    private static int quantidadeCidadao;
     public ListaEncadeada() {
         this.cabeca = null; /*iniciando a lista vazia*/
     }
@@ -32,6 +32,7 @@ public class ListaEncadeada {
             cidadaoExistente.getRgGerais().add(novoCidadao.getRgGerais().get(0));            
         } else {     
             No novo = new No(novoCidadao);
+            quantidadeCidadao++;
 
             if (cabeca == null) {
                 cabeca = novo;
@@ -44,6 +45,7 @@ public class ListaEncadeada {
                 i.prox = novo;
             }
         }
+        
     }
     
     public Cidadao buscarCidadao(String cpf) { /*Da para usar a busca aqui de cpf, so chamar na interface*/
@@ -92,6 +94,9 @@ public class ListaEncadeada {
     public No getCabeca() {
         return cabeca;
     }
-    
+
+    public static int getQuantidadeCidadao() {
+        return quantidadeCidadao;
+    }       
      
 }

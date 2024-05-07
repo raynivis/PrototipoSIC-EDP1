@@ -24,7 +24,7 @@ public class Program {
     public static void main(String[] args) {
        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();
        
-       ListaEncadeada lista = new ListaEncadeada(); /*declarando a lista*/
+       /*declarando a lista*/
         /*cirando a lista de rgs*/
        /* List<Rg> lista1 = new ArrayList<>();
         Rg rg1 = new Rg("12", "sp");
@@ -76,7 +76,7 @@ public class Program {
         //lista.imprimirLista();
         
         
-        gerenciadorDeDados.salvarCidadaos(lista.getCidadaos());
+        
         
         new TelaInicial().setVisible(true);
          
