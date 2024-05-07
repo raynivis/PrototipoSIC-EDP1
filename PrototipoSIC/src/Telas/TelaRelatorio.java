@@ -5,6 +5,7 @@
 package Telas;
 
 import Estrutura.ListaEncadeada;
+import Relatorio.ListaRelatorio;
 import Relatorio.Relatorio;
 
 /**
@@ -100,7 +101,11 @@ public class TelaRelatorio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Relatorio relatorio = new Relatorio(listaCadastros, Integer.parseInt(idadeSpi1.getValue().toString()) , Integer.parseInt(idadeSpi2.getValue().toString()));
+        ListaRelatorio estado[] = new ListaRelatorio[27];
+        for(int i=0; i<27; i++) {
+            estado[i] = new ListaRelatorio();
+        }
+        Relatorio relatorio = new Relatorio(listaCadastros, estado, Integer.parseInt(idadeSpi1.getValue().toString()) , Integer.parseInt(idadeSpi2.getValue().toString()));
         relatorio.imprimirRelatorio();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
