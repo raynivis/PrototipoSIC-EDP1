@@ -34,19 +34,24 @@ public class ListaRelatorio {
     
     public void imprimirLista() { 
         NoRlt i = cabeca;
+        if(i != null)
+            System.out.println(i.getCidadao().getOrigem().getEstado()+ ": ");
+        
         while (i != null) {
-            System.out.println(i.getCidadao().getNome() );
-            System.out.println(i.getCidadao().getCpf() );
-            System.out.println(i.getCidadao().getDatanasc());
+            System.out.println("   " + i.getCidadao().getNome() );
+            System.out.println("   " + i.getCidadao().getCpf() );
+            System.out.println("   " + i.getCidadao().getDatanasc());
             for(Rg r : i.getCidadao().getRgGerais()){
-                System.out.print(r.getRg() + " ");
+                System.out.print("   " + r.getRg() + " ");
                 System.out.println(r.getEstadoRG());
             }
-            System.out.print(i.getCidadao().getOrigem().getCidade() + " ");
+            System.out.print("   " + i.getCidadao().getOrigem().getCidade() + " ");
             System.out.println(i.getCidadao().getOrigem().getEstado());
             i = i.prox;
             System.out.println("");
         }
     }
+    
+    
     
 }

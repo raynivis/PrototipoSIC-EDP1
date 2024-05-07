@@ -8,6 +8,7 @@ import Estrutura.ListaEncadeada;
 import Importacoes.JsonImporter;
 import Individuo.Cidadao;
 import Persistencia.GerenciadorDeDados;
+import Relatorio.ListaRelatorio;
 import Relatorio.Relatorio;
 import Timer.TempoDeExecucao;
 import java.util.List;
@@ -94,7 +95,12 @@ public class TelaInicial extends javax.swing.JFrame {
             // Atualiza a interface de usuário se necessário e informa quantos cidadãos foram importados
             // System.out.println("Número de cidadãos na lista após a importação: " + lista.getQuantidadeCidadao());
         
-            Relatorio relatorio = new Relatorio(lista, 10, 30);
+            /*Tem que declarar a array para usar o relatorio*/
+            ListaRelatorio estado[] = new ListaRelatorio[27];
+            for(int i=0; i<27; i++) {
+                estado[i] = new ListaRelatorio();
+            }
+            Relatorio relatorio = new Relatorio(lista, estado, 10, 30);
             relatorio.imprimirRelatorio();
         
             // Termina de calcular o tempo
