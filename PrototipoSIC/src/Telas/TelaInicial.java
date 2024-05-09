@@ -23,6 +23,9 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public TelaInicial() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        
     }
 
     /**
@@ -35,6 +38,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         btnImportarJson = new javax.swing.JButton();
+        btnOpcoes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,21 +49,37 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
+        btnOpcoes.setText("Outras Opções");
+        btnOpcoes.setToolTipText("");
+        btnOpcoes.setActionCommand("btnOpcoes");
+        btnOpcoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpcoesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addComponent(btnImportarJson)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(btnImportarJson, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(btnOpcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(134, Short.MAX_VALUE)
-                .addComponent(btnImportarJson, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130))
+                .addContainerGap(84, Short.MAX_VALUE)
+                .addComponent(btnImportarJson, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(btnOpcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59))
         );
 
         pack();
@@ -99,10 +119,17 @@ public class TelaInicial extends javax.swing.JFrame {
             // Salva os dados após a importação
             gerenciadorDeDados.salvarCidadaos(lista);
             JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            new TelaEscolhas(lista).setVisible(true);
-            setVisible(false);
+            
+            
         }
     }//GEN-LAST:event_btnImportarJsonActionPerformed
+
+    private void btnOpcoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcoesActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new TelaEscolhas(lista).setVisible(true);
+        
+    }//GEN-LAST:event_btnOpcoesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,5 +169,6 @@ public class TelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnImportarJson;
+    private javax.swing.JButton btnOpcoes;
     // End of variables declaration//GEN-END:variables
 }
