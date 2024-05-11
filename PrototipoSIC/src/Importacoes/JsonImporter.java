@@ -8,6 +8,7 @@ import Estrutura.ListaEncadeada;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
 import Individuo.Rg;
+import Persistencia.GerenciadorDeDados;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -46,5 +47,24 @@ public class JsonImporter {
             }
             return listaCidadaos;
         }
+        
+        public void importarCidadaosDeJsonRapido(String arquivoJson, ListaEncadeada listaCidadaos) {
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(arquivoJson));
+            JSONArray cidadaosJson = (JSONArray) obj;
+
+            for (Object c : cidadaosJson) {
+                JSONObject cidadaoJson = (JSONObject) c;
+                Cidadao novoCidadao = GerenciadorDeDados.parsearObjetoCidadao(cidadaoJson);
+                if (novoCidadao != null) {
+                    listaCidadaos.adicionarNoInicio(novoCidadao);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
     }
+}
 

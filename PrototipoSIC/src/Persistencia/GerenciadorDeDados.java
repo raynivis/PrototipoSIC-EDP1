@@ -6,9 +6,11 @@ package Persistencia;
 
 import Estrutura.ListaEncadeada;
 import Estrutura.No;
+import Importacoes.JsonImporter;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
 import Individuo.Rg;
+import java.io.File;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -23,15 +25,32 @@ import java.util.List;
 public class GerenciadorDeDados {
     private static final String CAMINHO_DO_ARQUIVO = "cidadaos.json";
     private List<Cidadao> cidadaos;
+    private ListaEncadeada listaCadastros;
 
-    public GerenciadorDeDados() {
+    public GerenciadorDeDados(ListaEncadeada lista) {
         this.cidadaos = new ArrayList<>();
-        carregarCidadaos();
+        this.listaCadastros = lista;
+        //carregarCidadaos();
+        verificarExistenciaArquivo();
     }
 
     @SuppressWarnings("unchecked")
     
 
+           public static void verificarExistenciaArquivo() {
+        // Garante que a lista seja inicializada, independentemente de sua existência prévia
+        
+        File arquivo = new File(CAMINHO_DO_ARQUIVO);   
+        
+        if (arquivo.exists()) {
+            JsonImporter dados = new JsonImporter();
+            // Como garantimos que a lista não é nula, passamos diretamente
+            //dados.importarCidadaosDeJsonRapido("cidadaos.json", listaCadastros);
+        } else {
+            System.out.println("O arquivo " + CAMINHO_DO_ARQUIVO + " não existe.");
+        }
+    }
+        
     public void carregarCidadaos() {
     JSONParser parser = new JSONParser();
     try (FileReader reader = new FileReader(CAMINHO_DO_ARQUIVO)) {
@@ -52,7 +71,9 @@ public class GerenciadorDeDados {
 }
     
     
-    private Cidadao parsearObjetoCidadao(JSONObject cidadaoJson) {
+    
+    
+    public static Cidadao parsearObjetoCidadao(JSONObject cidadaoJson) {
         String nome = (String) cidadaoJson.get("nome");
         String cpf = (String) cidadaoJson.get("cpf");
         String datanasc = (String) cidadaoJson.get("data_nasc");

@@ -22,12 +22,13 @@ public class TelaInicial extends javax.swing.JFrame {
      * Creates new form TelaInicial
      */
     public TelaInicial() {
-        initComponents();
+        initComponents();        
         setLocationRelativeTo(null);
         setResizable(false);
         
+        
     }
-
+    private static ListaEncadeada lista;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,10 +85,10 @@ public class TelaInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private ListaEncadeada lista = null;  // Inicialmente, a lista é nula
+    // Inicialmente, a lista é nula
     private void btnImportarJsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarJsonActionPerformed
-        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();  
-
+        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados(lista);  
+        
         if (lista == null) {
             lista = new ListaEncadeada();  // Cria uma nova lista se não existir
         }

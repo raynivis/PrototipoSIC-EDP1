@@ -14,7 +14,9 @@ public class ListaEncadeada {
     private static int quantidadeCidadao;
     public ListaEncadeada() {
         this.cabeca = null; /*iniciando a lista vazia*/
+        this.quantidadeCidadao = 0;
     }
+    
     
     public void adicionarLista(ListaEncadeada lista, Cidadao novoCidadao) {
         
@@ -43,6 +45,14 @@ public class ListaEncadeada {
         }
         
     }
+    
+        public void adicionarNoInicio(Cidadao novoCidadao) {
+        No novo = new No(novoCidadao);
+        novo.prox = cabeca;
+        cabeca = novo;
+        quantidadeCidadao++;
+    }
+    
     
     public Cidadao buscarCidadao(ListaEncadeada lista, String cpf) { /*Da para usar a busca aqui de cpf, so chamar na interface*/
         if(lista.cabeca == null){
