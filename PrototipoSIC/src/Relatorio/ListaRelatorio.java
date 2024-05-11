@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Relatorio;
 import Individuo.Cidadao;
 import Individuo.Rg;
@@ -34,9 +30,11 @@ public class ListaRelatorio {
     
     public void imprimirLista() { 
         NoRlt i = cabeca;
-        if(i != null)
-            System.out.println(i.getCidadao().getOrigem().getEstado()+ ": ");
         
+        if(i != null){
+            EnumSiglaEstado sigla = EnumSiglaEstado.valueOf(i.getCidadao().getOrigem().getEstado());
+            System.out.println(sigla.getNomeEstado()+ ": ");
+        }
         while (i != null) {
             System.out.println("   " + i.getCidadao().getNome() );
             System.out.println("   " + i.getCidadao().getCpf() );

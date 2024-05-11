@@ -21,14 +21,16 @@ public class TelaInicial extends javax.swing.JFrame {
     /**
      * Creates new form TelaInicial
      */
-    public TelaInicial() {
+    
+    private static ListaEncadeada lista;
+    
+    public TelaInicial(ListaEncadeada listaCadastros) {
         initComponents();        
         setLocationRelativeTo(null);
         setResizable(false);
-        
-        
+        lista = listaCadastros;
     }
-    private static ListaEncadeada lista;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,7 +45,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnImportarJson.setText("Importar  Json");
+        btnImportarJson.setText("Importar  ERGUF");
         btnImportarJson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImportarJsonActionPerformed(evt);
@@ -94,7 +96,7 @@ public class TelaInicial extends javax.swing.JFrame {
         }
 
         JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos JSON", "json");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos ERGUF", "ERGUF");
         fileChooser.setFileFilter(filter);
     
         int result = fileChooser.showOpenDialog(this);
@@ -120,7 +122,7 @@ public class TelaInicial extends javax.swing.JFrame {
             // Salva os dados após a importação
             gerenciadorDeDados.salvarCidadaos(lista);
             JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            
+            lista.imprimirLista();
             
         }
     }//GEN-LAST:event_btnImportarJsonActionPerformed
@@ -163,7 +165,7 @@ public class TelaInicial extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaInicial().setVisible(true);
+                new TelaInicial(lista).setVisible(true);
             }
         });
     }

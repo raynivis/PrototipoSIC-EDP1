@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Importacoes;
 
 import Estrutura.ListaEncadeada;
@@ -30,9 +26,9 @@ public class JsonImporter {
                     JSONObject cidadaoJson = (JSONObject) c;
                     String nome = (String) cidadaoJson.get("nome");
                     String cpf = (String) cidadaoJson.get("cpf");
-                    String datanasc = (String) cidadaoJson.get("data_nasc");
                     String numeroRg = (String) cidadaoJson.get("rg");
-
+                    String datanasc = (String) cidadaoJson.get("data_nasc");
+                    
                     JSONObject naturalidadeJson = (JSONObject) cidadaoJson.get("naturalidade");
                     Naturalidade naturalidade = new Naturalidade((String) naturalidadeJson.get("cidade"), (String) naturalidadeJson.get("estado"));
                     Rg rg = new Rg(numeroRg, estadoRG);
@@ -49,22 +45,22 @@ public class JsonImporter {
         }
         
         public void importarCidadaosDeJsonRapido(String arquivoJson, ListaEncadeada listaCidadaos) {
-        JSONParser parser = new JSONParser();
-        try {
-            Object obj = parser.parse(new FileReader(arquivoJson));
-            JSONArray cidadaosJson = (JSONArray) obj;
+            JSONParser parser = new JSONParser();
+            try {
+                Object obj = parser.parse(new FileReader(arquivoJson));
+                JSONArray cidadaosJson = (JSONArray) obj;
 
-            for (Object c : cidadaosJson) {
-                JSONObject cidadaoJson = (JSONObject) c;
-                Cidadao novoCidadao = GerenciadorDeDados.parsearObjetoCidadao(cidadaoJson);
-                if (novoCidadao != null) {
-                    listaCidadaos.adicionarNoInicio(novoCidadao);
+                for (Object c : cidadaosJson) {
+                    JSONObject cidadaoJson = (JSONObject) c;
+                    Cidadao novoCidadao = GerenciadorDeDados.parsearObjetoCidadao(cidadaoJson);
+                    if (novoCidadao != null) {
+                        listaCidadaos.adicionarNoInicio(novoCidadao);
+                    }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
        
-    }
+        }
 }
 

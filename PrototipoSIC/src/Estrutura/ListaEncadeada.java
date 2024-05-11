@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  *
- * @author ray, Gustavo
+ * @author ray, Gustavo, Ligeiro
  */
 public class ListaEncadeada {
     private No cabeca; /*O no de cabeça aqui, ele vai apontar pro resto da estrutura*/
@@ -30,23 +30,14 @@ public class ListaEncadeada {
             cidadaoExistente.getRgGerais().add(novoCidadao.getRgGerais().get(0));            
         } else {     
             No novo = new No(novoCidadao);
+            novo.prox = cabeca;
+            cabeca = novo;
             quantidadeCidadao++;
-
-            if (cabeca == null) {
-                cabeca = novo;
-            }
-            else {
-                No i = cabeca;
-                while (i.prox != null) {
-                    i = i.prox;
-                }
-                i.prox = novo;
-            }
         }
         
     }
     
-        public void adicionarNoInicio(Cidadao novoCidadao) {
+    public void adicionarNoInicio(Cidadao novoCidadao) {
         No novo = new No(novoCidadao);
         novo.prox = cabeca;
         cabeca = novo;
