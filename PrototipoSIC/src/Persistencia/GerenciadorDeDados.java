@@ -17,6 +17,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class GerenciadorDeDados {
     private static final String CAMINHO_DO_ARQUIVO = "cidadaos.json";
@@ -42,7 +43,7 @@ public class GerenciadorDeDados {
             // Como garantimos que a lista não é nula, passamos diretamente
             dados.importarCidadaosDeJsonRapido(CAMINHO_DO_ARQUIVO, listaCadastros);
         } else {
-            System.out.println("O arquivo " + CAMINHO_DO_ARQUIVO + " não existe.");
+            JOptionPane.showMessageDialog(null, "O arquivo " + CAMINHO_DO_ARQUIVO + " não existe.", "", 1);
         }
     }
         
