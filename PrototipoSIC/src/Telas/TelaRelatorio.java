@@ -120,7 +120,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
             estado[i] = new ListaRelatorio();
         }
         Relatorio relatorio = new Relatorio(listaCadastros, estado, Integer.parseInt(idadeSpi1.getValue().toString()) , Integer.parseInt(idadeSpi2.getValue().toString()));
-        relatorio.imprimirRelatorio();        // TODO add your handling code here:
+        relatorio.imprimirRelatorio(Integer.parseInt(idadeSpi1.getValue().toString()) , Integer.parseInt(idadeSpi2.getValue().toString()));        // TODO add your handling code here:
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

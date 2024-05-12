@@ -1,7 +1,8 @@
 package Relatorio;
 import Individuo.Cidadao;
 import Individuo.Rg;
-
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 /**
  *
  * @author nivis
@@ -28,27 +29,36 @@ public class ListaRelatorio {
        }
     }
     
-    public void imprimirLista() { 
-        NoRlt i = cabeca;
-        
-        if(i != null){
-            EnumSiglaEstado sigla = EnumSiglaEstado.valueOf(i.getCidadao().getOrigem().getEstado());
-            System.out.println(sigla.getNomeEstado()+ ": ");
-        }
-        while (i != null) {
-            System.out.println("   " + i.getCidadao().getNome() );
-            System.out.println("   " + i.getCidadao().getCpf() );
-            System.out.println("   " + i.getCidadao().getDatanasc());
-            for(Rg r : i.getCidadao().getRgGerais()){
-                System.out.print("   " + r.getRg() + " ");
-                System.out.println(r.getEstadoRG());
+    public void imprimirLista(Document document) {
+        try {
+            NoRlt i = cabeca;
+
+            while (i != null) {
+                document.add(new Paragraph("   Nome: " + i.getCidadao().getNome()));
+                document.add(new Paragraph("   CPF: " + i.getCidadao().getCpf()));
+                document.add(new Paragraph("   Data de Nascimento: " + i.getCidadao().getDatanasc()));
+
+                for (Rg r : i.getCidadao().getRgGerais()) {
+                    document.add(new Paragraph("   RG: " + r.getRg() + " " + r.getEstadoRG()));
+                }
+
+                document.add(new Paragraph("   Cidade: " + i.getCidadao().getOrigem().getCidade() +
+                        ", Estado: " + i.getCidadao().getOrigem().getEstado()));
+
+                i = i.prox;
+                document.add(new Paragraph(""));
             }
-            System.out.print("   " + i.getCidadao().getOrigem().getCidade() + " ");
-            System.out.println(i.getCidadao().getOrigem().getEstado());
-            i = i.prox;
-            System.out.println("");
+            
+        } catch (Exception e) {
+            System.err.println("Erro ao adicionar dados ao PDF: " + e.getMessage());
         }
+        
     }
+    
+    public NoRlt getCabeca() {
+        return cabeca;
+    }
+
     
     
     
