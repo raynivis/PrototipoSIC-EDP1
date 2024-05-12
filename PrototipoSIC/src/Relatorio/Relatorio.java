@@ -11,6 +11,7 @@ import com.itextpdf.layout.element.Text;
 import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.colors.DeviceRgb;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 /**
  *
@@ -47,7 +48,7 @@ public class Relatorio {
             TempoDeExecucao tempo = new TempoDeExecucao();
             // Começa a calcular o tempo
             tempo.iniciar();
-            String nomeArquivo = "RelatorioPorFaixaEtaria_" + faixaetaria1 + "_a_" + faixaetaria2 +"anos.pdf";
+            String nomeArquivo = "RelatorioPorFaixaEtaria_" + faixaetaria1 + "_a_" + faixaetaria2 +"_anos.pdf";
             PdfWriter writer = new PdfWriter(nomeArquivo);
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
@@ -66,7 +67,7 @@ public class Relatorio {
             }
 
             document.close();
-            System.out.println("PDF gerado com sucesso.");
+            JOptionPane.showMessageDialog(null, "PDF gerado com sucesso.", "Sucesso!", 1);
             tempo.finalizar();
             long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
             JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Informação", JOptionPane.INFORMATION_MESSAGE);
