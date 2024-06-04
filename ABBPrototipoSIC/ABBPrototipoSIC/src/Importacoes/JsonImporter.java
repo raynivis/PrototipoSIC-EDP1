@@ -1,6 +1,6 @@
 package Importacoes;
 
-import Estrutura.ListaEncadeada;
+import Estrutura.*;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
 import Individuo.Rg;
@@ -11,10 +11,13 @@ import org.json.simple.parser.JSONParser;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ *
+ * @author Eduardo, Gustavo
+ */
 public class JsonImporter {
 
-        public ListaEncadeada importarCidadaosDeJson(String arquivoJson, ListaEncadeada listaCidadaos) {
+        public ABB importarCidadaosDeJson(String arquivoJson, ABB arvore) {
             JSONParser parser = new JSONParser();
             try {
                 Object obj = parser.parse(new FileReader(arquivoJson));
@@ -28,7 +31,7 @@ public class JsonImporter {
                     String cpf = (String) cidadaoJson.get("cpf");
                     String numeroRg = (String) cidadaoJson.get("rg");
                     String datanasc = (String) cidadaoJson.get("data_nasc");
-                    
+
                     JSONObject naturalidadeJson = (JSONObject) cidadaoJson.get("naturalidade");
                     Naturalidade naturalidade = new Naturalidade((String) naturalidadeJson.get("cidade"), (String) naturalidadeJson.get("estado"));
                     Rg rg = new Rg(numeroRg, estadoRG);
@@ -36,15 +39,15 @@ public class JsonImporter {
                     List<Rg> rgs = new ArrayList<>();
                     rgs.add(rg);
                     Cidadao novoCidadao = new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
-                    listaCidadaos.adicionarLista(listaCidadaos, novoCidadao);
+                    arvore.inserir(novoCidadao);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return listaCidadaos;
+            return arvore;
         }
-        
-        public void importarCidadaosDeJsonRapido(String arquivoJson, ListaEncadeada listaCidadaos) {
+
+        public void importarCidadaosDeJsonRapido(String arquivoJson, ABB arvore) {
             JSONParser parser = new JSONParser();
             try {
                 Object obj = parser.parse(new FileReader(arquivoJson));
@@ -54,13 +57,12 @@ public class JsonImporter {
                     JSONObject cidadaoJson = (JSONObject) c;
                     Cidadao novoCidadao = GerenciadorDeDados.parsearObjetoCidadao(cidadaoJson);
                     if (novoCidadao != null) {
-                        listaCidadaos.adicionarNoInicio(novoCidadao);
+                        arvore.inserir(novoCidadao);
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-       
-        }
+        } 
 }
 

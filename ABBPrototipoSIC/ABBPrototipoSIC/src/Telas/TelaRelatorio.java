@@ -1,8 +1,7 @@
 package Telas;
 
-import Estrutura.ListaEncadeada;
-import Relatorio.ListaRelatorio;
-import Relatorio.Relatorio;
+import Estrutura.ABB;
+import Relatorio.*;
 
 
 /**
@@ -11,15 +10,15 @@ import Relatorio.Relatorio;
  */
 public class TelaRelatorio extends javax.swing.JFrame {
     
-    private static ListaEncadeada listaCadastros;
+    private static ABB abb;
     /**
      * Creates new form TelaRelatorio
      */
-    public TelaRelatorio(ListaEncadeada listaCadastros) {
+    public TelaRelatorio(ABB abb) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        this.listaCadastros = listaCadastros;
+        this.abb = abb;
     }
 
     /**
@@ -115,17 +114,18 @@ public class TelaRelatorio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
-        ListaRelatorio estado[] = new ListaRelatorio[27];
+        ABBRelatorio estado[] = new ABBRelatorio[27];
         for(int i=0; i<27; i++) {
-            estado[i] = new ListaRelatorio();
+            estado[i] = new ABBRelatorio();
         }
-        Relatorio relatorio = new Relatorio(listaCadastros, estado, Integer.parseInt(idadeSpi1.getValue().toString()) , Integer.parseInt(idadeSpi2.getValue().toString()));
-        relatorio.imprimirRelatorio(Integer.parseInt(idadeSpi1.getValue().toString()) , Integer.parseInt(idadeSpi2.getValue().toString()));        // TODO add your handling code here:
+        Relatorio relatorio = new Relatorio(this.abb, estado, Integer.parseInt(idadeSpi1.getValue().toString()) , Integer.parseInt(idadeSpi2.getValue().toString()));
+        relatorio.imprimirRelatorio(Integer.parseInt(idadeSpi1.getValue().toString()) , Integer.parseInt(idadeSpi2.getValue().toString()));
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
-        new TelaEscolhas(listaCadastros).setVisible(true);
+        new TelaEscolhas(abb).setVisible(true);
         setVisible(false);
         
     }//GEN-LAST:event_btnVoltarActionPerformed
@@ -160,7 +160,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaRelatorio(listaCadastros).setVisible(true);
+                new TelaRelatorio(abb).setVisible(true);
             }
         });
     }

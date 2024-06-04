@@ -1,6 +1,6 @@
 package Telas;
 
-import Estrutura.ListaEncadeada;
+import Estrutura.*;
 
 /**
  *
@@ -8,15 +8,15 @@ import Estrutura.ListaEncadeada;
  */
 public class TelaEscolhas extends javax.swing.JFrame {
 
-    private static ListaEncadeada listaCadastros;
+    private static ABB abb;
     /**
      * Creates new form TelaEscolhas
      */
-    public TelaEscolhas(ListaEncadeada listaCadastros) {
+    public TelaEscolhas(ABB abb) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        this.listaCadastros = listaCadastros;
+        this.abb = abb;
     }
 
     /**
@@ -88,17 +88,17 @@ public class TelaEscolhas extends javax.swing.JFrame {
 
     private void btnBuscarCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCpfActionPerformed
         setVisible(false);
-        new TelaBuscarCPF(listaCadastros).setVisible(true);        // TODO add your handling code here:
+        new TelaBuscarCPF(abb).setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarCpfActionPerformed
 
     private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
         setVisible(false);
-        new TelaRelatorio(listaCadastros).setVisible(true);  // TODO add your handling code here:
+        new TelaRelatorio(abb).setVisible(true);  // TODO add your handling code here:
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
-        TelaInicial telaInicial = new TelaInicial(listaCadastros);
+        TelaInicial telaInicial = new TelaInicial(abb);
         setVisible(false);
         telaInicial.setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
@@ -133,7 +133,7 @@ public class TelaEscolhas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaEscolhas(listaCadastros).setVisible(true);
+                new TelaEscolhas(abb).setVisible(true);
             }
         });
     }

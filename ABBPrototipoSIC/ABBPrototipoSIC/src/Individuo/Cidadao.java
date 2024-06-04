@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  *
- * @author ra
+ * @author ray
  */
 public class Cidadao {
     private String nome;

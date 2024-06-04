@@ -2,7 +2,7 @@ package Relatorio;
 
 /**
  *
- * @author nivis
+ * @author ray, gustavo
  */
 public class EspalhamentoEstado {
     public static int retornaIndiceEstado(String sigla) {
@@ -93,5 +93,67 @@ public class EspalhamentoEstado {
             break;
         }       
         return i;             
+    }
+    
+    public static String retornaIndiceEstado(int i) {
+        switch(i){
+            case 0:
+                return "AC";
+            case 1:
+                return "AL";
+            case 2:
+                return "AP";
+            case 3:
+                return "AM";
+            case 4:
+                return "BA";
+            case 5:
+                return "CE";
+            case 6:
+                return "DF";
+            case 7:
+                return "ES";
+            case 8:
+                return "GO";
+            case 9:
+                return "MA";
+            case 10:
+                return "MT";
+            case 11:
+                return "MS";
+            case 12:
+                return "MG";
+            case 13:
+                return "PA";
+            case 14:
+                return "PB";
+            case 15:
+                return "PR";
+            case 16:
+                return "PE";
+            case 17:
+                return "PI";
+            case 18:
+                return "RJ";
+            case 19:
+                return "RN";
+            case 20:
+                return "RS";
+            case 21:
+                return "RO";
+            case 22:
+                return "RR";
+            case 23:
+                return "SC";
+            case 24:
+                return "SP";
+            case 25:
+               return "SE";
+            case 26:
+                return "TO";         
+            default:
+            break;
+        }  
+        return "Erro";
     }
 }

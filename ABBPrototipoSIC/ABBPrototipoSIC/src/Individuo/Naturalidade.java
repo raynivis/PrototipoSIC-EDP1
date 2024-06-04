@@ -2,7 +2,7 @@ package Individuo;
 
 /**
  *
- * @author ra
+ * @author ray
  */
 public class Naturalidade {
     private String cidade;

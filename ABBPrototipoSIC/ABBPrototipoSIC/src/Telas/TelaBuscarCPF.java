@@ -1,6 +1,6 @@
 package Telas;
 
-import Estrutura.ListaEncadeada;
+import Estrutura.ABB;
 import Individuo.Cidadao;
 import Individuo.Rg;
 import Timer.TempoDeExecucao;
@@ -12,15 +12,15 @@ import java.util.List;
  */
 public class TelaBuscarCPF extends javax.swing.JFrame {
 
-    private static ListaEncadeada listaCadastros;
+    private static ABB abb;
     /**
      * Creates new form TelaBuscarCPF
      */
-    public TelaBuscarCPF(ListaEncadeada listaCadastros) {
+    public TelaBuscarCPF(ABB abb) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        this.listaCadastros = listaCadastros;
+        this.abb = abb;
     }
 
     /**
@@ -212,7 +212,7 @@ public class TelaBuscarCPF extends javax.swing.JFrame {
         
         // Começa a calcular o tempo
         tempo.iniciar();
-        Cidadao cidadao = listaCadastros.buscarCidadao(listaCadastros ,jTextField1.getText());
+        Cidadao cidadao = abb.buscar(jTextField1.getText());
         if(cidadao != null){
             jTextPane1.setText(cidadao.getNome());
             jTextPane3.setText(cidadao.getDatanasc());
@@ -244,7 +244,7 @@ public class TelaBuscarCPF extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new TelaEscolhas(listaCadastros).setVisible(true);  
+        new TelaEscolhas(abb).setVisible(true);  
         setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -278,7 +278,7 @@ public class TelaBuscarCPF extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaBuscarCPF(listaCadastros).setVisible(true);
+                new TelaBuscarCPF(abb).setVisible(true);
             }
         });
     }

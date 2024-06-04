@@ -1,7 +1,6 @@
 package Persistencia;
 
-import Estrutura.ListaEncadeada;
-import Estrutura.No;
+import Estrutura.ABB;
 import Importacoes.JsonImporter;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
@@ -18,62 +17,54 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-
+/**
+ *
+ * @author Eduardo, Gustavo
+ */
 public class GerenciadorDeDados {
     private static final String CAMINHO_DO_ARQUIVO = "cidadaos.json";
-    private List<Cidadao> cidadaos;
-    private static ListaEncadeada listaCadastros;
+    private ABB abb;
 
-    public GerenciadorDeDados(ListaEncadeada listaCadastros) {
-        this.cidadaos = new ArrayList<>();
-        this.listaCadastros = listaCadastros;
-        //carregarCidadaos();
+    public GerenciadorDeDados(ABB abb) {
+        this.abb = new ABB();
+    }
+    
+    public GerenciadorDeDados() {
+        
     }
 
-    @SuppressWarnings("unchecked")
     
-
-    public static void verificarExistenciaArquivo(ListaEncadeada listaCadastros) {
-        // Garante que a lista seja inicializada, independentemente de sua existência prévia
-        
-        File arquivo = new File(CAMINHO_DO_ARQUIVO);   
-        
+    @SuppressWarnings("unchecked")
+    public void verificarExistenciaArquivo(ABB abb) {
+        File arquivo = new File(CAMINHO_DO_ARQUIVO);
         if (arquivo.exists()) {
             JsonImporter dados = new JsonImporter();
-            // Como garantimos que a lista não é nula, passamos diretamente
-            dados.importarCidadaosDeJsonRapido(CAMINHO_DO_ARQUIVO, listaCadastros);
+            dados.importarCidadaosDeJsonRapido(CAMINHO_DO_ARQUIVO, abb);
         } else {
             JOptionPane.showMessageDialog(null, "O arquivo " + CAMINHO_DO_ARQUIVO + " não existe.", "", 1);
         }
     }
-        
+
     public void carregarCidadaos() {
-    JSONParser parser = new JSONParser();
-    try (FileReader reader = new FileReader(CAMINHO_DO_ARQUIVO)) {
-        Object obj = parser.parse(reader);
-        JSONArray listaCidadaosJson = (JSONArray) obj;
-        listaCidadaosJson.forEach(item -> {
-            Cidadao cidadao = parsearObjetoCidadao((JSONObject) item);
-            cidadaos.add(cidadao);
-        });
-    } catch (IOException e) {
-        // Se não existir o arquivo, inicie uma nova lista vazia.
-        // Isso é esperado na primeira execução, então não é necessário imprimir o stack trace.
-        cidadaos = new ArrayList<>();
-    } catch (ParseException e) {
-        // Em caso de erro de parse, você pode querer informar o usuário ou logar o erro.
-        e.printStackTrace();
+        JSONParser parser = new JSONParser();
+        try (FileReader reader = new FileReader(CAMINHO_DO_ARQUIVO)) {
+            Object obj = parser.parse(reader);
+            JSONArray listaCidadaosJson = (JSONArray) obj;
+            listaCidadaosJson.forEach(item -> {
+                Cidadao cidadao = parsearObjetoCidadao((JSONObject) item);
+                abb.inserir(cidadao);
+            });
+        } catch (IOException e) {
+            abb = new ABB();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
-}
-    
-    
-    
-    
+
     public static Cidadao parsearObjetoCidadao(JSONObject cidadaoJson) {
         String nome = (String) cidadaoJson.get("nome");
         String cpf = (String) cidadaoJson.get("cpf");
         String datanasc = (String) cidadaoJson.get("data_nasc");
-    
         JSONArray rgsJson = (JSONArray) cidadaoJson.get("rgs");
         List<Rg> rgs = new ArrayList<>();
         for (Object r : rgsJson) {
@@ -82,19 +73,17 @@ public class GerenciadorDeDados {
             String estadoRG = (String) rgJson.get("Estado");
             rgs.add(new Rg(numero, estadoRG));
         }
-
         JSONObject naturalidadeJson = (JSONObject) cidadaoJson.get("naturalidade");
         Naturalidade naturalidade = new Naturalidade(
-        (String) naturalidadeJson.get("cidade"),
-        (String) naturalidadeJson.get("estado"));
-
+                (String) naturalidadeJson.get("cidade"),
+                (String) naturalidadeJson.get("estado"));
         return new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
-}
+    }
 
-    public void salvarCidadaos(ListaEncadeada lista) {
+    public void salvarCidadaos(ABB abb) {
         JSONArray listaCidadaos = new JSONArray();
-        
-        for (Cidadao cidadao : lista.getCidadaos()) {
+        abb.emOrdem((noABB) -> {
+            Cidadao cidadao = noABB.getCidadao();
             JSONObject detalhesCidadao = new JSONObject();
             detalhesCidadao.put("nome", cidadao.getNome());
             detalhesCidadao.put("cpf", cidadao.getCpf());
@@ -112,8 +101,7 @@ public class GerenciadorDeDados {
             detalhesNaturalidade.put("estado", cidadao.getOrigem().getEstado());
             detalhesCidadao.put("naturalidade", detalhesNaturalidade);
             listaCidadaos.add(detalhesCidadao);
-        }
-
+        });
         try (FileWriter file = new FileWriter("cidadaos.json")) {
             file.write(listaCidadaos.toJSONString());
             file.flush();
@@ -121,10 +109,4 @@ public class GerenciadorDeDados {
             e.printStackTrace();
         }
     }
-
-    public List<Cidadao> getCidadaos() {
-        return cidadaos;
-    }
-    
-
 }
