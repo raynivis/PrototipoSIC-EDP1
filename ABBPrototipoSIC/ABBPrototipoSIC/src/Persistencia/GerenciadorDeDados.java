@@ -82,7 +82,7 @@ public class GerenciadorDeDados {
 
     public void salvarCidadaos(ABB abb) {
         JSONArray listaCidadaos = new JSONArray();
-        abb.emOrdem((noABB) -> {
+        abb.preOrdem((noABB) -> {
             Cidadao cidadao = noABB.getCidadao();
             JSONObject detalhesCidadao = new JSONObject();
             detalhesCidadao.put("nome", cidadao.getNome());

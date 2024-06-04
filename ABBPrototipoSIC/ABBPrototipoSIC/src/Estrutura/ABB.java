@@ -58,15 +58,15 @@ public class ABB {
     
     }
     
-    public void emOrdem(Consumer<NoABB> consumer) {
-        emOrdem(raiz, consumer);
+    public void preOrdem(Consumer<NoABB> consumer) {
+        preOrdem(raiz, consumer);
     }
 
-    private void emOrdem(NoABB no, Consumer<NoABB> consumer) {
-        if (no != null) {
-            emOrdem(no.esquerda, consumer);
-            consumer.accept(no);
-            emOrdem(no.direita, consumer);
+    private void preOrdem(NoABB no, Consumer<NoABB> consumer) {
+        if (no!= null) {
+            consumer.accept(no); // <--- Move this line up
+            preOrdem(no.esquerda, consumer);
+            preOrdem(no.direita, consumer);
         }
     }
 
