@@ -15,11 +15,11 @@ public class TelaRelatorio extends javax.swing.JFrame {
     /**
      * Creates new form TelaRelatorio
      */
-    public TelaRelatorio(ListaEncadeada listaCadastros) {
+    public TelaRelatorio(ListaEncadeada listaCadastroso) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        this.listaCadastros = listaCadastros;
+        listaCadastros = listaCadastroso;
     }
 
     /**

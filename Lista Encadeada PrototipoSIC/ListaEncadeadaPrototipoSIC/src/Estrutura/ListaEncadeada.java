@@ -14,14 +14,14 @@ public class ListaEncadeada {
     private static int quantidadeCidadao;
     public ListaEncadeada() {
         this.cabeca = null; /*iniciando a lista vazia*/
-        this.quantidadeCidadao = 0;
+        quantidadeCidadao = 0;
     }
     
     
-    public void adicionarLista(ListaEncadeada lista, Cidadao novoCidadao) {
+    public void adicionarLista(Cidadao novoCidadao) {
         
         /*Verificando se o cpf esta cadastrado*/
-        Cidadao cidadaoExistente = buscarCidadao(lista, novoCidadao.getCpf()); 
+        Cidadao cidadaoExistente = buscarCidadao(novoCidadao.getCpf()); 
         /*talvez essa verificacao fique por arquivo, ja que vai demorar muito para 
         ele buscar e esse caso so acontece em ufs diferentes*/
         
@@ -30,8 +30,12 @@ public class ListaEncadeada {
             cidadaoExistente.getRgGerais().add(novoCidadao.getRgGerais().get(0));            
         } else {     
             No novo = new No(novoCidadao);
-            novo.prox = cabeca;
-            cabeca = novo;
+            if(cabeca == null){
+                cabeca = novo;
+            } else {
+                novo.prox = cabeca;
+                cabeca = novo;
+            }      
             quantidadeCidadao++;
         }
         
@@ -39,19 +43,23 @@ public class ListaEncadeada {
     
     public void adicionarNoInicio(Cidadao novoCidadao) {
         No novo = new No(novoCidadao);
-        novo.prox = cabeca;
-        cabeca = novo;
+        if(cabeca == null){
+            cabeca = novo;
+        } else {
+            novo.prox = cabeca;
+            cabeca = novo;
+        }      
         quantidadeCidadao++;
     }
     
     
-    public Cidadao buscarCidadao(ListaEncadeada lista, String cpf) { /*Da para usar a busca aqui de cpf, so chamar na interface*/
-        if(lista.cabeca == null){
-            return null;
-        }   
+    public Cidadao buscarCidadao( String cpf) { /*Da para usar a busca aqui de cpf, so chamar na interface*/
+        if(cabeca == null){           
+            return null;          
+        }  
         
-        No i = lista.cabeca;
-        while (i.prox != null) {
+        No i = cabeca;
+        while (i != null) {
             if(i.getCidadao().getCpf().equals(cpf)) {
                 return i.getCidadao();
             }

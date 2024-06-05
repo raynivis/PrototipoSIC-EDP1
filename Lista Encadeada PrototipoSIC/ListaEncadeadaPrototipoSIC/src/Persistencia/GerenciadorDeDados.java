@@ -1,11 +1,11 @@
 package Persistencia;
 
 import Estrutura.ListaEncadeada;
-import Estrutura.No;
 import Importacoes.JsonImporter;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
 import Individuo.Rg;
+import Timer.TempoDeExecucao;
 import java.io.File;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,11 +22,9 @@ import javax.swing.JOptionPane;
 public class GerenciadorDeDados {
     private static final String CAMINHO_DO_ARQUIVO = "cidadaos.json";
     private List<Cidadao> cidadaos;
-    private static ListaEncadeada listaCadastros;
 
-    public GerenciadorDeDados(ListaEncadeada listaCadastros) {
-        this.cidadaos = new ArrayList<>();
-        this.listaCadastros = listaCadastros;
+    public GerenciadorDeDados() {
+        this.cidadaos = new ArrayList<>();      
         //carregarCidadaos();
     }
 
@@ -41,7 +39,12 @@ public class GerenciadorDeDados {
         if (arquivo.exists()) {
             JsonImporter dados = new JsonImporter();
             // Como garantimos que a lista não é nula, passamos diretamente
+            TempoDeExecucao tempo = new TempoDeExecucao();
+            tempo.iniciar();
             dados.importarCidadaosDeJsonRapido(CAMINHO_DO_ARQUIVO, listaCadastros);
+            tempo.finalizar();
+            long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
+            JOptionPane.showMessageDialog(null, "Tempo de execução de: " + tempoDeExecucao + " Milissegundos", "Pesistencia de Dados", JOptionPane.INFORMATION_MESSAGE);       
         } else {
             JOptionPane.showMessageDialog(null, "O arquivo " + CAMINHO_DO_ARQUIVO + " não existe.", "", 1);
         }

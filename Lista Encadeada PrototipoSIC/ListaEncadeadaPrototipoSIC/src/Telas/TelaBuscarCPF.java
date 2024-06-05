@@ -4,7 +4,6 @@ import Estrutura.ListaEncadeada;
 import Individuo.Cidadao;
 import Individuo.Rg;
 import Timer.TempoDeExecucao;
-import java.util.List;
 
 /**
  *
@@ -16,11 +15,11 @@ public class TelaBuscarCPF extends javax.swing.JFrame {
     /**
      * Creates new form TelaBuscarCPF
      */
-    public TelaBuscarCPF(ListaEncadeada listaCadastros) {
+    public TelaBuscarCPF(ListaEncadeada listaCadastroso) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        this.listaCadastros = listaCadastros;
+        listaCadastros = listaCadastroso;
     }
 
     /**
@@ -212,7 +211,7 @@ public class TelaBuscarCPF extends javax.swing.JFrame {
         
         // Começa a calcular o tempo
         tempo.iniciar();
-        Cidadao cidadao = listaCadastros.buscarCidadao(listaCadastros ,jTextField1.getText());
+        Cidadao cidadao = listaCadastros.buscarCidadao(jTextField1.getText());
         if(cidadao != null){
             jTextPane1.setText(cidadao.getNome());
             jTextPane3.setText(cidadao.getDatanasc());

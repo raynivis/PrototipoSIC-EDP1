@@ -12,11 +12,11 @@ public class TelaEscolhas extends javax.swing.JFrame {
     /**
      * Creates new form TelaEscolhas
      */
-    public TelaEscolhas(ListaEncadeada listaCadastros) {
+    public TelaEscolhas(ListaEncadeada listaCadastroso) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        this.listaCadastros = listaCadastros;
+        listaCadastros = listaCadastroso;
     }
 
     /**

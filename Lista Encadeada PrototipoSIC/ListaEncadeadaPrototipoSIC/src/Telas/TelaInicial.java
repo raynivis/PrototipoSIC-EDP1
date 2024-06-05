@@ -2,12 +2,8 @@ package Telas;
 
 import Estrutura.ListaEncadeada;
 import Importacoes.JsonImporter;
-import Individuo.Cidadao;
 import Persistencia.GerenciadorDeDados;
-import Relatorio.ListaRelatorio;
-import Relatorio.Relatorio;
 import Timer.TempoDeExecucao;
-import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -89,7 +85,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     // Inicialmente, a lista é nula
     private void btnImportarJsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarJsonActionPerformed
-        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados(lista);  
+        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();  
         
         if (lista == null) {
             lista = new ListaEncadeada();  // Cria uma nova lista se não existir
@@ -121,7 +117,7 @@ public class TelaInicial extends javax.swing.JFrame {
         
             // Salva os dados após a importação
             gerenciadorDeDados.salvarCidadaos(lista);
-            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Importar", JOptionPane.INFORMATION_MESSAGE);
             lista.imprimirLista();
             
         }
