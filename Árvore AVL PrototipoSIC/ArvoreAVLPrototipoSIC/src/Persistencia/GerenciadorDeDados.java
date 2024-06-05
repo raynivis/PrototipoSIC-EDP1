@@ -86,8 +86,8 @@ public class GerenciadorDeDados {
     public void salvarCidadaos(EstruturaAVL arvoreAvl) {
         JSONArray listaCidadaos = new JSONArray();
         
-        arvoreAvl.preOrdem((noABB) -> {
-            Cidadao cidadao = noABB.getCidadao();
+        arvoreAvl.preOrdem((noAVL) -> {
+            Cidadao cidadao = noAVL.getCidadao();
             JSONObject detalhesCidadao = new JSONObject();
             detalhesCidadao.put("nome", cidadao.getNome());
             detalhesCidadao.put("cpf", cidadao.getCpf());
