@@ -4,7 +4,6 @@ import Estrutura.ABB;
 import Individuo.Cidadao;
 import Individuo.Rg;
 import Timer.TempoDeExecucao;
-import java.util.List;
 
 /**
  *
