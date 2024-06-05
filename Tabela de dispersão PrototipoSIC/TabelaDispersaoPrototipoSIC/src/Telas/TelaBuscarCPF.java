@@ -1,10 +1,9 @@
 package Telas;
 
-import Estrutura.ListaEncadeada;
+import Estrutura.TabelaHash;
 import Individuo.Cidadao;
 import Individuo.Rg;
 import Timer.TempoDeExecucao;
-import java.util.List;
 
 /**
  *
@@ -12,15 +11,15 @@ import java.util.List;
  */
 public class TelaBuscarCPF extends javax.swing.JFrame {
 
-    private static ListaEncadeada listaCadastros;
+    private static TabelaHash tabela;
     /**
      * Creates new form TelaBuscarCPF
      */
-    public TelaBuscarCPF(ListaEncadeada listaCadastros) {
+    public TelaBuscarCPF(TabelaHash tabelar) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        this.listaCadastros = listaCadastros;
+        tabela = tabelar;
     }
 
     /**
@@ -212,7 +211,7 @@ public class TelaBuscarCPF extends javax.swing.JFrame {
         
         // Começa a calcular o tempo
         tempo.iniciar();
-        Cidadao cidadao = listaCadastros.buscarCidadao(listaCadastros ,jTextField1.getText());
+        Cidadao cidadao = tabela.buscarCidadao(jTextField1.getText());
         if(cidadao != null){
             jTextPane1.setText(cidadao.getNome());
             jTextPane3.setText(cidadao.getDatanasc());
@@ -244,7 +243,7 @@ public class TelaBuscarCPF extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new TelaEscolhas(listaCadastros).setVisible(true);  
+        new TelaEscolhas(tabela).setVisible(true);  
         setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -278,7 +277,7 @@ public class TelaBuscarCPF extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaBuscarCPF(listaCadastros).setVisible(true);
+                new TelaBuscarCPF(tabela).setVisible(true);
             }
         });
     }

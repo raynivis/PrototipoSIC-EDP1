@@ -2,8 +2,7 @@ package Estrutura;
 
 import Individuo.Cidadao;
 import Individuo.Rg;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  *
@@ -11,47 +10,57 @@ import java.util.List;
  */
 public class ListaEncadeada {
     private No cabeca; /*O no de cabeça aqui, ele vai apontar pro resto da estrutura*/
-    private static int quantidadeCidadao;
+    private int quantidadeCidadao;
     public ListaEncadeada() {
         this.cabeca = null; /*iniciando a lista vazia*/
         this.quantidadeCidadao = 0;
     }
     
     
-    public void adicionarLista(ListaEncadeada lista, Cidadao novoCidadao) {
+    public boolean adicionarLista(Cidadao novoCidadao) {
         
         /*Verificando se o cpf esta cadastrado*/
-        Cidadao cidadaoExistente = buscarCidadao(lista, novoCidadao.getCpf()); 
+        Cidadao cidadaoExistente = buscarCidadao(novoCidadao.getCpf()); 
         /*talvez essa verificacao fique por arquivo, ja que vai demorar muito para 
         ele buscar e esse caso so acontece em ufs diferentes*/
         
         /*Se retornar nulo o cidadoexistente ele nao existe, logo eh so inserir o novo rg no noh dele*/
         if(cidadaoExistente != null) {
-            cidadaoExistente.getRgGerais().add(novoCidadao.getRgGerais().get(0));            
+            cidadaoExistente.getRgGerais().add(novoCidadao.getRgGerais().get(0));    
+            return false;
         } else {     
             No novo = new No(novoCidadao);
-            novo.prox = cabeca;
-            cabeca = novo;
+            if(cabeca == null){
+                cabeca = novo;
+            } else {
+                novo.prox = cabeca;
+                cabeca = novo;
+            }      
             quantidadeCidadao++;
+            return true;
         }
         
     }
     
     public void adicionarNoInicio(Cidadao novoCidadao) {
         No novo = new No(novoCidadao);
-        novo.prox = cabeca;
-        cabeca = novo;
+        if(cabeca == null){
+            cabeca = novo;
+        } else {
+            novo.prox = cabeca;
+            cabeca = novo;
+        }      
         quantidadeCidadao++;
     }
     
     
-    public Cidadao buscarCidadao(ListaEncadeada lista, String cpf) { /*Da para usar a busca aqui de cpf, so chamar na interface*/
-        if(lista.cabeca == null){
-            return null;
-        }   
+    public Cidadao buscarCidadao(String cpf) { /*Da para usar a busca aqui de cpf, so chamar na interface*/
+        if(cabeca == null){           
+            return null;          
+        }  
         
-        No i = lista.cabeca;
-        while (i.prox != null) {
+        No i = cabeca;
+        while (i != null) {
             if(i.getCidadao().getCpf().equals(cpf)) {
                 return i.getCidadao();
             }
@@ -78,21 +87,12 @@ public class ListaEncadeada {
         System.out.println();
     }
     
-    public List<Cidadao> getCidadaos() {
-        List<Cidadao> cidadaos = new ArrayList<>();
-        No atual = cabeca;
-        while (atual != null) {
-            cidadaos.add(atual.getCidadao());
-            atual = atual.prox;
-        }
-        return cidadaos;
-    }
 
     public No getCabeca() {
         return cabeca;
     }
 
-    public static int getQuantidadeCidadao() {
+    public int getQuantidadeCidadao() {
         return quantidadeCidadao;
     }       
      

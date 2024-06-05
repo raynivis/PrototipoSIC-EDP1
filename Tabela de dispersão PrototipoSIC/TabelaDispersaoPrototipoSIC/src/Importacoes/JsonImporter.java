@@ -1,6 +1,6 @@
 package Importacoes;
 
-import Estrutura.ListaEncadeada;
+import Estrutura.TabelaHash;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
 import Individuo.Rg;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class JsonImporter {
 
-        public ListaEncadeada importarCidadaosDeJson(String arquivoJson, ListaEncadeada listaCidadaos) {
+        public TabelaHash importarCidadaosDeJson(String arquivoJson, TabelaHash tabela) {
             JSONParser parser = new JSONParser();
             try {
                 Object obj = parser.parse(new FileReader(arquivoJson));
@@ -36,15 +36,15 @@ public class JsonImporter {
                     List<Rg> rgs = new ArrayList<>();
                     rgs.add(rg);
                     Cidadao novoCidadao = new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
-                    listaCidadaos.adicionarLista(listaCidadaos, novoCidadao);
+                    tabela.inserirChave(novoCidadao);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return listaCidadaos;
+            return tabela;
         }
         
-        public void importarCidadaosDeJsonRapido(String arquivoJson, ListaEncadeada listaCidadaos) {
+        public void importarCidadaosDeJsonRapido(String arquivoJson, TabelaHash tabela) {
             JSONParser parser = new JSONParser();
             try {
                 Object obj = parser.parse(new FileReader(arquivoJson));
@@ -54,7 +54,7 @@ public class JsonImporter {
                     JSONObject cidadaoJson = (JSONObject) c;
                     Cidadao novoCidadao = GerenciadorDeDados.parsearObjetoCidadao(cidadaoJson);
                     if (novoCidadao != null) {
-                        listaCidadaos.adicionarNoInicio(novoCidadao);
+                        tabela.inserirChaveRapido(novoCidadao);
                     }
                 }
             } catch (Exception e) {
