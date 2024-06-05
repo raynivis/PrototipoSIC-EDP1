@@ -2,11 +2,8 @@ package Telas;
 
 import Estrutura.*;
 import Importacoes.JsonImporter;
-import Individuo.Cidadao;
 import Persistencia.GerenciadorDeDados;
-import Relatorio.Relatorio;
 import Timer.TempoDeExecucao;
-import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;

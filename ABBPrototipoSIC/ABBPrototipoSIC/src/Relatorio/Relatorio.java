@@ -11,7 +11,6 @@ import com.itextpdf.layout.element.Text;
 import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.colors.DeviceRgb;
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
 import javax.swing.JOptionPane;
 /**
  *

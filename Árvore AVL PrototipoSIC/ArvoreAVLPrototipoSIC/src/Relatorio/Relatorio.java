@@ -1,7 +1,7 @@
 package Relatorio;
 
-import Estrutura.ListaEncadeada;
-import Estrutura.No;
+import Estrutura.EstruturaAVL;
+import Estrutura.NoAVL;
 import Timer.TempoDeExecucao;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -11,58 +11,56 @@ import com.itextpdf.layout.element.Text;
 import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.colors.DeviceRgb;
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
 import javax.swing.JOptionPane;
 /**
  *
  * @author nivis
  */
 public class Relatorio {
-    
-    /*estrutura:*/
-    ListaEncadeada estruraDeDados;
-    /*lista dos estados*/
-    ListaRelatorio[] estado;
-    
+    private AVLparaRelatorio[] estado;
 
-    public Relatorio(ListaEncadeada estruraDeDados, ListaRelatorio[] estados, int faixaetaria1, int faixaetaria2) {
-        this.estruraDeDados = estruraDeDados;
-        this.estado = estados;      
-    
-        No i = this.estruraDeDados.getCabeca();
-        while(i != null) {
-            String data = i.getCidadao().getDatanasc();
-            String anoTexto = data.substring(data.length()-4, data.length());
-            int ano = Integer.parseInt(anoTexto);
-            if((2024-ano) >= faixaetaria1 && (2024-ano) <= faixaetaria2) {           
-                String naturalidadeEstado = i.getCidadao().getOrigem().getEstado();
-                int j = EspalhamentoEstado.retornaIndiceEstado(naturalidadeEstado);
-                estado[j].inserirNaLista(i.getCidadao());              
-            }
-            i=i.prox;
-        }      
+    public Relatorio(EstruturaAVL estruturaDeDados, AVLparaRelatorio[] estados, int faixaetaria1, int faixaetaria2) {
+        this.estado = estados;
+
+        percorrerAVLInOrder(estruturaDeDados.getRaiz(), faixaetaria1, faixaetaria2);
+    }
+
+    private void percorrerAVLInOrder(NoAVL no, int faixaetaria1, int faixaetaria2) {
+        if (no == null) {
+            return;
+        }
+
+        percorrerAVLInOrder(no.getEsquerdo(), faixaetaria1, faixaetaria2);
+
+        String data = no.getCidadao().getDatanasc();
+        String anoTexto = data.substring(data.length() - 4, data.length());
+        int ano = Integer.parseInt(anoTexto);
+        if ((2024 - ano) >= faixaetaria1 && (2024 - ano) <= faixaetaria2) {
+            String naturalidadeEstado = no.getCidadao().getOrigem().getEstado();
+            int j = EspalhamentoEstado.retornaIndiceEstado(naturalidadeEstado);
+            estado[j].inserir(no.getCidadao());
+        }
+
+        percorrerAVLInOrder(no.getDireito(), faixaetaria1, faixaetaria2);
     }
     
     public void imprimirRelatorio(int faixaetaria1, int faixaetaria2) {
         try {
             TempoDeExecucao tempo = new TempoDeExecucao();
-            // Começa a calcular o tempo
             tempo.iniciar();
-            String nomeArquivo = "RelatorioPorFaixaEtaria_" + faixaetaria1 + "_a_" + faixaetaria2 +"_anos.pdf";
+            String nomeArquivo = "RelatorioPorFaixaEtaria_" + faixaetaria1 + "_a_" + faixaetaria2 + "_anos.pdf";
             PdfWriter writer = new PdfWriter(nomeArquivo);
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
 
             for (int i = 0; i < 27; i++) {
-                if (estado[i].getCabeca() != null) {
-                    EnumSiglaEstado sigla = EnumSiglaEstado.valueOf(estado[i].getCabeca().getCidadao().getOrigem().getEstado());
+                if (estado[i].getRaiz()!= null) {
+                    EnumSiglaEstado sigla = EnumSiglaEstado.valueOf(estado[i].getRaiz().getCidadao().getOrigem().getEstado());
                     String estadoNome = sigla.getNomeEstado();
                     Color color = new DeviceRgb(0, 0, 0); // Cor preta
-                    // Cria um texto em negrito
                     Text boldText = new Text(estadoNome + ": ").setBold().setFontColor(color);
-                    // Adiciona o texto em negrito ao documento
                     document.add(new Paragraph(boldText));
-                    estado[i].imprimirLista(document);
+                    estado[i].imprimir(document);
                 }
             }
 
@@ -74,10 +72,5 @@ public class Relatorio {
         } catch (FileNotFoundException e) {
             System.err.println("Erro ao criar o arquivo PDF: " + e.getMessage());
         }
-        
     }
-
-    
-    
-    
 }

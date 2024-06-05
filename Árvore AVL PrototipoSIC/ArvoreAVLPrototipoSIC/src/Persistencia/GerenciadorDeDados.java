@@ -1,7 +1,6 @@
 package Persistencia;
 
-import Estrutura.ListaEncadeada;
-import Estrutura.No;
+import Estrutura.EstruturaAVL;
 import Importacoes.JsonImporter;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
@@ -11,7 +10,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,27 +19,21 @@ import javax.swing.JOptionPane;
 
 public class GerenciadorDeDados {
     private static final String CAMINHO_DO_ARQUIVO = "cidadaos.json";
-    private List<Cidadao> cidadaos;
-    private static ListaEncadeada listaCadastros;
+    private EstruturaAVL arvoreAvl;
 
-    public GerenciadorDeDados(ListaEncadeada listaCadastros) {
-        this.cidadaos = new ArrayList<>();
-        this.listaCadastros = listaCadastros;
-        //carregarCidadaos();
+    public GerenciadorDeDados(EstruturaAVL arvoreAvl) {
+        this.arvoreAvl = new EstruturaAVL();
     }
 
     @SuppressWarnings("unchecked")
     
 
-    public static void verificarExistenciaArquivo(ListaEncadeada listaCadastros) {
-        // Garante que a lista seja inicializada, independentemente de sua existência prévia
-        
+    public static void verificarExistenciaArquivo(EstruturaAVL arvoreAvl) {
         File arquivo = new File(CAMINHO_DO_ARQUIVO);   
         
         if (arquivo.exists()) {
             JsonImporter dados = new JsonImporter();
-            // Como garantimos que a lista não é nula, passamos diretamente
-            dados.importarCidadaosDeJsonRapido(CAMINHO_DO_ARQUIVO, listaCadastros);
+            dados.importarCidadaosDeJsonRapido(CAMINHO_DO_ARQUIVO, arvoreAvl);
         } else {
             JOptionPane.showMessageDialog(null, "O arquivo " + CAMINHO_DO_ARQUIVO + " não existe.", "", 1);
         }
@@ -54,12 +46,12 @@ public class GerenciadorDeDados {
         JSONArray listaCidadaosJson = (JSONArray) obj;
         listaCidadaosJson.forEach(item -> {
             Cidadao cidadao = parsearObjetoCidadao((JSONObject) item);
-            cidadaos.add(cidadao);
+            arvoreAvl.inserirAVL(cidadao);
         });
     } catch (IOException e) {
         // Se não existir o arquivo, inicie uma nova lista vazia.
         // Isso é esperado na primeira execução, então não é necessário imprimir o stack trace.
-        cidadaos = new ArrayList<>();
+        arvoreAvl = new EstruturaAVL();
     } catch (ParseException e) {
         // Em caso de erro de parse, você pode querer informar o usuário ou logar o erro.
         e.printStackTrace();
@@ -91,10 +83,11 @@ public class GerenciadorDeDados {
         return new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
 }
 
-    public void salvarCidadaos(ListaEncadeada lista) {
+    public void salvarCidadaos(EstruturaAVL arvoreAvl) {
         JSONArray listaCidadaos = new JSONArray();
         
-        for (Cidadao cidadao : lista.getCidadaos()) {
+        arvoreAvl.preOrdem((noABB) -> {
+            Cidadao cidadao = noABB.getCidadao();
             JSONObject detalhesCidadao = new JSONObject();
             detalhesCidadao.put("nome", cidadao.getNome());
             detalhesCidadao.put("cpf", cidadao.getCpf());
@@ -112,8 +105,8 @@ public class GerenciadorDeDados {
             detalhesNaturalidade.put("estado", cidadao.getOrigem().getEstado());
             detalhesCidadao.put("naturalidade", detalhesNaturalidade);
             listaCidadaos.add(detalhesCidadao);
-        }
-
+        });
+        
         try (FileWriter file = new FileWriter("cidadaos.json")) {
             file.write(listaCidadaos.toJSONString());
             file.flush();
@@ -121,10 +114,4 @@ public class GerenciadorDeDados {
             e.printStackTrace();
         }
     }
-
-    public List<Cidadao> getCidadaos() {
-        return cidadaos;
-    }
-    
-
 }
