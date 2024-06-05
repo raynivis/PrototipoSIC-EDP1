@@ -1,16 +1,9 @@
 
-import Estrutura.ListaEncadeada;
-import Importacoes.JsonImporter;
-import Individuo.Cidadao;
-import Individuo.Naturalidade;
-import Individuo.Rg;
+
+import Estrutura.TabelaHash;
 import Persistencia.GerenciadorDeDados;
-import static Persistencia.GerenciadorDeDados.verificarExistenciaArquivo;
-import Relatorio.Relatorio;
 import Telas.TelaInicial;
-import Timer.TempoDeExecucao;
-import java.util.ArrayList;
-import java.util.List;
+
 /**
  *
  * @author ra
@@ -18,12 +11,11 @@ import java.util.List;
 public class Program {
     
     public static void main(String[] args) {     
-       ListaEncadeada listaCadastros = new ListaEncadeada();
-       GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados(listaCadastros);        
-       gerenciadorDeDados.verificarExistenciaArquivo(listaCadastros);
-        new TelaInicial(listaCadastros).setVisible(true);    
-        
-        listaCadastros.imprimirLista();
+       TabelaHash tabelaHash = new TabelaHash();
+       GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();        
+       gerenciadorDeDados.verificarExistenciaArquivo(tabelaHash);
+       new TelaInicial(tabelaHash).setVisible(true);    
+               
     }
         
 }

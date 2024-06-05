@@ -1,13 +1,8 @@
 package Telas;
-
-import Estrutura.ListaEncadeada;
+import Estrutura.TabelaHash;
 import Importacoes.JsonImporter;
-import Individuo.Cidadao;
 import Persistencia.GerenciadorDeDados;
-import Relatorio.ListaRelatorio;
-import Relatorio.Relatorio;
 import Timer.TempoDeExecucao;
-import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -22,13 +17,13 @@ public class TelaInicial extends javax.swing.JFrame {
      * Creates new form TelaInicial
      */
     
-    private static ListaEncadeada lista;
+    private static TabelaHash tabela;
     
-    public TelaInicial(ListaEncadeada listaCadastros) {
+    public TelaInicial(TabelaHash tabelar) {
         initComponents();        
         setLocationRelativeTo(null);
         setResizable(false);
-        lista = listaCadastros;
+        tabela = tabelar;
     }
     
     /**
@@ -89,10 +84,10 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     // Inicialmente, a lista é nula
     private void btnImportarJsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarJsonActionPerformed
-        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados(lista);  
+        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();  
         
-        if (lista == null) {
-            lista = new ListaEncadeada();  // Cria uma nova lista se não existir
+        if (tabela == null) {
+            tabela = new TabelaHash();  // Cria uma nova tabela se não existir
         }
 
         JFileChooser fileChooser = new JFileChooser();
@@ -109,8 +104,7 @@ public class TelaInicial extends javax.swing.JFrame {
         
             // Chamada da função para importar cidadãos do arquivo JSON
             JsonImporter jsonImporter = new JsonImporter(); // Criando uma instância de JsonImporter
-            lista = jsonImporter.importarCidadaosDeJson(caminhoDoArquivo, lista);
-
+            tabela = jsonImporter.importarCidadaosDeJson(caminhoDoArquivo, tabela);            
             // Atualiza a interface de usuário se necessário e informa quantos cidadãos foram importados
             // System.out.println("Número de cidadãos na lista após a importação: " + lista.getQuantidadeCidadao());
            
@@ -119,18 +113,18 @@ public class TelaInicial extends javax.swing.JFrame {
             long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
             // System.out.println("Tempo de execução: " + tempoDeExecucao + " Milissegundos");
         
-            // Salva os dados após a importação
-            gerenciadorDeDados.salvarCidadaos(lista);
-            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Informação", JOptionPane.INFORMATION_MESSAGE);
-            lista.imprimirLista();
             
+            // Salva os dados após a importação
+            gerenciadorDeDados.salvarCidadaos(tabela);
+            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Importar", JOptionPane.INFORMATION_MESSAGE);
+            tabela.imprimirColisoes();
         }
     }//GEN-LAST:event_btnImportarJsonActionPerformed
 
     private void btnOpcoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcoesActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        new TelaEscolhas(lista).setVisible(true);
+        new TelaEscolhas(tabela).setVisible(true);
         
     }//GEN-LAST:event_btnOpcoesActionPerformed
 
@@ -165,7 +159,7 @@ public class TelaInicial extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaInicial(lista).setVisible(true);
+                new TelaInicial(tabela).setVisible(true);
             }
         });
     }

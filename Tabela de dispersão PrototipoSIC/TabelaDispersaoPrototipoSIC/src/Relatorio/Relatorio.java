@@ -2,6 +2,7 @@ package Relatorio;
 
 import Estrutura.ListaEncadeada;
 import Estrutura.No;
+import Estrutura.TabelaHash;
 import Timer.TempoDeExecucao;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -11,7 +12,6 @@ import com.itextpdf.layout.element.Text;
 import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.colors.DeviceRgb;
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
 import javax.swing.JOptionPane;
 /**
  *
@@ -19,27 +19,28 @@ import javax.swing.JOptionPane;
  */
 public class Relatorio {
     
-    /*estrutura:*/
-    ListaEncadeada estruraDeDados;
     /*lista dos estados*/
-    ListaRelatorio[] estado;
+    private final ListaRelatorio[] estado;
     
 
-    public Relatorio(ListaEncadeada estruraDeDados, ListaRelatorio[] estados, int faixaetaria1, int faixaetaria2) {
-        this.estruraDeDados = estruraDeDados;
-        this.estado = estados;      
-    
-        No i = this.estruraDeDados.getCabeca();
-        while(i != null) {
-            String data = i.getCidadao().getDatanasc();
-            String anoTexto = data.substring(data.length()-4, data.length());
-            int ano = Integer.parseInt(anoTexto);
-            if((2024-ano) >= faixaetaria1 && (2024-ano) <= faixaetaria2) {           
-                String naturalidadeEstado = i.getCidadao().getOrigem().getEstado();
-                int j = EspalhamentoEstado.retornaIndiceEstado(naturalidadeEstado);
-                estado[j].inserirNaLista(i.getCidadao());              
+    public Relatorio(TabelaHash tabelaH, ListaRelatorio[] estados, int faixaetaria1, int faixaetaria2) {
+        this.estado = estados;
+        
+        for(int i = 0; i < tabelaH.getTabela().length; i++) {
+            if(tabelaH.getTabela()[i].getCabeca() != null){
+                No aux = tabelaH.getTabela()[i].getCabeca();
+                while(aux != null) {
+                    String data = aux.getCidadao().getDatanasc();
+                    String anoTexto = data.substring(data.length()-4, data.length());
+                    int ano = Integer.parseInt(anoTexto);
+                    if((2024-ano) >= faixaetaria1 && (2024-ano) <= faixaetaria2) {           
+                        String naturalidadeEstado = aux.getCidadao().getOrigem().getEstado();
+                        int j = EspalhamentoEstado.retornaIndiceEstado(naturalidadeEstado);
+                        estado[j].inserirNaLista(aux.getCidadao());              
+                    }
+                    aux=aux.prox;
+                }      
             }
-            i=i.prox;
         }      
     }
     
@@ -70,7 +71,7 @@ public class Relatorio {
             JOptionPane.showMessageDialog(null, "PDF gerado com sucesso.", "Sucesso!", 1);
             tempo.finalizar();
             long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
-            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Relatorio", JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException e) {
             System.err.println("Erro ao criar o arquivo PDF: " + e.getMessage());
         }

@@ -1,11 +1,11 @@
 package Persistencia;
 
-import Estrutura.ListaEncadeada;
-import Estrutura.No;
+import Estrutura.TabelaHash;
 import Importacoes.JsonImporter;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
 import Individuo.Rg;
+import Timer.TempoDeExecucao;
 import java.io.File;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,18 +22,15 @@ import javax.swing.JOptionPane;
 public class GerenciadorDeDados {
     private static final String CAMINHO_DO_ARQUIVO = "cidadaos.json";
     private List<Cidadao> cidadaos;
-    private static ListaEncadeada listaCadastros;
 
-    public GerenciadorDeDados(ListaEncadeada listaCadastros) {
+    public GerenciadorDeDados() {
         this.cidadaos = new ArrayList<>();
-        this.listaCadastros = listaCadastros;
-        //carregarCidadaos();
     }
 
     @SuppressWarnings("unchecked")
     
 
-    public static void verificarExistenciaArquivo(ListaEncadeada listaCadastros) {
+    public static void verificarExistenciaArquivo(TabelaHash tabela) {
         // Garante que a lista seja inicializada, independentemente de sua existência prévia
         
         File arquivo = new File(CAMINHO_DO_ARQUIVO);   
@@ -41,7 +38,13 @@ public class GerenciadorDeDados {
         if (arquivo.exists()) {
             JsonImporter dados = new JsonImporter();
             // Como garantimos que a lista não é nula, passamos diretamente
-            dados.importarCidadaosDeJsonRapido(CAMINHO_DO_ARQUIVO, listaCadastros);
+            TempoDeExecucao tempo = new TempoDeExecucao();
+            tempo.iniciar();
+            dados.importarCidadaosDeJsonRapido(CAMINHO_DO_ARQUIVO, tabela);
+            tempo.finalizar();
+            long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
+            JOptionPane.showMessageDialog(null, "Tempo de execução de: " + tempoDeExecucao + " Milissegundos", "Pesistencia de Dados", JOptionPane.INFORMATION_MESSAGE);
+            tabela.imprimirColisoes();         
         } else {
             JOptionPane.showMessageDialog(null, "O arquivo " + CAMINHO_DO_ARQUIVO + " não existe.", "", 1);
         }
@@ -68,7 +71,6 @@ public class GerenciadorDeDados {
     
     
     
-    
     public static Cidadao parsearObjetoCidadao(JSONObject cidadaoJson) {
         String nome = (String) cidadaoJson.get("nome");
         String cpf = (String) cidadaoJson.get("cpf");
@@ -91,10 +93,10 @@ public class GerenciadorDeDados {
         return new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
 }
 
-    public void salvarCidadaos(ListaEncadeada lista) {
+    public void salvarCidadaos(TabelaHash tabela) {
         JSONArray listaCidadaos = new JSONArray();
         
-        for (Cidadao cidadao : lista.getCidadaos()) {
+        for (Cidadao cidadao : tabela.getCidadaos()) {
             JSONObject detalhesCidadao = new JSONObject();
             detalhesCidadao.put("nome", cidadao.getNome());
             detalhesCidadao.put("cpf", cidadao.getCpf());
