@@ -45,6 +45,8 @@ public class GerenciadorDeDados {
             tempo.finalizar();
             long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
             JOptionPane.showMessageDialog(null, "Tempo de execução de: " + tempoDeExecucao + " Milissegundos", "Pesistencia de Dados", JOptionPane.INFORMATION_MESSAGE);       
+            listaCadastros.imprimirLista();
+            System.out.println("A quantidade atual do sistema eh de " + ListaEncadeada.getQuantidadeCidadao() + " Cidadaos.");
         } else {
             JOptionPane.showMessageDialog(null, "O arquivo " + CAMINHO_DO_ARQUIVO + " não existe.", "", 1);
         }

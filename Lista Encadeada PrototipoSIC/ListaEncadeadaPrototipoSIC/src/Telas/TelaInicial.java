@@ -119,6 +119,7 @@ public class TelaInicial extends javax.swing.JFrame {
             gerenciadorDeDados.salvarCidadaos(lista);
             JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Importar", JOptionPane.INFORMATION_MESSAGE);
             lista.imprimirLista();
+            System.out.println("A quantidade atual do sistema eh de " + ListaEncadeada.getQuantidadeCidadao() + " Cidadaos.");
             
         }
     }//GEN-LAST:event_btnImportarJsonActionPerformed
