@@ -19,12 +19,12 @@ public class JsonImporter {
 
         public ABB importarCidadaosDeJson(String arquivoJson, ABB arvore) {
             JSONParser parser = new JSONParser();
+            int qtdCidadoes = 0;
             try {
                 Object obj = parser.parse(new FileReader(arquivoJson));
-                JSONObject jsonObject = (JSONObject) obj;
-                String estadoRG = (String) jsonObject.get("uf");
-                JSONArray cidadaosJson = (JSONArray) jsonObject.get("cidadãos");
-
+                JSONObject estadoJson = (JSONObject) obj;
+                String estadoRG = (String) estadoJson.get("uf");
+                JSONArray cidadaosJson = (JSONArray) estadoJson.get("cidadãos");
                 for (Object c : cidadaosJson) {
                     JSONObject cidadaoJson = (JSONObject) c;
                     String nome = (String) cidadaoJson.get("nome");
@@ -40,15 +40,18 @@ public class JsonImporter {
                     rgs.add(rg);
                     Cidadao novoCidadao = new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
                     arvore.inserir(novoCidadao);
+                    qtdCidadoes += 1;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            System.out.println("Quantidade de cidadões importados: " + qtdCidadoes);
             return arvore;
         }
 
         public void importarCidadaosDeJsonRapido(String arquivoJson, ABB arvore) {
             JSONParser parser = new JSONParser();
+            int qtdCidadoes = 0;
             try {
                 Object obj = parser.parse(new FileReader(arquivoJson));
                 JSONArray cidadaosJson = (JSONArray) obj;
@@ -59,10 +62,13 @@ public class JsonImporter {
                     if (novoCidadao != null) {
                         arvore.inserir(novoCidadao);
                     }
+                    qtdCidadoes += 1;
                 }
+                
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            System.out.println("Quantidade de cidadões importados: " + qtdCidadoes);
         } 
 }
 

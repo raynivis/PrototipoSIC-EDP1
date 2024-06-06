@@ -1,5 +1,6 @@
 package Estrutura;
 import Individuo.*;
+import java.util.List;
 import java.util.function.Consumer;
 /**
  *
@@ -26,8 +27,25 @@ public class ABB {
             } else {
                 no.direita = inserirRecursivamente(no.direita, cidadao);
             }
+            return no;
         }
-        return no;
+        else{
+            // Verifica se o RG já existe na lista de RGs gerais
+            Cidadao cidadaoExistente = buscar(cidadao.getCpf());
+            List<Rg> rgGerais = cidadaoExistente.getRgGerais();
+            boolean rgJaExiste = false;
+            for (Rg rg : rgGerais) {
+                if (rg.getRg().equals(cidadao.getRgGerais().get(0).getRg()) && rg.getEstadoRG().equals(cidadao.getRgGerais().get(0).getEstadoRG())) {
+                    rgJaExiste = true;
+                    break;
+                }
+            }
+            if (!rgJaExiste) {
+                // Adiciona o novo RG à lista de RGs gerais
+                cidadaoExistente.getRgGerais().addAll(cidadao.getRgGerais());
+            }
+            return no;
+        }
     }
 
     public Cidadao buscar(String cpf) {

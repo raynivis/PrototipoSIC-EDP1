@@ -13,8 +13,7 @@ public class Program {
         ABB abb = new ABB();
         
         GerenciadorDeDados.verificarExistenciaArquivo(abb);
-        // Termina de calcular o tempo
-         new TelaInicial(abb).setVisible(true);
+        new TelaInicial(abb).setVisible(true);
         abb.imprimir();    
     }
 
