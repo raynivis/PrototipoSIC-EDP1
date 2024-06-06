@@ -11,15 +11,15 @@ import Relatorio.Relatorio;
  */
 public class TelaRelatorio extends javax.swing.JFrame {
     
-    private static ArvoreMAria listaCadastros;
+    private static ArvoreMAria ad;
     /**
      * Creates new form TelaRelatorio
      */
-    public TelaRelatorio(ArvoreMAria listaCadastros) {
+    public TelaRelatorio(ArvoreMAria arvoredigital) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        this.listaCadastros = listaCadastros;
+        this.ad = arvoredigital;
     }
 
     /**
@@ -119,13 +119,13 @@ public class TelaRelatorio extends javax.swing.JFrame {
         for(int i=0; i<27; i++) {
             estado[i] = new ListaRelatorio();
         }
-        Relatorio relatorio = new Relatorio(listaCadastros, estado, Integer.parseInt(idadeSpi1.getValue().toString()) , Integer.parseInt(idadeSpi2.getValue().toString()));
+        Relatorio relatorio = new Relatorio(ad, estado, Integer.parseInt(idadeSpi1.getValue().toString()) , Integer.parseInt(idadeSpi2.getValue().toString()));
         relatorio.imprimirRelatorio(Integer.parseInt(idadeSpi1.getValue().toString()) , Integer.parseInt(idadeSpi2.getValue().toString()));        // TODO add your handling code here:
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
-        new TelaEscolhas(listaCadastros).setVisible(true);
+        new TelaEscolhas(ad).setVisible(true);
         setVisible(false);
         
     }//GEN-LAST:event_btnVoltarActionPerformed
@@ -160,7 +160,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaRelatorio(listaCadastros).setVisible(true);
+                new TelaRelatorio(ad).setVisible(true);
             }
         });
     }

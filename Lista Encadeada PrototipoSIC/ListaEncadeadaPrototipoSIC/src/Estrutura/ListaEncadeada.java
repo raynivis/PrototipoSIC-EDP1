@@ -10,10 +10,10 @@ import java.util.List;
  * @author ray, Gustavo, Ligeiro
  */
 public class ListaEncadeada {
-    private No cabeca; /*O no de cabeça aqui, ele vai apontar pro resto da estrutura*/
+    private No topo; /*O no de topo aqui, ele vai apontar pro resto da estrutura*/
     private static int quantidadeCidadao;
     public ListaEncadeada() {
-        this.cabeca = null; /*iniciando a lista vazia*/
+        this.topo = null; /*iniciando a lista vazia*/
         quantidadeCidadao = 0;
     }
     
@@ -30,11 +30,11 @@ public class ListaEncadeada {
             cidadaoExistente.getRgGerais().add(novoCidadao.getRgGerais().get(0));            
         } else {     
             No novo = new No(novoCidadao);
-            if(cabeca == null){
-                cabeca = novo;
+            if(topo == null){
+                topo = novo;
             } else {
-                novo.prox = cabeca;
-                cabeca = novo;
+                novo.prox = topo;
+                topo = novo;
             }      
             quantidadeCidadao++;
         }
@@ -43,22 +43,22 @@ public class ListaEncadeada {
     
     public void adicionarNoInicio(Cidadao novoCidadao) {
         No novo = new No(novoCidadao);
-        if(cabeca == null){
-            cabeca = novo;
+        if(topo == null){
+            topo = novo;
         } else {
-            novo.prox = cabeca;
-            cabeca = novo;
+            novo.prox = topo;
+            topo = novo;
         }      
         quantidadeCidadao++;
     }
     
     
     public Cidadao buscarCidadao( String cpf) { /*Da para usar a busca aqui de cpf, so chamar na interface*/
-        if(cabeca == null){           
+        if(topo == null){           
             return null;          
         }  
         
-        No i = cabeca;
+        No i = topo;
         while (i != null) {
             if(i.getCidadao().getCpf().equals(cpf)) {
                 return i.getCidadao();
@@ -69,7 +69,7 @@ public class ListaEncadeada {
     }
     
      public void imprimirLista() { /*Para testes*/
-        No i = cabeca;
+        No i = topo;
         while (i != null) {
             System.out.println(i.getCidadao().getNome() );
             System.out.println(i.getCidadao().getCpf() );
@@ -88,7 +88,7 @@ public class ListaEncadeada {
     
     public List<Cidadao> getCidadaos() {
         List<Cidadao> cidadaos = new ArrayList<>();
-        No atual = cabeca;
+        No atual = topo;
         while (atual != null) {
             cidadaos.add(atual.getCidadao());
             atual = atual.prox;
@@ -96,8 +96,8 @@ public class ListaEncadeada {
         return cidadaos;
     }
 
-    public No getCabeca() {
-        return cabeca;
+    public No getTopo() {
+        return topo;
     }
 
     public static int getQuantidadeCidadao() {

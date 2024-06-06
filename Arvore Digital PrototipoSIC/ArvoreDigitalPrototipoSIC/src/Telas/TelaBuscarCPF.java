@@ -12,15 +12,15 @@ import java.util.List;
  */
 public class TelaBuscarCPF extends javax.swing.JFrame {
 
-    private static ArvoreMAria listaCadastros;
+    private static ArvoreMAria ad;
     /**
      * Creates new form TelaBuscarCPF
      */
-    public TelaBuscarCPF(ArvoreMAria listaCadastros) {
+    public TelaBuscarCPF(ArvoreMAria arvoredigital) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        this.listaCadastros = listaCadastros;
+        ad = arvoredigital;
     }
 
     /**
@@ -212,7 +212,7 @@ public class TelaBuscarCPF extends javax.swing.JFrame {
     
     // Começa a calcular o tempo
     tempo.iniciar();
-    Cidadao cidadao = listaCadastros.buscarCidadao(jTextField1.getText());
+    Cidadao cidadao = ad.buscarCidadao(jTextField1.getText());
     if (cidadao != null) {
         jTextPane1.setText(cidadao.getNome());
         jTextPane3.setText(cidadao.getDatanasc());
@@ -242,7 +242,7 @@ public class TelaBuscarCPF extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new TelaEscolhas(listaCadastros).setVisible(true);  
+        new TelaEscolhas(ad).setVisible(true);  
         setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -276,7 +276,7 @@ public class TelaBuscarCPF extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaBuscarCPF(listaCadastros).setVisible(true);
+                new TelaBuscarCPF(ad).setVisible(true);
             }
         });
     }

@@ -9,10 +9,6 @@ import Timer.TempoDeExecucao;
 import java.io.File;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,11 +17,7 @@ import javax.swing.JOptionPane;
 
 public class GerenciadorDeDados {
     private static final String CAMINHO_DO_ARQUIVO = "cidadaos.json";
-    private List<Cidadao> cidadaos;
-
-    public GerenciadorDeDados() {
-        this.cidadaos = new ArrayList<>();
-    }
+    
 
     @SuppressWarnings("unchecked")
     
@@ -49,25 +41,6 @@ public class GerenciadorDeDados {
             JOptionPane.showMessageDialog(null, "O arquivo " + CAMINHO_DO_ARQUIVO + " não existe.", "", 1);
         }
     }
-        
-    public void carregarCidadaos() {
-    JSONParser parser = new JSONParser();
-    try (FileReader reader = new FileReader(CAMINHO_DO_ARQUIVO)) {
-        Object obj = parser.parse(reader);
-        JSONArray listaCidadaosJson = (JSONArray) obj;
-        listaCidadaosJson.forEach(item -> {
-            Cidadao cidadao = parsearObjetoCidadao((JSONObject) item);
-            cidadaos.add(cidadao);
-        });
-    } catch (IOException e) {
-        // Se não existir o arquivo, inicie uma nova lista vazia.
-        // Isso é esperado na primeira execução, então não é necessário imprimir o stack trace.
-        cidadaos = new ArrayList<>();
-    } catch (ParseException e) {
-        // Em caso de erro de parse, você pode querer informar o usuário ou logar o erro.
-        e.printStackTrace();
-    }
-}
     
     
     
@@ -122,10 +95,6 @@ public class GerenciadorDeDados {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public List<Cidadao> getCidadaos() {
-        return cidadaos;
     }
     
 

@@ -29,7 +29,7 @@ public class Relatorio {
         this.estruraDeDados = estruraDeDados;
         this.estado = estados;      
     
-        No i = this.estruraDeDados.getCabeca();
+        No i = this.estruraDeDados.getTopo();
         while(i != null) {
             String data = i.getCidadao().getDatanasc();
             String anoTexto = data.substring(data.length()-4, data.length());
@@ -67,8 +67,9 @@ public class Relatorio {
             }
 
             document.close();
-            JOptionPane.showMessageDialog(null, "PDF gerado com sucesso.", "Sucesso!", 1);
             tempo.finalizar();
+
+            JOptionPane.showMessageDialog(null, "PDF gerado com sucesso.", "Sucesso!", 1);
             long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
             JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Relatorio", JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException e) {

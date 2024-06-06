@@ -117,7 +117,7 @@ public class TelaInicial extends javax.swing.JFrame {
         
             // Salva os dados após a importação
             gerenciadorDeDados.salvarCidadaos(abb);
-            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Importar", JOptionPane.INFORMATION_MESSAGE);
             abb.imprimir();
             
         }

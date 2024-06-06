@@ -50,27 +50,6 @@ public class GerenciadorDeDados {
         }
     }
         
-    public void carregarCidadaos() {
-    JSONParser parser = new JSONParser();
-    try (FileReader reader = new FileReader(CAMINHO_DO_ARQUIVO)) {
-        Object obj = parser.parse(reader);
-        JSONArray listaCidadaosJson = (JSONArray) obj;
-        listaCidadaosJson.forEach(item -> {
-            Cidadao cidadao = parsearObjetoCidadao((JSONObject) item);
-            cidadaos.add(cidadao);
-        });
-    } catch (IOException e) {
-        // Se não existir o arquivo, inicie uma nova lista vazia.
-        // Isso é esperado na primeira execução, então não é necessário imprimir o stack trace.
-        cidadaos = new ArrayList<>();
-    } catch (ParseException e) {
-        // Em caso de erro de parse, você pode querer informar o usuário ou logar o erro.
-        e.printStackTrace();
-    }
-}
-    
-    
-    
     
     public static Cidadao parsearObjetoCidadao(JSONObject cidadaoJson) {
         String nome = (String) cidadaoJson.get("nome");
@@ -125,9 +104,7 @@ public class GerenciadorDeDados {
         }
     }
 
-    public List<Cidadao> getCidadaos() {
-        return cidadaos;
-    }
+    
     
 
 }

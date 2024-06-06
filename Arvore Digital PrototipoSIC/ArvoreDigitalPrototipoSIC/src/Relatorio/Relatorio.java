@@ -83,7 +83,7 @@ public class Relatorio {
             JOptionPane.showMessageDialog(null, "PDF gerado com sucesso.", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
             
             long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
-            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Relatorio", JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException e) {
             System.err.println("Erro ao criar o arquivo PDF: " + e.getMessage());
         }

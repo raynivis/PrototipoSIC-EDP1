@@ -5,12 +5,10 @@ import Importacoes.JsonImporter;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
 import Individuo.Rg;
+import Timer.TempoDeExecucao;
 import java.io.File;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,12 +17,7 @@ import javax.swing.JOptionPane;
 
 public class GerenciadorDeDados {
     private static final String CAMINHO_DO_ARQUIVO = "cidadaos.json";
-    private EstruturaAVL arvoreAvl;
-
-    public GerenciadorDeDados(EstruturaAVL arvoreAvl) {
-        this.arvoreAvl = new EstruturaAVL();
-    }
-
+    
     @SuppressWarnings("unchecked")
     
 
@@ -33,32 +26,17 @@ public class GerenciadorDeDados {
         
         if (arquivo.exists()) {
             JsonImporter dados = new JsonImporter();
+            TempoDeExecucao tempo = new TempoDeExecucao();
+            // Começa a calcular o tempo
+            tempo.iniciar();
             dados.importarCidadaosDeJsonRapido(CAMINHO_DO_ARQUIVO, arvoreAvl);
+            tempo.finalizar();
+            long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
+            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Persistencia de Dados", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "O arquivo " + CAMINHO_DO_ARQUIVO + " não existe.", "", 1);
         }
-    }
-        
-    public void carregarCidadaos() {
-    JSONParser parser = new JSONParser();
-    try (FileReader reader = new FileReader(CAMINHO_DO_ARQUIVO)) {
-        Object obj = parser.parse(reader);
-        JSONArray listaCidadaosJson = (JSONArray) obj;
-        listaCidadaosJson.forEach(item -> {
-            Cidadao cidadao = parsearObjetoCidadao((JSONObject) item);
-            arvoreAvl.inserirAVL(cidadao);
-        });
-    } catch (IOException e) {
-        // Se não existir o arquivo, inicie uma nova lista vazia.
-        // Isso é esperado na primeira execução, então não é necessário imprimir o stack trace.
-        arvoreAvl = new EstruturaAVL();
-    } catch (ParseException e) {
-        // Em caso de erro de parse, você pode querer informar o usuário ou logar o erro.
-        e.printStackTrace();
-    }
-}
-    
-    
+    } 
     
     
     public static Cidadao parsearObjetoCidadao(JSONObject cidadaoJson) {

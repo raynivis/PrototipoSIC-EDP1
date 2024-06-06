@@ -65,7 +65,7 @@ public class TabelaHash {
     public Cidadao buscarCidadao(String cpf){      
         int posicao = funcaoDispersao(cpf);
         
-        No i = tabela[posicao].getCabeca();
+        No i = tabela[posicao].getTopo();
         while(i != null) {
             if(i.getCidadao().getCpf().equals(cpf)){
                 return i.getCidadao();
@@ -79,8 +79,8 @@ public class TabelaHash {
     public List<Cidadao> getCidadaos() {
         List<Cidadao> cidadaos = new ArrayList<>();
         for(int i = 0; i < tabela.length; i++) {
-            if(tabela[i].getCabeca() != null){
-                No atual = tabela[i].getCabeca();
+            if(tabela[i].getTopo() != null){
+                No atual = tabela[i].getTopo();
                 while (atual != null) {
                     cidadaos.add(atual.getCidadao());
                     atual = atual.prox;
@@ -92,8 +92,8 @@ public class TabelaHash {
     
     public void imprimirColisoes(){
         for(int i = 0; i < tabela.length; i++) {
-            if(tabela[i].getCabeca() != null) {
-                No atual = tabela[i].getCabeca();
+            if(tabela[i].getTopo() != null) {
+                No atual = tabela[i].getTopo();
                 while (atual != null) {
                         System.out.println("A posicao " + i + " com " + tabela[i].getQuantidadeCidadao() + " elemento/s" );
                     atual = atual.prox;

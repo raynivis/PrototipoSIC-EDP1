@@ -5,13 +5,10 @@ import Importacoes.JsonImporter;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
 import Individuo.Rg;
+import Timer.TempoDeExecucao;
 import java.io.File;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,41 +20,21 @@ import javax.swing.JOptionPane;
  */
 public class GerenciadorDeDados {
     private static final String CAMINHO_DO_ARQUIVO = "cidadaos.json";
-    private ABB abb;
 
-    public GerenciadorDeDados(ABB abb) {
-        this.abb = new ABB();
-    }
-    
-    public GerenciadorDeDados() {
-        
-    }
-
-    
     @SuppressWarnings("unchecked")
-    public void verificarExistenciaArquivo(ABB abb) {
+    public static void verificarExistenciaArquivo(ABB abb) {
         File arquivo = new File(CAMINHO_DO_ARQUIVO);
         if (arquivo.exists()) {
             JsonImporter dados = new JsonImporter();
+            TempoDeExecucao tempo = new TempoDeExecucao();
+            // Começa a calcular o tempo
+            tempo.iniciar();
             dados.importarCidadaosDeJsonRapido(CAMINHO_DO_ARQUIVO, abb);
+            tempo.finalizar();
+            long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
+            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Persistencia de Dados", JOptionPane.INFORMATION_MESSAGE);      
         } else {
             JOptionPane.showMessageDialog(null, "O arquivo " + CAMINHO_DO_ARQUIVO + " não existe.", "", 1);
-        }
-    }
-
-    public void carregarCidadaos() {
-        JSONParser parser = new JSONParser();
-        try (FileReader reader = new FileReader(CAMINHO_DO_ARQUIVO)) {
-            Object obj = parser.parse(reader);
-            JSONArray listaCidadaosJson = (JSONArray) obj;
-            listaCidadaosJson.forEach(item -> {
-                Cidadao cidadao = parsearObjetoCidadao((JSONObject) item);
-                abb.inserir(cidadao);
-            });
-        } catch (IOException e) {
-            abb = new ABB();
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
     }
 

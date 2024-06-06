@@ -27,8 +27,8 @@ public class Relatorio {
         this.estado = estados;
         
         for(int i = 0; i < tabelaH.getTabela().length; i++) {
-            if(tabelaH.getTabela()[i].getCabeca() != null){
-                No aux = tabelaH.getTabela()[i].getCabeca();
+            if(tabelaH.getTabela()[i].getTopo() != null){
+                No aux = tabelaH.getTabela()[i].getTopo();
                 while(aux != null) {
                     String data = aux.getCidadao().getDatanasc();
                     String anoTexto = data.substring(data.length()-4, data.length());
@@ -68,8 +68,9 @@ public class Relatorio {
             }
 
             document.close();
-            JOptionPane.showMessageDialog(null, "PDF gerado com sucesso.", "Sucesso!", 1);
             tempo.finalizar();
+            JOptionPane.showMessageDialog(null, "PDF gerado com sucesso.", "Sucesso!", 1);
+           
             long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
             JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Relatorio", JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException e) {

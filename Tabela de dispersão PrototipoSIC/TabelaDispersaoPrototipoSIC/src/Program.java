@@ -11,9 +11,8 @@ import Telas.TelaInicial;
 public class Program {
     
     public static void main(String[] args) {     
-       TabelaHash tabelaHash = new TabelaHash();
-       GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();        
-       gerenciadorDeDados.verificarExistenciaArquivo(tabelaHash);
+       TabelaHash tabelaHash = new TabelaHash();      
+       GerenciadorDeDados.verificarExistenciaArquivo(tabelaHash);
        new TelaInicial(tabelaHash).setVisible(true);    
                
     }

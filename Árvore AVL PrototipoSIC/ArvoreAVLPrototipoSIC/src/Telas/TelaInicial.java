@@ -85,7 +85,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     // Inicialmente, a lista é nula
     private void btnImportarJsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarJsonActionPerformed
-        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados(arvoreAvl);  
+        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();  
         
         if (arvoreAvl == null) {
             arvoreAvl = new EstruturaAVL();  // Cria uma nova lista se não existir
@@ -117,7 +117,7 @@ public class TelaInicial extends javax.swing.JFrame {
         
             // Salva os dados após a importação
             gerenciadorDeDados.salvarCidadaos(arvoreAvl);
-            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Informação", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Importar", JOptionPane.INFORMATION_MESSAGE);
             arvoreAvl.imprimir();
             
         }
