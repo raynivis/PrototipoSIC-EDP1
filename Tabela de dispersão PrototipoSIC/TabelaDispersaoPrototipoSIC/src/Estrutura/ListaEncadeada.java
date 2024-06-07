@@ -1,6 +1,7 @@
 package Estrutura;
 
 import Individuo.Cidadao;
+import Individuo.Rg;
 
 
 /**
