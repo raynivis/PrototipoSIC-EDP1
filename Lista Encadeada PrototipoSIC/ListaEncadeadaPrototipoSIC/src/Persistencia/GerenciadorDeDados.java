@@ -9,10 +9,7 @@ import Timer.TempoDeExecucao;
 import java.io.File;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,13 +18,8 @@ import javax.swing.JOptionPane;
 
 public class GerenciadorDeDados {
     private static final String CAMINHO_DO_ARQUIVO = "cidadaos.json";
-    private List<Cidadao> cidadaos;
 
-    public GerenciadorDeDados() {
-        this.cidadaos = new ArrayList<>();      
-        //carregarCidadaos();
-    }
-
+    
     @SuppressWarnings("unchecked")
     
 
@@ -45,8 +37,7 @@ public class GerenciadorDeDados {
             tempo.finalizar();
             long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
             JOptionPane.showMessageDialog(null, "Tempo de execução de: " + tempoDeExecucao + " Milissegundos", "Pesistencia de Dados", JOptionPane.INFORMATION_MESSAGE);       
-            listaCadastros.imprimirLista();
-            System.out.println("A quantidade atual do sistema eh de " + ListaEncadeada.getQuantidadeCidadao() + " Cidadaos.");
+            
         } else {
             JOptionPane.showMessageDialog(null, "O arquivo " + CAMINHO_DO_ARQUIVO + " não existe.", "", 1);
         }
