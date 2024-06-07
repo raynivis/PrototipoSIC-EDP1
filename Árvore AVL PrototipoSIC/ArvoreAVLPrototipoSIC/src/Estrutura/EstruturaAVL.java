@@ -10,9 +10,19 @@ import java.util.function.Consumer;
  */
 public class EstruturaAVL {
     private NoAVL raiz;
-
+    private int contaCidadao;
+    private int RSE; /* contador de rotações simples para a esquerda */
+    private int RSD; /* contador de rotações simples para a direita */
+    private int RDE; /* contador de rotações duplas para a esquerda */
+    private int RDD; /* contador de rotações duplas para a direita */
+    
     public EstruturaAVL() {
         this.raiz = null;
+        contaCidadao = 0;
+        RSE = 0;
+        RSD = 0;
+        RDE = 0;
+        RDD = 0;
     }
     
     public int alturaNo(NoAVL no) { /* retorna a altura do nó caso exista */
@@ -22,7 +32,7 @@ public class EstruturaAVL {
         return no.getAltura();
     }
     
-    public int fatorBalanceamento(NoAVL no) { 
+    public int fatorBalanceamento(NoAVL no) { /* calculo do FB do no com suas árvores esquerda e direita */
         if (no != null && no.direito != null && no.esquerdo != null) {
             return no.direito.getAltura() - no.esquerdo.getAltura();
         }
@@ -41,7 +51,7 @@ public class EstruturaAVL {
         
         raiz.setAltura(Math.max(alturaNo(raiz.getEsquerdo()), alturaNo(raiz.getDireito())) + 1);
         x.setAltura(Math.max(alturaNo(x.getEsquerdo()), alturaNo(x.getDireito())) + 1);
-        
+
         return x;
     }    
 
@@ -56,7 +66,7 @@ public class EstruturaAVL {
         
         raiz.setAltura(Math.max(alturaNo(raiz.getEsquerdo()), alturaNo(raiz.getDireito())) + 1);
         x.setAltura(Math.max(alturaNo(x.getEsquerdo()), alturaNo(x.getDireito())) + 1);
-        
+  
         return x;
     }
     
@@ -76,12 +86,16 @@ public class EstruturaAVL {
         
         if(fb == -2 && fatorBalanceamento(raiz.esquerdo) == -1) {
             raiz = simplesDireita(raiz);
+            RSD++;
         }else if(fb == -2 && fatorBalanceamento(raiz.esquerdo) == 1) {
             raiz = duplaDireita(raiz);
+            RDD++;
         }else if(fb == 2 && fatorBalanceamento(raiz.direito) == -1) {
             raiz = simplesEsquerda(raiz);
+            RSE++;
         }else if(fb == 2 && fatorBalanceamento(raiz.direito) == 1){
             raiz = duplaEsquerda(raiz);
+            RDE++;
         }
         return raiz;
     }
@@ -91,11 +105,14 @@ public class EstruturaAVL {
     }
 
     private Cidadao buscarAVL(NoAVL no, String cpf) {
-        if (no == null || no.getCidadao().getCpf().equals(cpf)) {
-            return (no != null) ? no.getCidadao() : null;
+        if (no == null) {
+            return null; 
+        }
+        if (no.getCidadao().getCpf().equals(cpf)) {
+            return no.getCidadao(); 
         }
         if (cpf.compareTo(no.getCidadao().getCpf()) < 0) {
-            return buscarAVL(no.esquerdo, cpf);
+            return buscarAVL(no.esquerdo, cpf); 
         } else {
             return buscarAVL(no.direito, cpf);
         }
@@ -107,19 +124,34 @@ public class EstruturaAVL {
     
     private NoAVL inserirAVL(NoAVL raiz, Cidadao cidadao) {
         if(raiz == null) {
-        return new NoAVL(cidadao);
-    } else {
-        if(buscarAVL(raiz, cidadao.getCpf()) == null) {
-            if (cidadao.getCpf().compareTo(raiz.getCidadao().getCpf()) <= 0) {
-                raiz.esquerdo = inserirAVL(raiz.esquerdo, cidadao);
+            contaCidadao++;
+            return new NoAVL(cidadao);
+        }else {    
+            if(buscarAVL(raiz, cidadao.getCpf()) == null) {
+                    if (cidadao.getCpf().compareTo(raiz.getCidadao().getCpf()) < 0) {
+                        raiz.esquerdo = inserirAVL(raiz.esquerdo, cidadao);
+                    } else {
+                        raiz.direito = inserirAVL(raiz.direito, cidadao);
+                    }
+                    raiz.setAltura(Math.max(alturaNo(raiz.getEsquerdo()), alturaNo(raiz.getDireito())) + 1);
+                    raiz = balanceia(raiz);
+                return raiz;
             } else {
-                raiz.direito = inserirAVL(raiz.direito, cidadao);
+                Cidadao cidadaoExistente = buscarAVL(cidadao.getCpf());
+                if(cidadaoExistente != null) {
+                    boolean substituir = false;
+                    for(Rg r : cidadaoExistente.getRgGerais()){                           
+                        if(cidadao.getRgGerais().get(0).getEstadoRG().equals(r.getEstadoRG())){
+                            r.setRg(cidadao.getRgGerais().get(0).getRg());                
+                            substituir = true;
+                        }
+                    }
+                    if(substituir == false)
+                        cidadaoExistente.getRgGerais().add(cidadao.getRgGerais().get(0));
+                }    
+                return raiz;
             }
-            raiz.setAltura(Math.max(alturaNo(raiz.getEsquerdo()), alturaNo(raiz.getDireito())) + 1);
-            raiz = balanceia(raiz);
-        }
-        return raiz;
-    }
+        }    
     }
     
     public void preOrdem(Consumer<NoAVL> consumer) {
@@ -136,6 +168,7 @@ public class EstruturaAVL {
 
     public void imprimir() {
         imprimirAVL(raiz);
+        qtdCidadaoERotacao();
     }
     
     public void imprimirAVL(NoAVL raiz) {
@@ -147,7 +180,7 @@ public class EstruturaAVL {
             for (Rg rg : cidadao.getRgGerais()) {
                 System.out.println("    RG: " + rg.getRg() + ", Estado: " + rg.getEstadoRG());
             }
-            System.out.println("  Naturalidade: " + cidadao.getOrigem().getCidade() + " - " + cidadao.getOrigem().getEstado());
+            System.out.println("  Naturalidade: " + cidadao.getOrigem().getCidade() + " - " + cidadao.getOrigem().getEstado());            
             imprimirAVL(raiz.getDireito());
         }
     }
@@ -155,4 +188,14 @@ public class EstruturaAVL {
     public NoAVL getRaiz() {
         return raiz;
     }
+    
+    private void qtdCidadaoERotacao() {
+            System.out.println("\nQuantidade de pessoas: " + contaCidadao
+                    + "\nQuantidade de rotacoes: " +
+                    "\n  Simples esquerda: " + RSE +
+                    "\n  Simples direita: " + RSD +
+                    "\n  Dupla Esquerda: " + RDE +
+                    "\n  Dupla Direita: " + RDD);   
+    }
+    
 }    

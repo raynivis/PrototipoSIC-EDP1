@@ -31,7 +31,7 @@ public class AVLparaRelatorio {
         if (no == null) {
             return new NoAVL(novo);
         }
-        if (novo.getNome().compareTo(no.getCidadao().getNome()) < 0) {
+        if (novo.getNome().compareTo(no.getCidadao().getNome()) <= 0) {
             no.setEsquerdo(inserirRelatorioAVL(no.getEsquerdo(), novo));
         } else if (novo.getNome().compareTo(no.getCidadao().getNome()) > 0) {
             no.setDireito(inserirRelatorioAVL(no.getDireito(), novo));

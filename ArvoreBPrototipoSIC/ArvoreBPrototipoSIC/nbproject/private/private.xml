@@ -2,19 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/trabalhoED/ArvoreBPrototipoSIC/ArvoreBPrototipoSIC/src/Relatorio/NoArvoreBRelatorio.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/trabalhoED/ArvoreBPrototipoSIC/ArvoreBPrototipoSIC/src/Importacoes/JsonImporter.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/trabalhoED/ArvoreBPrototipoSIC/ArvoreBPrototipoSIC/src/Telas/TelaEscolhas.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/trabalhoED/ArvoreBPrototipoSIC/ArvoreBPrototipoSIC/src/Program.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/trabalhoED/ArvoreBPrototipoSIC/ArvoreBPrototipoSIC/src/Telas/TelaRelatorio.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/trabalhoED/ArvoreBPrototipoSIC/ArvoreBPrototipoSIC/src/Relatorio/ArvoreBRelatorio.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/trabalhoED/ArvoreBPrototipoSIC/ArvoreBPrototipoSIC/src/Relatorio/Relatorio.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/trabalhoED/ArvoreBPrototipoSIC/ArvoreBPrototipoSIC/src/Estrutura/NoArvoreB.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/trabalhoED/ArvoreBPrototipoSIC/ArvoreBPrototipoSIC/src/Telas/TelaInicial.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/trabalhoED/ArvoreBPrototipoSIC/ArvoreBPrototipoSIC/src/Telas/TelaBuscarCPF.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/trabalhoED/ArvoreBPrototipoSIC/ArvoreBPrototipoSIC/src/Persistencia/GerenciadorDeDados.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/trabalhoED/ArvoreBPrototipoSIC/ArvoreBPrototipoSIC/src/Estrutura/ArvoreB.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
