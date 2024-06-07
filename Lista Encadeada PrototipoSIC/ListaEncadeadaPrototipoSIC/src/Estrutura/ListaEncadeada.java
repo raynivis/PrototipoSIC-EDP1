@@ -36,15 +36,8 @@ public class ListaEncadeada {
             }
             if(substituir == false)
                 cidadaoExistente.getRgGerais().add(novoCidadao.getRgGerais().get(0));            
-        } else {     
-            No novo = new No(novoCidadao);
-            if(topo == null){
-                topo = novo;
-            } else {
-                novo.prox = topo;
-                topo = novo;
-            }      
-            quantidadeCidadao++;
+        } else { 
+            adicionarNoInicio(novoCidadao);         
         }
         
     }
