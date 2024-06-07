@@ -25,7 +25,15 @@ public class ListaEncadeada {
         
         /*Se retornar nulo o cidadoexistente ele nao existe, logo eh so inserir o novo rg no noh dele*/
         if(cidadaoExistente != null) {
-            cidadaoExistente.getRgGerais().add(novoCidadao.getRgGerais().get(0));    
+            boolean substituir = false;
+            for(Rg r : cidadaoExistente.getRgGerais()){                           
+                if(novoCidadao.getRgGerais().get(0).getEstadoRG().equals(r.getEstadoRG())){ /*Se o Rg representa da mesma UF, ele é subsituido*/
+                    r.setRg(novoCidadao.getRgGerais().get(0).getRg());                
+                    substituir = true;
+                }
+            }
+            if(substituir == false)
+                cidadaoExistente.getRgGerais().add(novoCidadao.getRgGerais().get(0));              
             return false;
         } else {     
             No novo = new No(novoCidadao);
