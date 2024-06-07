@@ -61,7 +61,7 @@ Estudar mais **Recursão**
 
 
 
-![eddiagrama](https://github.com/gustavo-cortez/trabalhoED/assets/154099929/e2d1bd47-a557-4f8e-8a29-558a18b0d86c)
+![diagramaedd](https://github.com/gustavo-cortez/trabalhoED/assets/154099929/c9ba9f6d-4207-4961-8fa5-5ee278660277)
 
 1. **Informações dos cidadãos**
 
