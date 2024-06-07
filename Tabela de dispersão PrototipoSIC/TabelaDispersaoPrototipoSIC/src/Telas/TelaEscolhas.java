@@ -1,6 +1,5 @@
 package Telas;
 
-import Estrutura.ListaEncadeada;
 import Estrutura.TabelaHash;
 
 /**
