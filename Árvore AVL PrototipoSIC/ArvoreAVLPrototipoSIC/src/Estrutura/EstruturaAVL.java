@@ -24,6 +24,7 @@ public class EstruturaAVL {
         RDE = 0;
         RDD = 0;
     }
+
     
     public int alturaNo(NoAVL no) { /* retorna a altura do nó caso exista */
         if(no == null) {
@@ -33,40 +34,43 @@ public class EstruturaAVL {
     }
     
     public int fatorBalanceamento(NoAVL no) { /* calculo do FB do no com suas árvores esquerda e direita */
-        if (no != null && no.direito != null && no.esquerdo != null) {
-            return no.direito.getAltura() - no.esquerdo.getAltura();
+        if (no != null) {
+            return alturaNo(no.direito) - alturaNo(no.esquerdo);
         }
         return 0;
-}
+    }
     
     /* métodos para os 4 tipos de rotação da arvore AVL */
     public NoAVL simplesEsquerda(NoAVL raiz) {
-        NoAVL x, filhox;
-        
-        x = raiz.getDireito();
-        filhox = x.getEsquerdo();
-        
+        NoAVL x = raiz.getDireito();
+        NoAVL filhox = x.getEsquerdo();
+
         x.setEsquerdo(raiz);
         raiz.setDireito(filhox);
-        
+
+        // Atualiza as alturas
         raiz.setAltura(Math.max(alturaNo(raiz.getEsquerdo()), alturaNo(raiz.getDireito())) + 1);
         x.setAltura(Math.max(alturaNo(x.getEsquerdo()), alturaNo(x.getDireito())) + 1);
 
         return x;
-    }    
+    }
 
     public NoAVL simplesDireita(NoAVL raiz) {
-        NoAVL x, filhox;
-        
-        x = raiz.getEsquerdo();
-        filhox = x.getDireito();
-        
+
+        NoAVL x = raiz.getEsquerdo();
+        if (x == null) {
+            return raiz; 
+        }
+
+        NoAVL filhox = x.getDireito();
+
         x.setDireito(raiz);
         raiz.setEsquerdo(filhox);
-        
+
+        // Atualiza as alturas
         raiz.setAltura(Math.max(alturaNo(raiz.getEsquerdo()), alturaNo(raiz.getDireito())) + 1);
         x.setAltura(Math.max(alturaNo(x.getEsquerdo()), alturaNo(x.getDireito())) + 1);
-  
+
         return x;
     }
     
@@ -128,7 +132,7 @@ public class EstruturaAVL {
             return new NoAVL(cidadao);
         }else {    
             if(buscarAVL(raiz, cidadao.getCpf()) == null) {
-                    if (cidadao.getCpf().compareTo(raiz.getCidadao().getCpf()) < 0) {
+                    if (cidadao.getCpf().compareTo(raiz.getCidadao().getCpf()) <= 0) {
                         raiz.esquerdo = inserirAVL(raiz.esquerdo, cidadao);
                     } else {
                         raiz.direito = inserirAVL(raiz.direito, cidadao);
