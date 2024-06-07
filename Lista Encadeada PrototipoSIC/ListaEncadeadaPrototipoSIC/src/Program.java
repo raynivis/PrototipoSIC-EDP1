@@ -14,7 +14,7 @@ public class Program {
        GerenciadorDeDados.verificarExistenciaArquivo(listaCadastros);
        new TelaInicial(listaCadastros).setVisible(true);    
         
-        listaCadastros.imprimirLista();
+        
     }
         
 }
