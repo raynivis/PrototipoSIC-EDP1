@@ -17,7 +17,7 @@ public class TabelaHash {
     private int quantidadetotalCidadao;
 
     public TabelaHash() {
-        tabela = new ListaEncadeada[100000000]; /*Cpf vai pra chave ddd.ddd.dd*/
+        tabela = new ListaEncadeada[1000000]; /*Cpf vai pra chave ddd.ddd.dd*/
         quantidadetotalCidadao = 0;
         for(int i = 0; i < tabela.length; i++) {
             tabela[i] = new ListaEncadeada();
@@ -37,15 +37,15 @@ public class TabelaHash {
     }
     
     public static int funcaoDispersao(String cpf){
-        int digito = 10000000; 
+        int digito = 100000; 
         int somar = 0; 
-        for (int i = 0; i < cpf.length()-3; i++) {
+        for (int i = 0; i < cpf.length()-5; i++) {
             char c = cpf.charAt(i);
             int ascii = (int) c-48;
             somar += ascii*digito;           
             digito/=10;
         }
-        return somar%100000000;        
+        return somar%1000000;        
     }
     
     public void inserirChave(Cidadao novoCidadao){
@@ -92,12 +92,8 @@ public class TabelaHash {
     
     public void imprimirColisoes(){
         for(int i = 0; i < tabela.length; i++) {
-            if(tabela[i].getTopo() != null) {
-                No atual = tabela[i].getTopo();
-                while (atual != null) {
-                        System.out.println("A posicao " + i + " com " + tabela[i].getQuantidadeCidadao() + " elemento/s" );
-                    atual = atual.prox;
-                } 
+            if(tabela[i].getTopo() != null) {            
+                System.out.println("A posicao " + i + " com " + tabela[i].getQuantidadeCidadao() + " elemento/s" );
             }
         }
         System.out.println(getQuantidadetotalCidadao());

@@ -11,6 +11,7 @@ import com.itextpdf.layout.element.Text;
 import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.colors.DeviceRgb;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 /**
  *
@@ -36,7 +37,10 @@ public class Relatorio {
         String data = no.getCidadao().getDatanasc();
         String anoTexto = data.substring(data.length() - 4, data.length());
         int ano = Integer.parseInt(anoTexto);
-        if ((2024 - ano) >= faixaetaria1 && (2024 - ano) <= faixaetaria2) {
+        
+        LocalDate anoAtual = LocalDate.now();
+        int ane = anoAtual.getYear();
+        if ((ane - ano) >= faixaetaria1 && (ane - ano) <= faixaetaria2) {
             String naturalidadeEstado = no.getCidadao().getOrigem().getEstado();
             int j = EspalhamentoEstado.retornaIndiceEstado(naturalidadeEstado);
             estado[j].inserir(no.getCidadao());

@@ -1,0 +1,15 @@
+{
+    "uf": "Rio de Janeiro",
+    "cidadãos": [
+      {
+        "nome": "Cláudio Kauê Murilo Drumond",
+        "cpf": "12425329862",
+        "rg": "40028922",
+        "data_nasc": "08/02/1949",
+        "naturalidade": {
+          "cidade": "São Paulo",
+          "estado": "SP"
+        }
+      }
+    ]
+}
