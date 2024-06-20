@@ -1,0 +1,35 @@
+{
+   "uf": "Acre",
+   "cidadãos": [
+      {
+          "nome": "Victor Tomás Drumond",
+          "cpf": "70054769213",
+          "rg": "262390231",
+          "data_nasc": "01/02/1984",
+          "naturalidade": {
+             "cidade": "Rio Branco",
+             "estado": "AC"
+          }
+      },
+      {
+          "nome": "Isabelly Maya Ramos",
+          "cpf": "39972560201",
+          "rg": "104799997",
+          "data_nasc": "08/01/2005",
+          "naturalidade": {
+             "cidade": "Rio Branco",
+             "estado": "AC"
+          }
+      },
+      {
+          "nome": "Evelyn Patrícia Teixeira",
+          "cpf": "05068175200",
+          "rg": "419747102",
+          "data_nasc": "07/01/1987",
+          "naturalidade": {
+             "cidade": "Rio Branco",
+             "estado": "AC"
+          }
+      }
+   ]
+}
