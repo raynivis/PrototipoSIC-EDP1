@@ -4,7 +4,6 @@
  */
 package Relatorio;
 
-import Estrutura.EstruturaAVL;
 import Estrutura.NoAVL;
 import Individuo.Cidadao;
 import Individuo.Rg;
@@ -16,7 +15,6 @@ import com.itextpdf.layout.element.Paragraph;
  * @author maymi
  */
 public class AVLparaRelatorio {
-    EstruturaAVL metodosAvl = new EstruturaAVL();
     private NoAVL raiz;
     
     public AVLparaRelatorio() {
@@ -26,8 +24,10 @@ public class AVLparaRelatorio {
     public void inserir(Cidadao novo) {
         raiz = inserirRelatorioAVL(raiz, novo);
     }
-
-    private NoAVL inserirRelatorioAVL(NoAVL no, Cidadao novo) {
+    
+    /* Como a estrutura será utilizada para a comparação de busca e importação, o relatório será feito com a 
+    árvore ABB pela sua maior eficiencia nas inserções (não contém rotações) */
+    private NoAVL inserirRelatorioAVL(NoAVL no, Cidadao novo) { /* insere*/
         if (no == null) {
             return new NoAVL(novo);
         }
@@ -36,9 +36,6 @@ public class AVLparaRelatorio {
         } else if (novo.getNome().compareTo(no.getCidadao().getNome()) > 0) {
             no.setDireito(inserirRelatorioAVL(no.getDireito(), novo));
         }
-        
-        no.setAltura(Math.max(metodosAvl.alturaNo(no.getEsquerdo()), metodosAvl.alturaNo(no.getDireito())) + 1);
-        no = metodosAvl.balanceia(no);
 
         return no;
     }

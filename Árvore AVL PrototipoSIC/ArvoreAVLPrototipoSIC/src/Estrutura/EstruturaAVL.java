@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 public class EstruturaAVL {
     private NoAVL raiz;
     private int contaCidadao;
+    private static boolean status;
     private int RSE; /* contador de rotações simples para a esquerda */
     private int RSD; /* contador de rotações simples para a direita */
     private int RDE; /* contador de rotações duplas para a esquerda */
@@ -23,84 +24,87 @@ public class EstruturaAVL {
         RSD = 0;
         RDE = 0;
         RDD = 0;
+        status = false;
     }
-
-    
-    public int alturaNo(NoAVL no) { /* retorna a altura do nó caso exista */
-        if(no == null) {
-            return 0;
-        }
-        return no.getAltura();
-    }
-    
-    public int fatorBalanceamento(NoAVL no) { /* calculo do FB do no com suas árvores esquerda e direita */
-        if (no != null) {
-            return alturaNo(no.direito) - alturaNo(no.esquerdo);
-        }
-        return 0;
-    }
-    
+     
     /* métodos para os 4 tipos de rotação da arvore AVL */
-    public NoAVL simplesEsquerda(NoAVL raiz) {
-        NoAVL x = raiz.getDireito();
-        NoAVL filhox = x.getEsquerdo();
-
-        x.setEsquerdo(raiz);
-        raiz.setDireito(filhox);
-
-        // Atualiza as alturas
-        raiz.setAltura(Math.max(alturaNo(raiz.getEsquerdo()), alturaNo(raiz.getDireito())) + 1);
-        x.setAltura(Math.max(alturaNo(x.getEsquerdo()), alturaNo(x.getDireito())) + 1);
-
-        return x;
-    }
-
-    public NoAVL simplesDireita(NoAVL raiz) {
-
-        NoAVL x = raiz.getEsquerdo();
-        if (x == null) {
-            return raiz; 
-        }
-
-        NoAVL filhox = x.getDireito();
-
-        x.setDireito(raiz);
-        raiz.setEsquerdo(filhox);
-
-        // Atualiza as alturas
-        raiz.setAltura(Math.max(alturaNo(raiz.getEsquerdo()), alturaNo(raiz.getDireito())) + 1);
-        x.setAltura(Math.max(alturaNo(x.getEsquerdo()), alturaNo(x.getDireito())) + 1);
-
-        return x;
-    }
-    
-    public NoAVL duplaEsquerda(NoAVL raiz) {
-        raiz.setDireito(simplesDireita(raiz.getDireito()));
-        return simplesEsquerda(raiz);
-    }
-    
-    public NoAVL duplaDireita(NoAVL raiz) {
-        raiz.setEsquerdo(simplesEsquerda(raiz.getEsquerdo()));
-        return simplesDireita(raiz);
-    }
-    
-    /* balanceia a raiz depois de uma inserção a partir do fb do nó/raiz */
-    public NoAVL balanceia(NoAVL raiz) {
-        int fb = fatorBalanceamento(raiz);
-        
-        if(fb == -2 && fatorBalanceamento(raiz.esquerdo) == -1) {
-            raiz = simplesDireita(raiz);
-            RSD++;
-        }else if(fb == -2 && fatorBalanceamento(raiz.esquerdo) == 1) {
-            raiz = duplaDireita(raiz);
-            RDD++;
-        }else if(fb == 2 && fatorBalanceamento(raiz.direito) == -1) {
-            raiz = simplesEsquerda(raiz);
+    public NoAVL rotacaoEsquerda(NoAVL raiz) {
+        NoAVL b = raiz.getDireito();
+        if(b.getFb() == -1) { /* rotação simples */
+            raiz.setDireito(b.getEsquerdo());
+            b.setEsquerdo(raiz);
+            raiz.setFb(0);
+            b.setFb(0);
+            raiz = b;
             RSE++;
-        }else if(fb == 2 && fatorBalanceamento(raiz.direito) == 1){
-            raiz = duplaEsquerda(raiz);
+        } else { /* rotação dupla */
+            NoAVL c = b.getEsquerdo();
+            if (c == null) {
+                return raiz;  
+            }
+            b.setEsquerdo(c.getDireito());
+            c.setDireito(b);
+            raiz.setDireito(c.getEsquerdo());
+            c.setEsquerdo(raiz);
+            switch (c.getFb()) {
+                case 1:
+                    raiz.setFb(-1);
+                    b.setFb(0);
+                    break;
+                case -1:
+                    raiz.setFb(0);
+                    b.setFb(1);
+                    break;
+                default:
+                    raiz.setFb(0);
+                    b.setFb(0);
+                    break;
+            }
+            c.setFb(0);
+            raiz = c;
             RDE++;
         }
+        status = false;
+        return raiz;
+    }
+
+    public NoAVL rotacaoDireita(NoAVL raiz) {
+        NoAVL b = raiz.getEsquerdo();
+        if (b.getFb() == -1) { /* rotação simples */
+            raiz.setEsquerdo(b.getDireito());
+            b.setDireito(raiz);
+            raiz.setFb(0);
+            b.setFb(0);
+            raiz = b;
+            RSD++;
+        } else { /* rotação dupla */
+            NoAVL c = b.getDireito();
+            if (c == null) {
+                return raiz;  
+            }
+            b.setDireito(c.getEsquerdo());
+            c.setEsquerdo(b);
+            raiz.setEsquerdo(c.getDireito());
+            c.setDireito(raiz);
+            switch (c.getFb()) {
+                case -1:
+                    raiz.setFb(1);
+                    b.setFb(0);
+                    break;
+                case 1:
+                    raiz.setFb(0);
+                    b.setFb(-1);
+                    break;
+                default:
+                    raiz.setFb(0);
+                    b.setFb(0);
+                    break;
+            }
+            c.setFb(0);
+            raiz = c;
+            RDD++;
+        }
+        status = false;
         return raiz;
     }
     
@@ -116,9 +120,9 @@ public class EstruturaAVL {
             return no.getCidadao(); 
         }
         if (cpf.compareTo(no.getCidadao().getCpf()) < 0) {
-            return buscarAVL(no.esquerdo, cpf); 
+            return buscarAVL(no.getEsquerdo(), cpf); 
         } else {
-            return buscarAVL(no.direito, cpf);
+            return buscarAVL(no.getDireito(), cpf);
         }
     }
     
@@ -129,17 +133,41 @@ public class EstruturaAVL {
     private NoAVL inserirAVL(NoAVL raiz, Cidadao cidadao) {
         if(raiz == null) {
             contaCidadao++;
+            status = true;
             return new NoAVL(cidadao);
         }else {    
-            if(buscarAVL(raiz, cidadao.getCpf()) == null) {
-                    if (cidadao.getCpf().compareTo(raiz.getCidadao().getCpf()) <= 0) {
-                        raiz.esquerdo = inserirAVL(raiz.esquerdo, cidadao);
-                    } else {
-                        raiz.direito = inserirAVL(raiz.direito, cidadao);
+            if (cidadao.getCpf().compareTo(raiz.getCidadao().getCpf()) < 0) {
+                raiz.setEsquerdo(inserirAVL(raiz.getEsquerdo(), cidadao));
+                if(status == true) {
+                    switch (raiz.getFb()) {
+                        case 1 : 
+                            raiz.setFb(0);
+                            status = false;
+                            break; 
+                        case 0 : 
+                            raiz.setFb(-1); 
+                            break;
+                        case -1 : 
+                            raiz = rotacaoDireita(raiz);
+                            break;
                     }
-                    raiz.setAltura(Math.max(alturaNo(raiz.getEsquerdo()), alturaNo(raiz.getDireito())) + 1);
-                    raiz = balanceia(raiz);
-                return raiz;
+                }
+            } else if(cidadao.getCpf().compareTo(raiz.getCidadao().getCpf()) > 0) {
+                raiz.setDireito(inserirAVL(raiz.getDireito(), cidadao));
+                if(status == true) {
+                    switch (raiz.getFb()) {
+                        case -1:
+                            raiz.setFb(0);
+                            status = false;
+                            break;
+                        case 0:
+                            raiz.setFb(1); 
+                            break;
+                        case 1:
+                            raiz = rotacaoEsquerda(raiz);
+                            break;
+                    }
+                }
             } else {
                 Cidadao cidadaoExistente = buscarAVL(cidadao.getCpf());
                 if(cidadaoExistente != null) {
@@ -152,11 +180,62 @@ public class EstruturaAVL {
                     }
                     if(substituir == false)
                         cidadaoExistente.getRgGerais().add(cidadao.getRgGerais().get(0));
-                }    
-                return raiz;
+                }   
             }
+            return raiz;
         }    
     }
+    
+    
+    /* metodo para puxar os dados de forma mais rapida, quando já existe no BD */
+    public void inserirRapidoAVL(Cidadao cidadao) {
+        raiz = inserirRapidoAVL(raiz, cidadao);
+    }
+    
+    private NoAVL inserirRapidoAVL(NoAVL raiz, Cidadao cidadao) {
+        if(raiz == null) {
+            contaCidadao++;
+            status = true;
+            return new NoAVL(cidadao);
+        }else {    
+            if (cidadao.getCpf().compareTo(raiz.getCidadao().getCpf()) < 0) { /* se o CPF for menor */
+                raiz.setEsquerdo(inserirAVL(raiz.getEsquerdo(), cidadao));
+                if(status == true) {
+                    switch (raiz.getFb()) {
+                        case 1 : 
+                            raiz.setFb(0);
+                            status = false;
+                            break; 
+                        case 0 : 
+                            raiz.setFb(-1); 
+                            break;
+                        case -1 : 
+                            raiz = rotacaoDireita(raiz);
+                            break;
+                    }
+                }
+            } else {
+                raiz.setDireito(inserirAVL(raiz.getDireito(), cidadao));
+                if(status == true) {
+                    switch (raiz.getFb()) {
+                        case -1:
+                            raiz.setFb(0);
+                            status = false;
+                            break;
+                        case 0:
+                            raiz.setFb(1); 
+                            break;
+                        case 1:
+                            raiz = rotacaoEsquerda(raiz);
+                            break;
+                    }
+                }
+            }
+            return raiz;
+        }
+    }
+    
+    
     
     public void preOrdem(Consumer<NoAVL> consumer) {
         preOrdem(raiz, consumer);
@@ -165,8 +244,8 @@ public class EstruturaAVL {
     private void preOrdem(NoAVL raiz, Consumer<NoAVL> consumer) {
         if (raiz != null) {
             consumer.accept(raiz);
-            preOrdem(raiz.esquerdo, consumer);
-            preOrdem(raiz.direito, consumer);
+            preOrdem(raiz.getEsquerdo(), consumer);
+            preOrdem(raiz.getDireito(), consumer);
         }
     }
 

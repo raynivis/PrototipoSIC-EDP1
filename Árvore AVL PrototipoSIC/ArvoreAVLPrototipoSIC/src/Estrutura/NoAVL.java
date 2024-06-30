@@ -7,15 +7,15 @@ import Individuo.Cidadao;
  */
 public class NoAVL {
     private Cidadao cidadao;
-    NoAVL esquerdo;
-    NoAVL direito;
-    private int altura;
+    private NoAVL esquerdo;
+    private NoAVL direito;
+    private int fb;
 
     public NoAVL(Cidadao cidadao) {
         this.cidadao = cidadao;
         this.esquerdo = null;
         this.direito = null;
-        this.altura = 1;
+        this.fb = 0;
     }
 
     public Cidadao getCidadao() {
@@ -42,11 +42,11 @@ public class NoAVL {
         this.direito = direito;
     }
 
-    public int getAltura() {
-        return altura;
+    public int getFb() {
+        return fb;
     }
 
-    public void setAltura(int alutra) {
-        this.altura = alutra;
+    public void setFb(int fb) {
+        this.fb = fb;
     }
 }

@@ -36,6 +36,7 @@ public class JsonImporter {
                     List<Rg> rgs = new ArrayList<>();
                     rgs.add(rg);
                     Cidadao novoCidadao = new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
+                    /*inserção com a busca */
                     arvoreAvl.inserirAVL(novoCidadao);
                 }
             } catch (Exception e) {
@@ -54,7 +55,8 @@ public class JsonImporter {
                     JSONObject cidadaoJson = (JSONObject) c;
                     Cidadao novoCidadao = GerenciadorDeDados.parsearObjetoCidadao(cidadaoJson);
                     if (novoCidadao != null) {
-                        arvoreAvl.inserirAVL(novoCidadao);
+                        /* inserção dos dados do BD, sem necessidade de verificação */
+                        arvoreAvl.inserirRapidoAVL(novoCidadao);
                     }
                 }
             } catch (Exception e) {
