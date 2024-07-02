@@ -1,8 +1,10 @@
 package Telas;
 
 import Estrutura.ArvoreMAria;
+import Persistencia.GerenciadorDeDados;
 import Relatorio.ListaRelatorio;
 import Relatorio.Relatorio;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -39,7 +41,12 @@ public class TelaRelatorio extends javax.swing.JFrame {
         btnGerarRelatorio = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setText("Idade inicial:");
 
@@ -129,6 +136,22 @@ public class TelaRelatorio extends javax.swing.JFrame {
         setVisible(false);
         
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados(ad);
+        int resposta = JOptionPane.showConfirmDialog(this, 
+        "Deseja realmente fechar?", "Fechar",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    
+    if (resposta == JOptionPane.YES_OPTION) {
+        
+        gerenciadorDeDados.salvarCidadaos();
+        System.exit(0);
+    } else {
+         evt.getWindow().setVisible(true);
+        
+    }  
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

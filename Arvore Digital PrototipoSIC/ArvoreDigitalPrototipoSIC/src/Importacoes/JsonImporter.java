@@ -43,6 +43,7 @@ public class JsonImporter {
 
                 Cidadao novoCidadao = new Cidadao(nome, datanasc, cpf, rgs, naturalidade);
                 arvoreCidadaos.adicionarCidadao(novoCidadao);
+                
             }
         } catch (Exception e) {
             e.printStackTrace();
