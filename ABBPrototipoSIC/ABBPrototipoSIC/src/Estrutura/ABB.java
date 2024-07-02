@@ -47,6 +47,22 @@ public class ABB {
             return no;
         }
     }
+    
+    public void inserirRapido(Cidadao cidadao) {
+        raiz = inserirRecursivamenteRapido(raiz, cidadao);
+    }
+
+    private NoABB inserirRecursivamenteRapido(NoABB no, Cidadao cidadao) {
+        if (no == null) {
+            return new NoABB(cidadao);
+        }
+        if (cidadao.getCpf().compareTo(no.getCidadao().getCpf()) <= 0) {
+            no.esquerda = inserirRecursivamenteRapido(no.esquerda, cidadao);
+        } else {
+            no.direita = inserirRecursivamenteRapido(no.direita, cidadao);
+        }
+        return no;
+    }
 
     public Cidadao buscar(String cpf) {
         return buscar(raiz, cpf);

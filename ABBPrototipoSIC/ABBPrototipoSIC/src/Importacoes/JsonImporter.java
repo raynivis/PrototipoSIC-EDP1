@@ -60,7 +60,7 @@ public class JsonImporter {
                     JSONObject cidadaoJson = (JSONObject) c;
                     Cidadao novoCidadao = GerenciadorDeDados.parsearObjetoCidadao(cidadaoJson);
                     if (novoCidadao != null) {
-                        arvore.inserir(novoCidadao);
+                        arvore.inserirRapido(novoCidadao);
                     }
                     qtdCidadoes += 1;
                 }
