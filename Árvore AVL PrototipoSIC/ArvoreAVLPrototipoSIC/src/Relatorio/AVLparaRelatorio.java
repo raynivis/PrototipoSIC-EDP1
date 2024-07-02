@@ -4,6 +4,7 @@
  */
 package Relatorio;
 
+import Estrutura.EstruturaAVL;
 import Estrutura.NoAVL;
 import Individuo.Cidadao;
 import Individuo.Rg;
@@ -16,29 +17,59 @@ import com.itextpdf.layout.element.Paragraph;
  */
 public class AVLparaRelatorio {
     private NoAVL raiz;
+    EstruturaAVL avl = new EstruturaAVL();
+    private static boolean status;
     
     public AVLparaRelatorio() {
         this.raiz = null;
     }
     
-    public void inserir(Cidadao novo) {
-        raiz = inserirRelatorioAVL(raiz, novo);
+    public void inserir(Cidadao cidadaoRelat) {
+        raiz = inserirRelatorioAVL(raiz, cidadaoRelat);
     }
-    
-    /* Como a estrutura será utilizada para a comparação de busca e importação, o relatório será feito com a 
-    árvore ABB pela sua maior eficiencia nas inserções (não contém rotações) */
-    private NoAVL inserirRelatorioAVL(NoAVL no, Cidadao novo) { /* insere*/
-        if (no == null) {
-            return new NoAVL(novo);
-        }
-        if (novo.getNome().compareTo(no.getCidadao().getNome()) <= 0) {
-            no.setEsquerdo(inserirRelatorioAVL(no.getEsquerdo(), novo));
-        } else if (novo.getNome().compareTo(no.getCidadao().getNome()) > 0) {
-            no.setDireito(inserirRelatorioAVL(no.getDireito(), novo));
-        }
 
-        return no;
+    private NoAVL inserirRelatorioAVL(NoAVL no, Cidadao cidadaoRelat) { /* insere*/
+        if(no == null) {
+            status = true;
+            return new NoAVL(cidadaoRelat);
+        }else {    
+            if (cidadaoRelat.getNome().compareTo(no.getCidadao().getNome()) <= 0) { /* se o nome for menor ou igual */
+                no.setEsquerdo(inserirRelatorioAVL(no.getEsquerdo(), cidadaoRelat));
+                if(status == true) {
+                    switch (no.getFb()) {
+                        case 1 : 
+                            no.setFb(0);
+                            status = false;
+                            break; 
+                        case 0 : 
+                            no.setFb(-1); 
+                            break;
+                        case -1 : 
+                            no = avl.rotacaoDireita(no);
+                            break;
+                    }
+                }
+            } else {
+                no.setDireito(inserirRelatorioAVL(no.getDireito(), cidadaoRelat));
+                if(status == true) {
+                    switch (no.getFb()) {
+                        case -1:
+                            no.setFb(0);
+                            status = false;
+                            break;
+                        case 0:
+                            no.setFb(1); 
+                            break;
+                        case 1:
+                            no = avl.rotacaoEsquerda(no);
+                            break;
+                    }
+                }
+            }
+            return no;
+        }
     }
+
     
     public void imprimir(Document document) {
         emOrdem(raiz, document);
