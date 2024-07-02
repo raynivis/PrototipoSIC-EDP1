@@ -1,7 +1,9 @@
 package Telas;
 
 import Estrutura.ABB;
+import Persistencia.GerenciadorDeDados;
 import Relatorio.*;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -38,7 +40,12 @@ public class TelaRelatorio extends javax.swing.JFrame {
         btnGerarRelatorio = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Idade inicial:");
 
@@ -47,7 +54,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Relatório por faixa etária");
 
-        btnGerarRelatorio.setText("Geral relatório");
+        btnGerarRelatorio.setText("Gerar relatório");
         btnGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerarRelatorioActionPerformed(evt);
@@ -129,6 +136,20 @@ public class TelaRelatorio extends javax.swing.JFrame {
         setVisible(false);
         
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();
+        int resposta = JOptionPane.showConfirmDialog(this,
+        "Deseja realmente fechar?", "Fechar",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resposta == JOptionPane.YES_OPTION) {
+            gerenciadorDeDados.salvarCidadaos(abb);
+            System.exit(0); // ou setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        } else {
+            evt.getWindow().setVisible(true);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

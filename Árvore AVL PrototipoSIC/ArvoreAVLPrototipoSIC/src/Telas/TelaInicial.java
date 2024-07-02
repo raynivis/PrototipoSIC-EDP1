@@ -39,7 +39,12 @@ public class TelaInicial extends javax.swing.JFrame {
         btnImportarJson = new javax.swing.JButton();
         btnOpcoes = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btnImportarJson.setText("Importar  ERGUF");
         btnImportarJson.addActionListener(new java.awt.event.ActionListener() {
@@ -115,8 +120,6 @@ public class TelaInicial extends javax.swing.JFrame {
             long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
             // System.out.println("Tempo de execução: " + tempoDeExecucao + " Milissegundos");
         
-            // Salva os dados após a importação
-            gerenciadorDeDados.salvarCidadaos(arvoreAvl);
             JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Importar", JOptionPane.INFORMATION_MESSAGE);
             arvoreAvl.imprimir();
             
@@ -129,6 +132,20 @@ public class TelaInicial extends javax.swing.JFrame {
         new TelaEscolhas(arvoreAvl).setVisible(true);
         
     }//GEN-LAST:event_btnOpcoesActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();
+        int resposta = JOptionPane.showConfirmDialog(this,
+        "Deseja realmente fechar?", "Fechar",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resposta == JOptionPane.YES_OPTION) {
+            gerenciadorDeDados.salvarCidadaos(arvoreAvl);
+            System.exit(0); // ou setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        } else {
+            evt.getWindow().setVisible(true);   
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

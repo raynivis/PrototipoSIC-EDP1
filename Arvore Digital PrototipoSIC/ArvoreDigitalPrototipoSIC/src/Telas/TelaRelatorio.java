@@ -41,7 +41,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
         btnGerarRelatorio = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -55,7 +55,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Relatório por faixa etária");
 
-        btnGerarRelatorio.setText("Geral relatório");
+        btnGerarRelatorio.setText("Gerar relatório");
         btnGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerarRelatorioActionPerformed(evt);

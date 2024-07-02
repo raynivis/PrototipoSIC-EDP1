@@ -1,6 +1,8 @@
 package Telas;
 
 import Estrutura.EstruturaAVL;
+import Persistencia.GerenciadorDeDados;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,9 +32,13 @@ public class TelaEscolhas extends javax.swing.JFrame {
 
         btnBuscarCpf = new javax.swing.JButton();
         btnGerarRelatorio = new javax.swing.JButton();
-        btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btnBuscarCpf.setLabel("Buscar CPF");
         btnBuscarCpf.addActionListener(new java.awt.event.ActionListener() {
@@ -48,35 +54,21 @@ public class TelaEscolhas extends javax.swing.JFrame {
             }
         });
 
-        btnVoltar.setText("Voltar");
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnGerarRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBuscarCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVoltar)))
+                .addGap(127, 127, 127)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnGerarRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBuscarCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnVoltar)
-                .addGap(62, 62, 62)
+                .addGap(105, 105, 105)
                 .addComponent(btnBuscarCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGerarRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -96,12 +88,20 @@ public class TelaEscolhas extends javax.swing.JFrame {
         new TelaRelatorio(arvoreAvl).setVisible(true);  // TODO add your handling code here:
     }//GEN-LAST:event_btnGerarRelatorioActionPerformed
 
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        TelaInicial telaInicial = new TelaInicial(arvoreAvl);
-        setVisible(false);
-        telaInicial.setVisible(true);
-    }//GEN-LAST:event_btnVoltarActionPerformed
+        GerenciadorDeDados gerenciadorDeDados = new GerenciadorDeDados();
+        int resposta = JOptionPane.showConfirmDialog(this,
+        "Deseja realmente fechar?", "Fechar",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resposta == JOptionPane.YES_OPTION) {
+            gerenciadorDeDados.salvarCidadaos(arvoreAvl);
+            System.exit(0); // ou setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        } else {
+            evt.getWindow().setVisible(true);   
+        }
+
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -141,6 +141,5 @@ public class TelaEscolhas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarCpf;
     private javax.swing.JButton btnGerarRelatorio;
-    private javax.swing.JButton btnVoltar;
     // End of variables declaration//GEN-END:variables
 }
