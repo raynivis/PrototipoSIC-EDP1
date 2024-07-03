@@ -10,6 +10,14 @@
         const nomes = ["Victor Tomás Drumond", "Isabelly Maya Ramos", "Evelyn Patrícia Teixeira"];
         let cpfInicial = 99999999999; // Valor inicial do CPF
 
+        function setCpfInicial() {
+            cpfInicial = parseInt(document.getElementById("cpfInicial").value);
+            if (isNaN(cpfInicial) || cpfInicial <= 0) {
+                alert("Por favor, insira um CPF inicial válido.");
+                cpfInicial = 99999999999;
+            }
+        }
+
         function gerarCPF() {
             let cpf = cpfInicial.toString().padStart(11, '0');
             cpfInicial--; // Decrementa o valor inicial a cada chamada
@@ -60,8 +68,15 @@
         }
 
         function gerarJSON() {
+            setCpfInicial();
             const uf = document.getElementById("uf").value;
-            const quantidade = document.getElementById("quantidade").value;
+            const quantidade = parseInt(document.getElementById("quantidade").value);
+
+            if (isNaN(quantidade) || quantidade <= 0) {
+                alert("Por favor, insira uma quantidade válida de pessoas.");
+                return;
+            }
+
             const cidadãos = gerarCidadãos(quantidade);
 
             const resultado = {
@@ -89,6 +104,9 @@
         <option value="Acre">Acre</option>
         <!-- Adicione outros estados aqui -->
     </select>
+    <br><br>
+    <label for="cpfInicial">CPF Inicial:</label>
+    <input type="number" id="cpfInicial" min="1" value="99999999999">
     <br><br>
     <label for="quantidade">Quantidade de Pessoas:</label>
     <input type="number" id="quantidade" min="1" value="1">

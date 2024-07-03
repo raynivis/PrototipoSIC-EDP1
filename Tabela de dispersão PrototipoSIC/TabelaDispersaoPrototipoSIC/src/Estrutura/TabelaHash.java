@@ -17,7 +17,7 @@ public class TabelaHash {
     private int quantidadetotalCidadao;
 
     public TabelaHash() {
-        tabela = new ListaEncadeada[1000000]; /*Cpf vai pra chave ddd.ddd.dd*/
+        tabela = new ListaEncadeada[1000000]; /*Cpf vai pra chave ddd.ddd*/
         quantidadetotalCidadao = 0;
         for(int i = 0; i < tabela.length; i++) {
             tabela[i] = new ListaEncadeada();
