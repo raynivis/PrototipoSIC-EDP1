@@ -20,15 +20,15 @@ Estudar mais **Recursão**
 |Estruturas de Dados|Trabalhoso|Todos|01/07|03/06|
 |Slides do CP 1|Trabalhoso|Todos|04/04|05/04|08/04|
 |Slides do CP 2|Trabalhoso|Todos|05/06|07/06|
-|Slides do TF|Trabalhoso|Todos|03/07|02/07|
+|Slides do TF|Trabalhoso|Todos|03/07||
 |Classes|Médio|Ray, Cortez e Mayara|02/04|28/03|30/03|
 |Operação OBR 1|Médio|Eduardo e Mayara|15/04|10/04|
 |Operação OBR 2|Médio|Eduardo e Ray|03/05|15/05|
 |Operação OBR 3|Trabalhoso|Todos|30/04|04/05|
 |Operação OBR 4|Trabalhoso|Ray, Cortez e Mayara|20/04|08/05|
 |Operação OBR 5|Simples|Cortez e Eduardo|03/04|01/04|
-|Operação OBR 6|Trabalhoso|Eduardo, Cortez e Mayara|20/05|20/06|
-|Arquivos para testes|Médio|Mayara e Ray|02/07|02/07|
+|Operação OBR 6|Trabalhoso|Eduardo, Cortez e Mayara|20/05||
+|Arquivos para testes|Médio|Mayara e Ray|||
 
 
 **Legenda:**

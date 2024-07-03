@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Relatorio;
 
 import Estrutura.EstruturaAVL;
@@ -69,7 +65,6 @@ public class AVLparaRelatorio {
             return no;
         }
     }
-
     
     public void imprimir(Document document) {
         emOrdem(raiz, document);

@@ -27,6 +27,20 @@ public class NoABB {
     public NoABB getDireita() {
         return direita;
     }
+
+    public void setCidadao(Cidadao cidadao) {
+        this.cidadao = cidadao;
+    }
+
+    public void setEsquerda(NoABB esquerda) {
+        this.esquerda = esquerda;
+    }
+
+    public void setDireita(NoABB direita) {
+        this.direita = direita;
+    }
+    
+    
     
     
 }

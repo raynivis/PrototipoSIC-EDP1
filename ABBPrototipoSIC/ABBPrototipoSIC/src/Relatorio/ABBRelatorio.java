@@ -1,4 +1,5 @@
 package Relatorio;
+import Estrutura.NoABB;
 import Individuo.Cidadao;
 import Individuo.Rg;
 import com.itextpdf.layout.Document;
@@ -8,32 +9,40 @@ import com.itextpdf.layout.element.Paragraph;
  * @author Gustavo
  */
 public class ABBRelatorio {
-    private NoABBRelatorio raiz;
+    private NoABB raiz;
 
     public ABBRelatorio() {
         this.raiz = null;
     }
 
-    public void inserir(Cidadao novo) {
-        raiz = inserir(raiz, novo);
+    public NoABB getRaiz() {
+        return raiz;
     }
 
-    private NoABBRelatorio inserir(NoABBRelatorio no, Cidadao novo) {
-        if (no == null) {
-            return new NoABBRelatorio(novo);
-        } else if (novo.getNome().compareTo(no.getCidadao().getNome()) < 0) {
-            no.esquerda = inserir(no.esquerda, novo);
-        } else if (novo.getNome().compareTo(no.getCidadao().getNome()) > 0) {
-            no.direita = inserir(no.direita, novo);
+    public void inserir(Cidadao cidadaoRelat) {
+        raiz = inserirRelatorioAVL(raiz, cidadaoRelat);
+    }
+
+    private NoABB inserirRelatorioAVL(NoABB no, Cidadao cidadaoRelat) { /* insere*/
+        if(no == null) {
+            return new NoABB(cidadaoRelat);
+        }else {    
+            if (cidadaoRelat.getNome().compareTo(no.getCidadao().getNome()) < 0) { /* se o nome for menor ou igual */
+                no.setEsquerda(inserirRelatorioAVL(no.getEsquerda(), cidadaoRelat));
+                
+            } else {
+                no.setDireita(inserirRelatorioAVL(no.getDireita(), cidadaoRelat));
+                
+            }
+            return no;
         }
-        return no;
     }
 
     public void imprimir(Document document) {
         emOrdem(raiz, document);
     }
 
-    private void emOrdem(NoABBRelatorio no, Document document) {
+    private void emOrdem(NoABB no, Document document) {
         if (no != null) {
             emOrdem(no.esquerda, document);
             try {
@@ -55,10 +64,5 @@ public class ABBRelatorio {
             emOrdem(no.direita, document);
         }
     }
-
-    public NoABBRelatorio getRaiz() {
-        return raiz;
-    }
-    
     
 }
