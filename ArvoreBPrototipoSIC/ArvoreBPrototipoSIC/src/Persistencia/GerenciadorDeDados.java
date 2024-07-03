@@ -1,6 +1,6 @@
 package Persistencia;
 
-import Estrutura.*;
+import Estrutura.ArvoreB;
 import Importacoes.JsonImporter;
 import Individuo.Cidadao;
 import Individuo.Naturalidade;
@@ -59,7 +59,7 @@ public class GerenciadorDeDados {
 
     public void salvarCidadaos(ArvoreB arvoreB) {
         JSONArray listaCidadaos = new JSONArray();
-        arvoreB.getRaiz().emOrdem((cidadao) -> {
+        arvoreB.emOrdem((cidadao) -> {
             JSONObject detalhesCidadao = new JSONObject();
             detalhesCidadao.put("nome", cidadao.getNome());
             detalhesCidadao.put("cpf", cidadao.getCpf());
@@ -78,15 +78,9 @@ public class GerenciadorDeDados {
             detalhesCidadao.put("naturalidade", detalhesNaturalidade);
             listaCidadaos.add(detalhesCidadao);
         });
-        try (FileWriter file = new FileWriter("cidadaos.json")) {
-            TempoDeExecucao tempo = new TempoDeExecucao();
-            // Começa a calcular o tempo
-            tempo.iniciar();
+        try (FileWriter file = new FileWriter(CAMINHO_DO_ARQUIVO)) {
             file.write(listaCidadaos.toJSONString());
-            file.flush();
-            tempo.finalizar();
-            long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
-            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Persistencia de Dados: Salvar", JOptionPane.INFORMATION_MESSAGE);
+            file.flush(); 
         } catch (IOException e) {
             e.printStackTrace();
         }

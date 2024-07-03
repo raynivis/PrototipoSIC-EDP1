@@ -1,15 +1,16 @@
 package Relatorio;
 
-import Estrutura.*;
+import Estrutura.ArvoreB;
+import Estrutura.NoB;
 import Individuo.Cidadao;
 import Timer.TempoDeExecucao;
+import com.itextpdf.kernel.colors.Color;
+import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
-import com.itextpdf.kernel.colors.Color;
-import com.itextpdf.kernel.colors.DeviceRgb;
 import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
 
@@ -22,14 +23,14 @@ public class Relatorio {
         this.estado = estados;
     }
 
-    public void percorrerArvoreBInOrder(NoArvoreB no, int faixaetaria1, int faixaetaria2) {
+    public void percorrerArvoreBInOrder(NoB no, int faixaetaria1, int faixaetaria2) {
         if (no == null) {
             return;
         }
 
         for (Cidadao cidadao : no.getChaves()) {
             String data = cidadao.getDatanasc();
-            String anoTexto = data.substring(data.length() - 4, data.length());
+            String anoTexto = data.substring(data.length() - 4);
             int ano = Integer.parseInt(anoTexto);
             if ((2024 - ano) >= faixaetaria1 && (2024 - ano) <= faixaetaria2) {
                 String naturalidadeEstado = cidadao.getOrigem().getEstado();
@@ -38,7 +39,7 @@ public class Relatorio {
             }
         }
 
-        for (NoArvoreB filho : no.getFilhos()) {
+        for (NoB filho : no.getFilhos()) {
             percorrerArvoreBInOrder(filho, faixaetaria1, faixaetaria2);
         }
     }
@@ -54,7 +55,7 @@ public class Relatorio {
             Document document = new Document(pdf);
 
             for (int i = 0; i < 27; i++) {
-                if (estado[i].getRaiz()!= null) {
+                if (estado[i].getRaiz() != null) {
                     Cidadao primeiroCidadao = estado[i].getRaiz().getChaves().get(0);
                     EnumSiglaEstado sigla = EnumSiglaEstado.valueOf(primeiroCidadao.getOrigem().getEstado());
                     String estadoNome = sigla.getNomeEstado();

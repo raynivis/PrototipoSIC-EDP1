@@ -122,7 +122,7 @@ public class TelaRelatorio extends javax.swing.JFrame {
 
     private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
         ArvoreBRelatorio estado[] = new ArvoreBRelatorio[27];
-        for(int i=0; i<27; i++) {
+        for (int i = 0; i < 27; i++) {
             estado[i] = new ArvoreBRelatorio(5);
         }
         Relatorio relatorio = new Relatorio(this.arvoreB, estado);
