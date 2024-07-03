@@ -186,57 +186,6 @@ public class EstruturaAVL {
         }    
     }
     
-    
-    /* metodo para puxar os dados de forma mais rapida, quando já existe no BD */
-    public void inserirRapidoAVL(Cidadao cidadao) {
-        raiz = inserirRapidoAVL(raiz, cidadao);
-    }
-    
-    private NoAVL inserirRapidoAVL(NoAVL raiz, Cidadao cidadao) {
-        if(raiz == null) {
-            contaCidadao++;
-            status = true;
-            return new NoAVL(cidadao);
-        }else {    
-            if (cidadao.getCpf().compareTo(raiz.getCidadao().getCpf()) < 0) { /* se o CPF for menor */
-                raiz.setEsquerdo(inserirAVL(raiz.getEsquerdo(), cidadao));
-                if(status == true) {
-                    switch (raiz.getFb()) {
-                        case 1 : 
-                            raiz.setFb(0);
-                            status = false;
-                            break; 
-                        case 0 : 
-                            raiz.setFb(-1); 
-                            break;
-                        case -1 : 
-                            raiz = rotacaoDireita(raiz);
-                            break;
-                    }
-                }
-            } else {
-                raiz.setDireito(inserirAVL(raiz.getDireito(), cidadao));
-                if(status == true) {
-                    switch (raiz.getFb()) {
-                        case -1:
-                            raiz.setFb(0);
-                            status = false;
-                            break;
-                        case 0:
-                            raiz.setFb(1); 
-                            break;
-                        case 1:
-                            raiz = rotacaoEsquerda(raiz);
-                            break;
-                    }
-                }
-            }
-            return raiz;
-        }
-    }
-    
-    
-    
     public void preOrdem(Consumer<NoAVL> consumer) {
         preOrdem(raiz, consumer);
     }

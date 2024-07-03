@@ -79,8 +79,10 @@ public class GerenciadorDeDados {
             listaCidadaos.add(detalhesCidadao);
         });
         try (FileWriter file = new FileWriter(CAMINHO_DO_ARQUIVO)) {
+            
             file.write(listaCidadaos.toJSONString());
             file.flush(); 
+              
         } catch (IOException e) {
             e.printStackTrace();
         }

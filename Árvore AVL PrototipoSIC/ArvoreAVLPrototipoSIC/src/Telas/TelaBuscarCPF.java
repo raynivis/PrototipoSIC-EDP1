@@ -261,7 +261,13 @@ public class TelaBuscarCPF extends javax.swing.JFrame {
         "Deseja realmente fechar?", "Fechar",
         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (resposta == JOptionPane.YES_OPTION) {
+            TempoDeExecucao tempo = new TempoDeExecucao();
+            // Começa a calcular o tempo
+            tempo.iniciar();
             gerenciadorDeDados.salvarCidadaos(arvoreAvl);
+            tempo.finalizar();
+            long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
+            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Persistencia de Dados: Salvar", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0); // ou setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         } else {
             evt.getWindow().setVisible(true);   

@@ -80,14 +80,10 @@ public class GerenciadorDeDados {
             listaCidadaos.add(detalhesCidadao);
         });
         try (FileWriter file = new FileWriter("cidadaos.json")) {
-            TempoDeExecucao tempo = new TempoDeExecucao();
-            // Começa a calcular o tempo
-            tempo.iniciar();
+            
             file.write(listaCidadaos.toJSONString());
             file.flush();
-            tempo.finalizar();
-            long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
-            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Persistencia de Dados: Salvar", JOptionPane.INFORMATION_MESSAGE);
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

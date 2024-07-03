@@ -56,7 +56,7 @@ public class JsonImporter {
                     Cidadao novoCidadao = GerenciadorDeDados.parsearObjetoCidadao(cidadaoJson);
                     if (novoCidadao != null) {
                         /* inserção dos dados do BD, sem necessidade de verificação */
-                        arvoreAvl.inserirRapidoAVL(novoCidadao);
+                        arvoreAvl.inserirAVL(novoCidadao);
                     }
                 }
             } catch (Exception e) {

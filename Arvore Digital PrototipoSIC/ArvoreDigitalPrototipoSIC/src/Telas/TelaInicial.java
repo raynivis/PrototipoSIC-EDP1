@@ -143,8 +143,14 @@ public class TelaInicial extends javax.swing.JFrame {
     
     if (resposta == JOptionPane.YES_OPTION) {
         
+        TempoDeExecucao tempo = new TempoDeExecucao();
+        // Começa a calcular o tempo
+        tempo.iniciar();
         gerenciadorDeDados.salvarCidadaos();
-        
+        tempo.finalizar();
+        long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
+        JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Persistencia de Dados: Salvar", JOptionPane.INFORMATION_MESSAGE);
+        // Fechar a janela
         System.exit(0); // ou setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     } else {
          evt.getWindow().setVisible(true);

@@ -4,6 +4,7 @@ import Estrutura.ArvoreMAria;
 import Persistencia.GerenciadorDeDados;
 import Relatorio.ListaRelatorio;
 import Relatorio.Relatorio;
+import Timer.TempoDeExecucao;
 import javax.swing.JOptionPane;
 
 
@@ -143,14 +144,21 @@ public class TelaRelatorio extends javax.swing.JFrame {
         "Deseja realmente fechar?", "Fechar",
         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
     
-    if (resposta == JOptionPane.YES_OPTION) {
-        
-        gerenciadorDeDados.salvarCidadaos();
-        System.exit(0);
-    } else {
-         evt.getWindow().setVisible(true);
-        
-    }  
+        if (resposta == JOptionPane.YES_OPTION) {
+
+            TempoDeExecucao tempo = new TempoDeExecucao();
+            // Começa a calcular o tempo
+            tempo.iniciar();
+            gerenciadorDeDados.salvarCidadaos();
+            tempo.finalizar();
+            long tempoDeExecucao = tempo.obterTempoEmMilissegundos();
+            JOptionPane.showMessageDialog(null, "Tempo de execução: " + tempoDeExecucao + " Milissegundos", "Persistencia de Dados: Salvar", JOptionPane.INFORMATION_MESSAGE);
+            // Fechar a janela
+            System.exit(0); // ou setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        } else {
+             evt.getWindow().setVisible(true);
+
+        }  
     }//GEN-LAST:event_formWindowClosed
 
     /**
